@@ -34,7 +34,7 @@ def kth_smallest(matrix, k):
         
         count = count_less_equal(matrix, mid)
         if count < k:
-            low = mid + 1
+            low = mid - 1
         else:
             high = mid
     return low

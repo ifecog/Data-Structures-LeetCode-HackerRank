@@ -10,7 +10,7 @@ def binary_search(list, n):
     lb, ub, mid = 0, len(list) - 1, 0
     step = 0
     
-    while(lb <= ub):
+    while lb <= ub:
         print('step', step, ':', str(list[lb:ub+1]))
         step += 1 # step increment until element is located
         
@@ -20,11 +20,10 @@ def binary_search(list, n):
         # set conditions for search execution
         if n == list[mid]:
             return mid
+        elif n > list[mid]:
+            lb = mid + 1
         else:
-            if n > list[mid]:
-                lb = mid + 1
-            else:
-                ub = mid - 1
+            ub = mid - 1
                 
     return -1
 
