@@ -18,6 +18,6 @@ def indices_sum(nums, target):
     
 
 
-array = [2, 3, 5, 7, 6, 4]
+array = [2, 3, 5, 7, 6]
 target = 11
 print(indices_sum(array, target))

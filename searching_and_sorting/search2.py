@@ -16,7 +16,7 @@ def kth_smallest(matrix, k):
     low, high, n = matrix[0][0], matrix[-1][-1], len(matrix)
     
     def count_less_equal(matrix, target):
-        n, count, = len(matrix), 0
+        n, count = len(matrix), 0
         row, col = n - 1, 0
         
         while row >= 0 and col < n:
@@ -34,7 +34,7 @@ def kth_smallest(matrix, k):
         
         count = count_less_equal(matrix, mid)
         if count < k:
-            low = mid - 1
+            low = mid + 1
         else:
             high = mid
     return low
