@@ -16,12 +16,6 @@ def indices_sum(nums, target):
                 
     return result if result else None
     
-    # for i in range(n):
-    #     j = i + 1
-    #     if nums[i] + nums[j] == target:
-    #         result.append((i, j))
-    
-    # return result if result else None
 
 
 array = [2, 3, 5, 7, 6, 4]

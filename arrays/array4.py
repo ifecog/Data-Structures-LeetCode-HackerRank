@@ -1,4 +1,4 @@
-def next_permuation(nums):
+def next_permutation(nums):
     """The next permutation of an array of integers is the next lexicographically greater permutation of its integer. Given an array of integer nums, find the next permutation of nums. The replacement must be in place and use only constant extra memory.
 
     Args:
@@ -30,5 +30,5 @@ def next_permuation(nums):
 
 # example test
 num_perm = [1, 2, 3, 4]
-next_permuation(num_perm)
+next_permutation(num_perm)
 print('Next Permutation:', num_perm)
