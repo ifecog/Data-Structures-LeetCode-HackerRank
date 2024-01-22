@@ -1,3 +1,17 @@
+def merged_interval(intervals):
+    intervals.sort(key=lambda i: i[0[)
+
+    merged = []
+    for interval in intervals:
+        if not merged or interval[0] > merged[-1][1]:
+            merged.append(interval)
+	else:
+	    merged[-1][1] = max(merged[-1][1], interval[1])
+    
+    return merged
+
+
+
 def kth_smallest(matrix, k):
     n = len(matrix)
     low, high = matrix[0][0], matrix[-1][-1]
