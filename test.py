@@ -1,59 +1,80 @@
-def merged_interval(intervals):
-    intervals.sort(key=lambda i: i[0[)
+# def merged_interval(intervals):
+#     intervals.sort(key=lambda i: i[0[)
 
-    merged = []
-    for interval in intervals:
-        if not merged or interval[0] > merged[-1][1]:
-            merged.append(interval)
-	else:
-	    merged[-1][1] = max(merged[-1][1], interval[1])
+#     merged = []
+#     for interval in intervals:
+#         if not merged or interval[0] > merged[-1][1]:
+#             merged.append(interval)
+# 	else:
+# 	    merged[-1][1] = max(merged[-1][1], interval[1])
     
-    return merged
+#     return merged
 
 
 
-def kth_smallest(matrix, k):
-    n = len(matrix)
-    low, high = matrix[0][0], matrix[-1][-1]
+# def kth_smallest(matrix, k):
+#     n = len(matrix)
+#     low, high = matrix[0][0], matrix[-1][-1]
     
-    def count_less_equal(array, target):
-        n, count = len(array), 0
-        row, col = n - 1, 0
+#     def count_less_equal(array, target):
+#         n, count = len(array), 0
+#         row, col = n - 1, 0
         
-        while row >= 0 and col < n:
-            if array[row][col] <= target:
-                count += row + 1
-                col += 1
-            else:
-                row -= 1
+#         while row >= 0 and col < n:
+#             if array[row][col] <= target:
+#                 count += row + 1
+#                 col += 1
+#             else:
+#                 row -= 1
                 
-        return count
+#         return count
     
-    # implement binary search
-    while low < high:
-        mid = (low + high) // 2
-        count = count_less_equal(matrix, mid)
+#     # implement binary search
+#     while low < high:
+#         mid = (low + high) // 2
+#         count = count_less_equal(matrix, mid)
         
-        if count < k:
-            low = mid + 1
-        else:
-            high = mid
+#         if count < k:
+#             low = mid + 1
+#         else:
+#             high = mid
             
-    return low
+#     return low
     
     
-# example
-matrix = [
-    [1, 5, 9],
-    [10, 11, 13],
-    [12, 13, 15]
-]
-k = 8
-result = kth_smallest(matrix, k)
+# # example
+# matrix = [
+#     [1, 5, 9],
+#     [10, 11, 13],
+#     [12, 13, 15]
+# ]
+# k = 8
+# result = kth_smallest(matrix, k)
+# print(result)
+
+
+def product_of_elements(nums):
+    n = len(nums)
+    left_products, right_products = [1] * n, [1] * n
+    
+    left_product = 1
+    for i in range(1, n):
+        left_product *= nums[i - 1]
+        left_products[i] = left_product
+    
+    right_product = 1
+    for i in range(n - 2, -1, -1):
+        right_product *= nums[i + 1]
+        right_products[i] = right_product
+        
+    result = [left_products[i] * right_products[i] for i in range(n)]
+    
+    return result
+
+# test code
+array = [2, 4, 6, 8, 10]
+result = product_of_elements(array)
 print(result)
-
-
-
 
 
 
