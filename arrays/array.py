@@ -1,33 +1,61 @@
-def min_subarray_length(nums, target):
-    """Given an array of positive interger nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
-
-    Args:
-        nums (int): An array of positive integers
-        target (int): target
+def merge_arrays(nums1, m, nums2, n):
+    """You are given 2 integer arrays nums1 and nums2, sorted in non-decreasing order, and 2 intergers m and n, representing the number of elements in muns1 and nums2 respectively. Merge nums1 and nums2 into a single array sorted in non-decreasing order.
     """
     
-    # Initialize variables
-    min_length = len(nums) + 1
-    current_sum = 0
-    left = 0
+    p1, p2, p_merged = m - 1, n - 1, m + n - 1
     
-    for right, num in enumerate(nums):
-        current_sum += num
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] > nums2[p2]:
+            nums1[p_merged] = nums1[p1]
+            p1 -= 1
+        else:
+            nums1[p_merged] = nums2[p2]
+            p2 -= 1
+        p_merged -= 1
         
-        while current_sum >= target:
-            min_length = min(min_length, right - left + 1)
-            
-            current_sum -= nums[left]
-            left += 1
+    nums1[:p2 + 1] = nums2[:p2 + 1]
     
-    return min_length if min_length < len(nums) else 0
+
+# Example usage:
+nums1 = [1, 2, 3, 0, 0, 0]
+m = 3
+nums2 = [2, 5, 6]
+n = 3
+
+merge_arrays(nums1, m, nums2, n)
+print(nums1)
 
 
-# Example usage
-nums = [2, 3, 1, 2, 4, 3]
-target = 9
-result = min_subarray_length(nums, target)
-print(result) 
+# def min_subarray_length(nums, target):
+#     """Given an array of positive interger nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+
+#     Args:
+#         nums (int): An array of positive integers
+#         target (int): target
+#     """
+    
+#     # Initialize variables
+#     min_length = len(nums) + 1
+#     current_sum = 0
+#     left = 0
+    
+#     for right, num in enumerate(nums):
+#         current_sum += num
+        
+#         while current_sum >= target:
+#             min_length = min(min_length, right - left + 1)
+            
+#             current_sum -= nums[left]
+#             left += 1
+    
+#     return min_length if min_length < len(nums) else 0
+
+
+# # Example usage
+# nums = [2, 3, 1, 2, 4, 3]
+# target = 9
+# result = min_subarray_length(nums, target)
+# print(result) 
 
 
 # def next_permutation(nums):
