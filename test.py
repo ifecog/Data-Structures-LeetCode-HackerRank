@@ -1,3 +1,52 @@
+def merge_arrays(nums1, m, nums2, n):
+    # initialize pointers for nums1, nums2, and the merged result
+    p1, p2, p_merged = m - 1, n - 1, m + n - 1
+    
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] > nums2[p2]:
+            nums1[p_merged] = nums1[p1]
+            p1 -= 1
+        else:
+            nums1[p_merged] = nums2[p2]
+            p2 -= 1
+        p_merged -= 1
+        
+    # insert elements in nums2 that are not already in nums1
+    nums1[:p2 + 1] = nums2[:p2 + 1]
+    
+    return nums1
+
+
+# # Example usage:
+# nums1 = [1, 2, 3, 0, 0, 0]
+# m = 3
+# nums2 = [2, 5, 6]
+# n = 3
+
+# merge_arrays(nums1, m, nums2, n)
+# print(nums1)
+
+
+# def min_subarray_length(nums, target):
+#     # initiate variables
+#     min_length = len(nums) + 1
+#     left, current_sum = 0, 0
+    
+#     # iterate through the array using the sliding windows approach
+#     for right, num in enumerate(nums):
+#         # update the current sum with the surrent num
+#         current_sum += num
+        
+#         while current_sum >= target:
+#             min_length = min(min_length, right - left + 1)
+            
+#             # remove the leftmost element in the current window
+#             current_sum -= nums[left]
+#             left -= 1
+            
+#     return min_length if min_length <= len(nums) else 0
+    
+
 # def merged_interval(intervals):
 #     intervals.sort(key=lambda i: i[0[)
 
@@ -53,28 +102,28 @@
 # print(result)
 
 
-def product_of_elements(nums):
-    n = len(nums)
-    left_products, right_products = [1] * n, [1] * n
+# def product_of_elements(nums):
+#     n = len(nums)
+#     left_products, right_products = [1] * n, [1] * n
     
-    left_product = 1
-    for i in range(1, n):
-        left_product *= nums[i - 1]
-        left_products[i] = left_product
+#     left_product = 1
+#     for i in range(1, n):
+#         left_product *= nums[i - 1]
+#         left_products[i] = left_product
     
-    right_product = 1
-    for i in range(n - 2, -1, -1):
-        right_product *= nums[i + 1]
-        right_products[i] = right_product
+#     right_product = 1
+#     for i in range(n - 2, -1, -1):
+#         right_product *= nums[i + 1]
+#         right_products[i] = right_product
         
-    result = [left_products[i] * right_products[i] for i in range(n)]
+#     result = [left_products[i] * right_products[i] for i in range(n)]
     
-    return result
+#     return result
 
-# test code
-array = [2, 4, 6, 8, 10]
-result = product_of_elements(array)
-print(result)
+# # test code
+# array = [2, 4, 6, 8, 10]
+# result = product_of_elements(array)
+# print(result)
 
 
 

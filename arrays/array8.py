@@ -8,8 +8,7 @@ def min_subarray_length(nums, target):
     
     # initialize variables
     min_length = len(nums) + 1
-    current_sum = 0
-    left = 0
+    current_sum, left = 0, 0
     
     # iterate through the array using thr sliding window approach
     for right, num in enumerate(nums):
