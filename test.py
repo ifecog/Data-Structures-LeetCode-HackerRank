@@ -1,20 +1,63 @@
-def merge_arrays(nums1, m, nums2, n):
-    # initialize pointers for nums1, nums2, and the merged result
-    p1, p2, p_merged = m - 1, n - 1, m + n - 1
+from collections import Counter
+
+def min_window(s, t):
+    # initialize pointers and coutners
+    left, right = 0, 0
+    min_length = len(s) + 1
+    min_window_str = ''
+    required_chars = Counter(t)
+    missing_chars = len(t)
     
-    while p1 >= 0 and p2 >= 0:
-        if nums1[p1] > nums2[p2]:
-            nums1[p_merged] = nums1[p1]
-            p1 -= 1
-        else:
-            nums1[p_merged] = nums2[p2]
-            p2 -= 1
-        p_merged -= 1
+    while right < len(s):
+        # expand the window to the right
+        if s[right] in required_chars:
+            required_chars[s[right]] -= 1
+            
+            if required_chars[s[right]] >= 0:
+                missing_chars -= 1
+                
         
-    # insert elements in nums2 that are not already in nums1
-    nums1[:p2 + 1] = nums2[:p2 + 1]
+        while missing_chars == 0:
+            if right - left + 1 < min_length:
+                min_length = right - left + 1
+                min_window_str = s[left:right + 1]
+            
+            if s[left] in required_chars:
+                required_chars[s[left]] += 1
+                if required_chars[s[left]] > 0:
+                    missing_chars += 1
+                    
+            left += 1
+
+        right += 1
+        
+    return min_window_str
+
+# Example usage:
+s = "ADOBECODEBANC"
+t = "ABC"
+result = min_window(s, t)
+print(result)
+
+
+
+# def merge_arrays(nums1, m, nums2, n):
+#     # initialize pointers for nums1, nums2, and the merged result
+#     p1, p2, p_merged = m - 1, n - 1, m + n - 1
     
-    return nums1
+#     while p1 >= 0 and p2 >= 0:
+#         if nums1[p1] > nums2[p2]:
+#             nums1[p_merged] = nums1[p1]
+#             p1 -= 1
+#         else:
+#             nums1[p_merged] = nums2[p2]
+#             p2 -= 1
+#         p_merged -= 1
+        
+#     # insert elements in nums2 that are not already in nums1
+#     nums1[:p2 + 1] = nums2[:p2 + 1]
+    
+#     return nums1
 
 
 # # Example usage:
