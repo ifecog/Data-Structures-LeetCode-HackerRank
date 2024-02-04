@@ -1,43 +1,79 @@
-from collections import Counter
-
-def min_window(s, t):
-    # initialize pointers and coutners
-    left, right = 0, 0
-    min_length = len(s) + 1
-    min_window_str = ''
-    required_chars = Counter(t)
-    missing_chars = len(t)
+    # """You are given a string s asnd an integer k. You can choose any character of the string and change it to any uppercase English character. You can perform this operation at most k times.
+    # """
     
-    while right < len(s):
-        # expand the window to the right
-        if s[right] in required_chars:
-            required_chars[s[right]] -= 1
-            
-            if required_chars[s[right]] >= 0:
-                missing_chars -= 1
-                
+def character_replacement(s, k):
+    # initialize variables
+    max_length = 0
+    max_count = 0
+    char_count = {}
+    left = 0
+    
+    for right in range(len(s)):
+        # increment the count of the character at the right pointer
+        char_count[s[right]]  = char_count.get(s[right], 0) + 1
         
-        while missing_chars == 0:
-            if right - left + 1 < min_length:
-                min_length = right - left + 1
-                min_window_str = s[left:right + 1]
-            
-            if s[left] in required_chars:
-                required_chars[s[left]] += 1
-                if required_chars[s[left]] > 0:
-                    missing_chars += 1
-                    
+        # update the maximum count
+        max_count = max(max_count, char_count[s[right]])
+        
+        # check if the current window needs shrinking
+        if right - left + 1 - max_count > k:
+            char_count[s[left]] -= 1
             left += 1
-
-        right += 1
         
-    return min_window_str
+        # update maximum length
+        max_length = max(max_length, right - left + 1)
+        
+        
+    
+    return max_length
+    
 
 # Example usage:
-s = "ADOBECODEBANC"
-t = "ABC"
-result = min_window(s, t)
+s = "AABABBA"
+k = 1
+result = character_replacement(s, k)
 print(result)
+
+
+# from collections import Counter
+
+# def min_window(s, t):
+#     left, right = 0, 0
+#     min_len = len(s) + 1
+#     min_win_substr = ''
+#     required_chars = Counter(t)
+#     missing_chars = len(t)
+    
+#     while right < len(s):
+#         if s[right] in required_chars:
+#             required_chars[s[right]] -= 1
+            
+#             if required_chars[s[right]] >= 0:
+#                 missing_chars -= 1
+                
+#         while missing_chars == 0:
+#             if right - left + 1 < min_len:
+#                 min_len = right - left + 1
+#                 min_win_substr = s[left:right + 1]
+                
+#             if s[left] in required_chars:
+#                 required_chars[s[left]] += 1
+                
+#                 if required_chars[s[left]] > 0:
+#                     missing_chars += 1
+            
+#             left += 1
+                
+#         right += 1
+    
+#     return min_win_substr
+    
+
+# # Example usage:
+# s = "ADOBECODEBANC"
+# t = "ABC"
+# result = min_window(s, t)
+# print(result)
 
 
 
