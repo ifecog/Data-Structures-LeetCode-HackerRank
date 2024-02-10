@@ -1,38 +1,63 @@
+class Node:
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+        
+        
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        
+    
+    def reverse_linked_list(head):
+        """
+            Given the head of a singly linked list, reverse the list, and return the reversed list
+        """
+        
+        prev = None
+        current = head
+
+
+
+
+
+
+
     # """You are given a string s asnd an integer k. You can choose any character of the string and change it to any uppercase English character. You can perform this operation at most k times.
     # """
     
-def character_replacement(s, k):
-    # initialize variables
-    max_length = 0
-    max_count = 0
-    char_count = {}
-    left = 0
+# def character_replacement(s, k):
+#     # initialize variables
+#     max_length = 0
+#     max_count = 0
+#     char_count = {}
+#     left = 0
     
-    for right in range(len(s)):
-        # increment the count of the character at the right pointer
-        char_count[s[right]]  = char_count.get(s[right], 0) + 1
+#     for right in range(len(s)):
+#         # increment the count of the character at the right pointer
+#         char_count[s[right]]  = char_count.get(s[right], 0) + 1
         
-        # update the maximum count
-        max_count = max(max_count, char_count[s[right]])
+#         # update the maximum count
+#         max_count = max(max_count, char_count[s[right]])
         
-        # check if the current window needs shrinking
-        if right - left + 1 - max_count > k:
-            char_count[s[left]] -= 1
-            left += 1
+#         # check if the current window needs shrinking
+#         if right - left + 1 - max_count > k:
+#             char_count[s[left]] -= 1
+#             left += 1
         
-        # update maximum length
-        max_length = max(max_length, right - left + 1)
+#         # update maximum length
+#         max_length = max(max_length, right - left + 1)
         
         
     
-    return max_length
+#     return max_length
     
 
-# Example usage:
-s = "AABABBA"
-k = 1
-result = character_replacement(s, k)
-print(result)
+# # Example usage:
+# s = "AABABBA"
+# k = 1
+# result = character_replacement(s, k)
+# print(result)
 
 
 # from collections import Counter
