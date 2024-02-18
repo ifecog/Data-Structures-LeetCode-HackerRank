@@ -1,23 +1,49 @@
-    # """Given an array of strings strs, groupd the anagrams together. 
-    # """
-def group_anagrams(strs):
-    anagrams = {}
-        
-    for word in strs:
-        sorted_words = ''.join(sorted(word))
-            
-        if sorted_words in anagrams:
-            anagrams[sorted_words].append(word)
-        else:
-            anagrams[sorted_words] = [word]
-                
-    return list(anagrams.values())
+"""
+    You are given a string s containing one or more words. Every consecutive pair of words is separated by a single space ' '.
 
+A string t is an anagram of string s if the ith word of t is a permutation of the ith word of s.
+
+For example, "acb dfe" is an anagram of "abc def", but "def cab" and "adc bef" are not.
+Return the number of distinct anagrams of s. Since the answer may be very large, return it modulo 109 + 7.
+
+
+"""
+
+def remove_anagrams(words):
+    # initialize an empty list to store the non_anagram words
+    non_anagrams = []
+    
+    for i, word in enumerate(words):
+        if i == 0 or sorted(word) != sorted(words[i - 1]):
+            non_anagrams.append(word)
+    
+    return non_anagrams
 
 # Example usage:
-strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-result = group_anagrams(strs)
-print(result)
+words = ["dacb", "abdc", "abc", "cba"]
+result = remove_anagrams(words)
+print(result)  # Output: ['dacb', 'abc']
+
+    # """Given an array of strings strs, groupd the anagrams together. 
+    # """
+# def group_anagrams(strs):
+#     anagrams = {}
+        
+#     for word in strs:
+#         sorted_words = ''.join(sorted(word))
+            
+#         if sorted_words in anagrams:
+#             anagrams[sorted_words].append(word)
+#         else:
+#             anagrams[sorted_words] = [word]
+                
+#     return list(anagrams.values())
+
+
+# # Example usage:
+# strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+# result = group_anagrams(strs)
+# print(result)
 
 
 
