@@ -11,6 +11,7 @@ def min_window(s, t):
     
     # initiate pointers
     left, right = 0, 0
+    # initiate variables
     min_len = len(s) + 1
     min_window_substr = ''
     required_chars = Counter(t)

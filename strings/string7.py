@@ -22,7 +22,7 @@ Given a roman numeral, convert it to an integer.
         s (string): a string representing a roman numeral
     """
     
-    # initialize a dict to store roman numeral values
+    # initialize a dict to map roman numerals to their respective integer values
     roman_map = {
         'I': 1,
         'V': 5,
