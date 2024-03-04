@@ -1,24 +1,59 @@
-def frequency_sort(s):
-    char_freq = {}
-    
-    for char in s:
-        # count the frequency of each character in the string
-        char_freq[char] = char_freq.get(char, 0) + 1
-        
-    # sort the characters based on their frequencies in decreasing order
-    sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
-    
-    # construct the sorted string
-    sorted_str = ''
-    for char in sorted_chars:
-        sorted_str += char * char_freq[char]
-    
-    return sorted_str
+# from collections import Counter
 
-# Example usage:
-s = "tree"
-result = frequency_sort(s)
-print(result)  
+
+# def check_permutation(s1, s2):
+#     len_s1, len_s2 = len(s1), len(s2)
+    
+#     if len_s2 < len_s1:
+#         return False
+    
+#     s1_counter = Counter(s1)
+#     s2_counter = Counter(s2[:len_s1])
+    
+#     if s1_counter == s2_counter:
+#         return True
+    
+#     for i in range(len_s1, len_s2):
+#         s2_counter[s2[i]] += 1
+        
+#         if s2_counter[s2[i - len_s1]] == 1:
+#             del s2_counter[s2[i - len_s1]]
+#         else:
+#             s2_counter[s2[i - len_s1]] -= 1
+            
+#         if s1_counter == s2_counter:
+#             return True
+    
+#     return False
+        
+# # Example usage:
+# s1 = "auy"
+# s2 = "eidbaooo"
+# result = check_permutation(s1, s2)
+# print(result)
+
+
+# def frequency_sort(s):
+#     char_freq = {}
+    
+#     for char in s:
+#         # count the frequency of each character in the string
+#         char_freq[char] = char_freq.get(char, 0) + 1
+        
+#     # sort the characters based on their frequencies in decreasing order
+#     sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
+    
+#     # construct the sorted string
+#     sorted_str = ''
+#     for char in sorted_chars:
+#         sorted_str += char * char_freq[char]
+    
+#     return sorted_str
+
+# # Example usage:
+# s = "tree"
+# result = frequency_sort(s)
+# print(result)  
 
 # def roman_to_int(s):
 #     roman_map = {
