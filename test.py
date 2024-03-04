@@ -1,72 +1,36 @@
-
-def roman_to_int(s):
-    """Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
-
-Symbol       Value
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
-For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
-
-Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
-
-I can be placed before V (5) and X (10) to make 4 and 9. 
-X can be placed before L (50) and C (100) to make 40 and 90. 
-C can be placed before D (500) and M (1000) to make 400 and 900.
-Given a roman numeral, convert it to an integer.
-
-    Args:
-        s (string): a string representing a roman numeral
-    """
+# def roman_to_int(s):
+#     roman_map = {
+#         'I': 1,
+#         'V': 5,
+#         'X': 10,
+#         'L': 50,
+#         'C': 100,
+#         'D': 500,
+#         'M': 1000
+#     }
     
-    # initialize a dict to map roman numerals to their respective integer values
-    roman_map = {
-        'I': 1,
-        'V': 5,
-        'X': 10,
-        'L': 50,
-        'C': 100,
-        'D': 500,
-        'M': 1000
-    }
+#     sum = 0
     
-    total = 0
-    
-    for i in range(len(s)):
-        if i < len(s) - 1 and roman_map[s[i]] < roman_map[s[i + 1]]:
-            total -= roman_map[s[i]]
-        else:
-            total += roman_map[s[i]]
-            
-    return total
+#     for i in range(len(s)):
+#         if i < len(s) - 1 and roman_map[s[i]] < roman_map[s[i + 1]]:
+#             sum -= roman_map[s[i]]
+#         else:
+#             sum += roman_map[s[i]]
+#     return sum
 
-# Example usage:
-roman_numeral = "CDII"
-result = roman_to_int(roman_numeral)
-print(result)
-# """
-#     You are given a string s containing one or more words. Every consecutive pair of words is separated by a single space ' '.
+# # Example usage:
+# roman_numeral = "CDIV"
+# result = roman_to_int(roman_numeral)
+# print(result)
 
-# A string t is an anagram of string s if the ith word of t is a permutation of the ith word of s.
-
-# For example, "acb dfe" is an anagram of "abc def", but "def cab" and "adc bef" are not.
-# Return the number of distinct anagrams of s. Since the answer may be very large, return it modulo 109 + 7.
-
-
-# """
 
 # def remove_anagrams(words):
-#     # initialize an empty list to store the non_anagram words
 #     non_anagrams = []
     
 #     for i, word in enumerate(words):
 #         if i == 0 or sorted(word) != sorted(words[i - 1]):
 #             non_anagrams.append(word)
-    
+            
 #     return non_anagrams
 
 # # Example usage:
@@ -74,26 +38,25 @@ print(result)
 # result = remove_anagrams(words)
 # print(result)  # Output: ['dacb', 'abc']
 
-    # """Given an array of strings strs, groupd the anagrams together. 
-    # """
+
 # def group_anagrams(strs):
 #     anagrams = {}
-        
+    
 #     for word in strs:
-#         sorted_words = ''.join(sorted(word))
-            
-#         if sorted_words in anagrams:
-#             anagrams[sorted_words].append(word)
+#         sorted_word = ''.join(sorted(word))
+        
+#         if sorted_word in anagrams:
+#             anagrams[sorted_word].append(word)
 #         else:
-#             anagrams[sorted_words] = [word]
-                
+#             anagrams[sorted_word] = [word]
+            
 #     return list(anagrams.values())
-
 
 # # Example usage:
 # strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 # result = group_anagrams(strs)
 # print(result)
+
 
 
 
