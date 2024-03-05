@@ -1,3 +1,26 @@
+def frequency_sort(s):
+    char_freq = {}
+    
+    for char in s:
+        # count the frequency of each character in the string
+        char_freq[char] = char_freq.get(char, 0) + 1
+        
+    # sort the characters based on their frequencies in decreasing order
+    sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
+    
+    # construct the sorted string
+    sorted_string = ''
+    for char in sorted_chars:
+        sorted_string += char * char_freq[char]
+    
+    return sorted_string
+    
+# Example usage:
+s = "tree"
+result = frequency_sort(s)
+print(result)  
+
+
 # from collections import Counter
 
 
@@ -32,28 +55,6 @@
 # result = check_permutation(s1, s2)
 # print(result)
 
-
-# def frequency_sort(s):
-#     char_freq = {}
-    
-#     for char in s:
-#         # count the frequency of each character in the string
-#         char_freq[char] = char_freq.get(char, 0) + 1
-        
-#     # sort the characters based on their frequencies in decreasing order
-#     sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
-    
-#     # construct the sorted string
-#     sorted_str = ''
-#     for char in sorted_chars:
-#         sorted_str += char * char_freq[char]
-    
-#     return sorted_str
-
-# # Example usage:
-# s = "tree"
-# result = frequency_sort(s)
-# print(result)  
 
 # def roman_to_int(s):
 #     roman_map = {
