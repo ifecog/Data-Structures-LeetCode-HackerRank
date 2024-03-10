@@ -1,5 +1,5 @@
 def merge_arrays(nums1, m, nums2, n):
-    """You are given 2 integer arrays nums1 and nums2, sorted in non-decreasing order, and 2 intergers m and n, representing the number of elements in muns1 and nums2 respectively. Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+    """You are given 2 integer arrays nums1 and nums2, sorted in non-decreasing order, and 2 intergers m and n, representing the number of elements in nums1 and nums2 respectively. Merge nums1 and nums2 into a single array sorted in non-decreasing order.
     """
     
     # initialize pointers for nums1, nums2, and the merged result
