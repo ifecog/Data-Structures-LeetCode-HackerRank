@@ -13,7 +13,7 @@ def kth_smallest(matrix, k):
     
     # return tmp[k-1]
     
-    low, high, n = matrix[0][0], matrix[-1][-1], len(matrix)
+    low, high = matrix[0][0], matrix[-1][-1]
     
     def count_less_equal(matrix, target):
         n, count = len(matrix), 0
