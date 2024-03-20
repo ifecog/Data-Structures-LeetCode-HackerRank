@@ -8,6 +8,7 @@ def array_median(nums1, nums2):
     """
     
     def merge_arrays(arr1, arr2):
+        # Ensure array1 has the capacity to hold all elements
         arr1 += [0] * len(arr2)
         p1, p2, p_merged = len(arr1) - len(arr2) - 1, len(arr2) - 1, len(arr1) - 1
         
