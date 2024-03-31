@@ -20,16 +20,17 @@ def binary_search(list, n):
         # set conditions for search execution
         if n == list[mid]:
             return mid
-        elif n > list[mid]:
-            lb = mid + 1
         else:
-            ub = mid - 1
+            if n < list[mid]:
+                ub = mid - 1
+            else:
+                lb = mid + 1
                 
     return -1
 
 
 test_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 print(test_list)
-target = int(input('Target element?'))
+target = int(input('Target element? '))
 
 print('Target Location:', binary_search(test_list, target))

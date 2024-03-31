@@ -5,20 +5,27 @@ def kth_largest(matrix, k):
         matrix (int): a sorted n * n matrix
         k (int): kth largest value
     """
-
+    
+    # solution 1
+    
     # tmp = []
     # for i in matrix:
     #     tmp.extend(i)
     # tmp.sort()
     
-    # return tmp[-k]    
+    # return tmp[-k]
     
     
-    low, high, n = matrix[0][0], matrix[-1][-1], len(matrix)
+    # solution 2
     
-    def count_greater_equal(matrix, target):
-        n, count = len(matrix), 0
+    # initializr pointers to the start and end of the 2-D matrix
+    low, high = matrix[0][0], matrix[-1][-1]
+    
+    # define a function to count elements greater than or equal to a given target
+    def count_greater_equal(array, target):
+        n = len(array)
         row, col = 0, n - 1
+        count = 0
         
         while row < n and col >= 0:
             if matrix[row][col] >= target:
@@ -29,19 +36,19 @@ def kth_largest(matrix, k):
         
         return count
     
-    # binary search
+    # implement binary search anf the count greater than or equal function to locate element
     while low < high:
         mid = (low + high) // 2
         
         count = count_greater_equal(matrix, mid)
-        if count < k:
+        
+        if k > count:
             high = mid
         else:
             low = mid + 1
     
-    return low - 1
-        
-    
+    return low - 1        
+          
 
 # example
 matrix = [

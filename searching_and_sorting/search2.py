@@ -6,40 +6,47 @@ def kth_smallest(matrix, k):
         k (int): kth smallest value
     """
     
+    # solution 1
+    
     # tmp = []
-    # for l in matrix:
-    #     tmp.extend(l)
+    # for i in matrix:
+    #     tmp.extend(i)
     # tmp.sort()
     
-    # return tmp[k-1]
+    # return tmp[k - 1]
     
+    
+    # solution 2
+    
+    # intialize low and high pointers to the start and end of the 2-D array
     low, high = matrix[0][0], matrix[-1][-1]
     
-    def count_less_equal(matrix, target):
-        n, count = len(matrix), 0
+    # define a function to count elements less than or equal to a given target
+    def count_less_equal(array, target):
+        n = len(matrix)
         row, col = n - 1, 0
+        count = 0
         
         while row >= 0 and col < n:
-            if matrix[row][col] <= target:
+            if array[row][col] <= target:
                 count += row + 1
                 col += 1
             else:
                 row -= 1
-                
+        
         return count
     
-    # binary search
+    # use binary search algorithm and the count less function to locate the element
     while low < high:
         mid = (low + high) // 2
-        
         count = count_less_equal(matrix, mid)
-        if count < k:
+        
+        if k > count:
             low = mid + 1
         else:
             high = mid
+    
     return low
-
-
         
 
 

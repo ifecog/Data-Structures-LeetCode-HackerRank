@@ -1,136 +1,151 @@
-# 4.
-def array_median(nums1, nums2):
-    def merge_arrays(arr1, arr2):
-        arr1 += [0] * len(arr2)
-        p1, p2, p_merged = len(arr1) - len(arr2) - 1, len(arr2) - 1, len(arr1) - 1
+5.
+
+
+# # 4.
+# def merge_arrays(arr1, arr2):
+#     arr1 += [0] * len(arr2)
+    
+#     p1, p2, p_merged = len(arr1) - len(arr2) - 1, len(arr2) - 1, len(arr1) - 1
+    
+#     while p1 >= 0 and p2 >= 0:
+#         if arr1[p1] >= arr2[p2]:
+#             arr1[p_merged] = arr1[p1]
+#             p1 -= 1
+#         else:
+#             arr1[p_merged] = arr2[p2]
+#             p2 -= 1
+#         p_merged -= 1
+    
+#     if p2 >= 0:
+#         arr1[:p2 + 1] = arr2[:p2 + 1]
         
-        while p1 >= 0 and p2 >= 0:
-            if arr1[p1] >= arr2[p2]:
-                arr1[p_merged] = arr1[p1]
-                p1 -= 1
-            else:
-                arr1[p_merged] = arr2[p2]
-                p2 -= 1
-            p_merged -= 1
+#     return arr1
+
+
+# def array_median(nums1, nums2):
+#     merge = merge_arrays(nums1, nums2)
+#     n = len(merge)
+    
+#     if n % 2 == 0:
+#         return (merge[n // 2 - 1] + merge[n // 2]) / 2
+#     else:
+#         return merge[n // 2]
+
+
+# # Example usage:
+# nums1 = [1, 2]
+# nums2 = [3, 4]
+# result = array_median(nums1, nums2)
+# print(result) 
+
+
+# # 3. 
+# def kth_largest(matrix, k):
+#     # # solution 1
+#     # tmp = []
+#     # for i in matrix:
+#     #     tmp.extend(i)
+#     # tmp.sort()
+    
+#     # return tmp[-k]
+    
+#     # solution 2
+#     low, high, n = matrix[0][0], matrix[-1][-1], len(matrix)
+    
+#     def count_greater_equal(matrix, target):
+#         n, count = len(matrix), 0
+#         row, col = 0, n - 1
         
-        if p2 >= 0:
-            arr1[:p2 + 1] = arr2[:p2 + 1]
+#         while col >= 0 and row < n:
+#             if matrix[row][col] >= target:
+#                 count += n - row
+#                 col -= 1
+#             else:
+#                 row += 1
+        
+#         return count
+    
+#     while low < high:
+#         mid = (low + high) // 2
+#         count = count_greater_equal(matrix, mid)
+        
+#         if k > count:
+#             high = mid
+#         else:
+#             low = mid + 1
             
-        return arr1
+#     return low - 1
     
-    merged_array = merge_arrays(nums1, nums2)
-    n = len(merged_array)
-    
-    if n % 2 == 0:
-        return (merged_array[n // 2 - 1] + merged_array[n // 2]) / 2
-    else:
-        return merged_array[n // 2]
-    
-    
-# Example usage:
-nums1 = [1, 2]
-nums2 = [3, 4]
-result = array_median(nums1, nums2)
-print(result) 
 
-# 3. 
-def kth_largest(matrix, k):
-    # # solution 1
-    # tmp = []
-    # for i in matrix:
-    #     tmp.extend(i)
-    # tmp.sort()
+# # example
+# matrix = [
+#     [1, 5, 9],
+#     [10, 11, 13],
+#     [12, 13, 15]
+# ]
+# k = 8
+# result = kth_largest(matrix, k)
+# print(result)
+
+
+
+# # 2.
+# def kth_smallest(matrix, k):
+#     # solution 1
     
-    # return tmp[-k]
+#     # tmp = []
+#     # for i in matrix:
+#     #     tmp.extend(i)
+#     # tmp.sort()
     
-    # solution 2
-    low, high, n = matrix[0][0], matrix[-1][-1], len(matrix)
+#     # return tmp[k - 1]
     
-    def count_greater_equal(matrix, target):
-        n, count = len(matrix), 0
-        row, col = 0, n - 1
+    
+#     # solution 2
+    
+#     # initialize low and high pointers to the start and end of the 2D-matrix
+#     low, high = matrix[0][0], matrix[-1][-1]
+    
+#     # define a function to count elements less than of equal to a given target
+#     def count_less_equal(array, target):
+#         n = len(array)
+#         row, col = n - 1, 0
+#         count = 0
         
-        while col >= 0 and row < n:
-            if matrix[row][col] >= target:
-                count += n - row
-                col -= 1
-            else:
-                row += 1
+#         # iterate through the array to count the intended elements
+#         while row >= 0 and col < n:
+#             if array[row][col] <= target:
+#                 count += row + 1
+#                 col += 1
+#             else:
+#                 row -= 1
         
-        return count
+#         return count
     
-    while low < high:
-        mid = (low + high) // 2
-        count = count_greater_equal(matrix, mid)
+#     # implement binary search and the count_less_equal function to locate the element
+#     while low < high:
+#         mid = (low + high) // 2
         
-        if k > count:
-            high = mid
-        else:
-            low = mid + 1
-            
-    return low - 1
-    
-
-# example
-matrix = [
-    [1, 5, 9],
-    [10, 11, 13],
-    [12, 13, 15]
-]
-k = 8
-result = kth_largest(matrix, k)
-print(result)
-
-
-
-# 2.
-def kth_smallest(matrix, k):
-    # # solution 1
-    # tmp = []
-    # for i in matrix:
-    #     tmp.extend(i)
-    # tmp.sort()
-    
-    # return tmp[k - 1]
-    
-    # solution 2
-    low, high, n = matrix[0][0], matrix[-1][-1], len(matrix)
-    
-    def count_less_equal(matrix, target):
-        n, count = len(matrix), 0
-        row, col = n - 1, 0
+#         count = count_less_equal(matrix, mid)
         
-        while row >= 0 and col < n:
-            if matrix[row][col] <= target:
-                count += row + 1
-                col += 1
-            else:
-                row -= 1
-   
-        return count
+#         if k > count:
+#             low = mid + 1
+#         else:
+#             high = mid
     
-    while low < high:
-        mid = (low + high) // 2
-        count = count_less_equal(matrix, mid)
-        
-        if k > count:
-            low = mid + 1
-        else:
-            high = mid
-    
-    return low
+#     return low
     
     
 
-# example
-matrix = [
-    [1, 5, 9],
-    [10, 11, 13],
-    [12, 13, 15]
-]
-k = 8
-result = kth_smallest(matrix, k)
-print(result)
+# # example
+# matrix = [
+#     [1, 5, 9],
+#     [10, 11, 13],
+#     [12, 13, 15]
+# ]
+# k = 8
+# result = kth_smallest(matrix, k)
+# print(result)
 
 # # 1.
 # def binary_search(list, n):
