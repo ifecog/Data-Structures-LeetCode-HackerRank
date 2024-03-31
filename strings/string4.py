@@ -9,26 +9,23 @@ def character_replacement(s, k):
     """
     
     # initialize variables
-    max_length = 0
-    max_count = 0
     char_count = {}
     left = 0
-    
+    max_count = 0
+    max_length = 0
+   
     for right in range(len(s)):
-        # increment the count of the character at the right pointer
         char_count[s[right]] = char_count.get(s[right], 0) + 1
-        
-        # update the maximum count
+         
         max_count = max(max_count, char_count[s[right]])
-        
-        # check if the current window needs shrinking
+         
         if right - left + 1 - max_count > k:
             char_count[s[left]] -= 1
             left += 1
-            
-        # update maximum length
+             
         max_length = max(max_length, right - left + 1)
-    
+         
+   
     return max_length
 
 # Example usage:
