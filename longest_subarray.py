@@ -18,11 +18,11 @@ def longest_subarray(nums, limit):
     
     # loop throught the array using enumerate (index, num)
     for right, num in enumerate(nums):
-        while max_queue and num > max_queue[0]:
+        while max_queue and num > max_queue[-1]:
             max_queue.pop()
         max_queue.append(num)
         
-        while min_queue and num < min_queue[0]:
+        while min_queue and num < min_queue[-1]:
             min_queue.pop()
         min_queue.append(num)
         

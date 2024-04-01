@@ -7,7 +7,7 @@ def permute(nums):
     
     result = []
     
-    # define a backtrack function
+    # define a nested backtrack function
     def backtrack(start):
         if start == len(nums):
             # when start reaches the length of num, make a copy of the current pemitation

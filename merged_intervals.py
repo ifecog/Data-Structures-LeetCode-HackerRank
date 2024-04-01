@@ -10,16 +10,15 @@ def merged_intervals(intervals):
     
     merged = []
     for interval in intervals:
-        # append current interval if the mered list is empty or the current interval does not overlap with the last merged interval
+        # append current interval if the merged list is empty or the current interval does not overlap with the last merged interval
         if not merged or interval[0] > merged[-1][1]:
             merged.append(interval)
         else:
-            # merge overlapping intervals by updating the ebdpoint of the last merged interval
+            # merge overlapping intervals by updating the endpoint of the last merged interval
             merged[-1][1] = max(merged[-1][1], interval[1])
     
     return merged
-    
-    
+        
 
 # Example usage:
 intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
