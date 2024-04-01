@@ -11,7 +11,37 @@
 # result = sorted_squares(nums)
 # print(result)
 
-# # 9.
+# 9(a).
+def merge_arrays(nums1, m, nums2, n):
+    nums1 += [0] * n
+    p1, p2, p_merged = m - 1, n - 1, m + n - 1
+    
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] >= nums2[p2]:
+            nums1[p_merged] = nums1[p1]
+            p1 -= 1
+        else:
+            nums1[p_merged] = nums2[p2]
+            p2 -= 1
+        p_merged -= 1
+        
+    if p2 >= 0:
+        nums1[:p2 + 1] = nums2[:p2 + 1]
+        
+    return nums1
+    
+    
+# Example usage:
+nums1 = [1, 2, 3, 5, 7, 8]
+m = 6
+nums2 = [2, 5, 6]
+n = 3
+
+merge_arrays(nums1, m, nums2, n)
+print(nums1)
+
+
+# # 9(a).
 # def merge_arrays(nums1, m, nums2, n):
 #     p1, p2, p_merged = m - 1, n - 1, m + n - 1
     
@@ -23,11 +53,13 @@
 #             nums1[p_merged] = nums2[p2]
 #             p2 -= 1
 #         p_merged -= 1
-    
-#     nums1[:p2 + 1] = nums2[:p2 + 1]
-    
-#     return nums1
         
+#     if p2 >= 0:
+#         nums1[:p2 + 1] = nums2[:p2 + 1]
+        
+#     return nums1
+    
+    
 # # Example usage:
 # nums1 = [1, 2, 3, 0, 0, 0]
 # m = 3
@@ -40,20 +72,21 @@
 
 # # 8.
 # def min_subarray_length(nums, target):
-#     # initialize pointes and variables
-#     current_sum, left = 0, 0
-#     min_len = len(nums) + 1
+#     min_length = len(nums) + 1
+#     current_sum = 0
+#     left = 0
     
 #     for right, num in enumerate(nums):
 #         current_sum += num
         
 #         while current_sum >= target:
-#             min_len = min(min_len, right - left + 1)
+#             min_length = min(min_length, right - left + 1)
             
 #             current_sum -= nums[left]
 #             left += 1
-            
-#     return min_len if min_len <= len(nums) else 0
+    
+#     return min_length if min_length <= len(nums) else 0
+    
 
 # # Example usage
 # nums = [2, 3, 1, 2, 4, 3]
@@ -65,6 +98,7 @@
 # #  7.
 # def two_sum(nums, target):
 #     nums_indices = {}
+    
 #     for i, num in enumerate(nums):
 #         complement = target - num
         
@@ -72,8 +106,6 @@
 #             return [nums_indices[complement], i]
         
 #         nums_indices[num] = i
-    
-#     return []
 
 # # Example usage:
 # nums = [2, 4, 6, 7, 1]
@@ -84,15 +116,16 @@
 
 # # 6.
 # def rotate_array(nums, k):
-#     # ensure that k is less than the length of the array
+#     # first, ensure that k is less than the length of nums
 #     k = k % len(nums)
     
-#     nums[:] = nums[-k:] + nums[:-k]
+#     # 1. array alicing
+#     # nums[:] = nums[-k:] + nums[:-k]
     
-#     # nums.reverse()
-    
-#     # nums[:k] = reversed(nums[:k])
-#     # nums[k:] = reversed(nums[k:])
+#     # 2. use reverse method
+#     nums.reverse()
+#     nums[:k] = reversed(nums[:k])
+#     nums[k:] = reversed(nums[k:])
     
 #     return nums
 
@@ -120,24 +153,30 @@
 
 # # 4. 
 # def next_permutation(nums):
+#     # find the decreasing element
 #     i = len(nums) - 2
 #     while i >= 0 and nums[i] >= nums[i + 1]:
 #         i -= 1
-    
+        
+#     # find the smallest element to the right that is greater than nums[i]
 #     if i >= 0:
-#         j  = len(nums) - 1
+#         j = len(nums) - 1
 #         while j >= 0 and nums[j] < nums[i]:
 #             j -= 1
-#         nums[i], nums[j] = nums[j], nums[i]
-    
+        
+#         nums[i], nums[j] = nums[j], nums[i] 
+        
+#     # reverse the right subarray
+#     # initialize left and right pointers from i
 #     left, right = i + 1, len(nums) - 1
 #     while left < right:
 #         nums[left], nums[right] = nums[right], nums[left]
 #         left += 1
 #         right -= 1
-        
+
+
 # # example test
-# num_perm = [1, 2, 4, 3]
+# num_perm = [1, 2, 3, 4]
 # next_permutation(num_perm)
 # print('Next Permutation:', num_perm)
 
@@ -164,12 +203,13 @@
 
 # # 2.
 # def arrange_zero_and_nonzero_elements(nums):
-#     non_zer0_index = 0
+#     zero_index = 0
     
 #     for i in range(len(nums)):
 #         if nums[i] != 0:
-#             nums[non_zer0_index], nums[i] = nums[i], nums[non_zer0_index]
-#             non_zer0_index += 1
+#             nums[zero_index], nums[i] = nums[i], nums[zero_index]
+            
+#             zero_index += 1
             
 # array = [0, 2, 5, 0, 4, 0, 2, 2, 6, 0]
 # arrange_zero_and_nonzero_elements(array)

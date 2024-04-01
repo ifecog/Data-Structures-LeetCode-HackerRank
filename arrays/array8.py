@@ -10,9 +10,9 @@ def min_subarray_length(nums, target):
     min_length = len(nums) + 1
     current_sum, left = 0, 0
     
-    # iterate through the array using thr sliding window approach
+    # iterate through the array using the sliding window approach
     for right, num in enumerate(nums):
-        # add the surrent element to the sum
+        # add the current element to the sum
         current_sum += num
         
         # check if the current sum is greater than or equal to the target

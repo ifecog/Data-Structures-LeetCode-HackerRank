@@ -31,6 +31,7 @@ def array_median(nums1, nums2):
     
     # implement the merge_arrays function to merge nums1 and nums2
     merge = merge_arrays(nums1, nums2)
+    print('Merged Array:', merge)
     n = len(merge)
     
     if n % 2 == 0:
@@ -40,7 +41,7 @@ def array_median(nums1, nums2):
     
     
 # Example usage:
-nums1 = [1, 2, 6]
-nums2 = [3, 4, 7, 5]
+nums1 = [1, 2, 6, 9]
+nums2 = [3, 4, 7, 8]
 result = array_median(nums1, nums2)
 print(result) 

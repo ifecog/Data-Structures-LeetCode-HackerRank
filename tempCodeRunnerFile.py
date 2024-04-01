@@ -1,4 +1,2 @@
-    count = 0
-    for i in range(len(heights)):
-        if heights[i] != expected[i]:
-            count += 1
+merge_arrays(nums1, m, nums2, n)
+print(nums1)
