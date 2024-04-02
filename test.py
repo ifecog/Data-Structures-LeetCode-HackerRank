@@ -1,25 +1,25 @@
-# 6
-def permute(nums):
-    result = []
+# # 6
+# def permute(nums):
+#     result = []
     
-    def backtrack(start):
-        if start == len(nums):
-            return result.append(nums[:])
+#     def backtrack(start):
+#         if start == len(nums):
+#             return result.append(nums[:])
         
-        for i in range(start, len(nums)):
-            nums[start], nums[i] = nums[i], nums[start]
+#         for i in range(start, len(nums)):
+#             nums[start], nums[i] = nums[i], nums[start]
             
-            backtrack(start + 1)
+#             backtrack(start + 1)
             
-            nums[start], nums[i] = nums[i], nums[start]
-            
-    backtrack(0)
+#             nums[start], nums[i] = nums[i], nums[start]
     
-    return result
+#     backtrack(0)
+    
+#     return result
 
-# example test
-test_nums = [1, 2, 3]
-print(permute(test_nums))
+# # example test
+# test_nums = [1, 2, 3]
+# print(permute(test_nums))
 
 
 # # 5. 
