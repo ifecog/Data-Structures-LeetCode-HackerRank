@@ -5,16 +5,29 @@ def closest_palindrome(n):
         n (str): a string of characters
     """
     
-    # conversion to int for the purpose of iteration
-    n = int(n)
+    """
+    To solve this problem, here is my proposed solution:
     
-    # nested function to determine palindrome status
+    1. convert n to int for the purpose of iteration
+    
+    2. def a nested function to determine palindromic status
+    
+    3. def a nested function to determine the nearest smaller palindrome
+    
+    4. def a nested function to determine the nearest higher palindrome
+    
+    5. assign variable names to smaller and higher palindromes by applying their respective functions
+    
+    6. applying the condition for choosing, return the nearest palindrome
+    """ 
+    
+    n = int (n)
+    
     def is_palindrome(s):
-        # return s == ''.join(reversed(s))
         return s == s[::-1]
+        # return s == ''.join(reversed(s))
+        
     
-    
-    # nested function to determine nearest smaller palindrome
     def get_smaller_palindrome(x):
         x -= 1
         while x > 0 and not is_palindrome(str(x)):
@@ -23,7 +36,6 @@ def closest_palindrome(n):
         return x
     
     
-    # nested function to determin nearest higher palindrome
     def get_higher_palindrome(x):
         x += 1
         while True:
@@ -31,12 +43,11 @@ def closest_palindrome(n):
                 return x
             x += 1
             
-    # assign variables for smaller and higher palindromes
-    smaller_palindrome = get_smaller_palindrome(n)
-    higher_palindrome = get_higher_palindrome(n)
+    smaller_palindrome = get_smaller_palindrome(n)       
+    higher_palindrome = get_higher_palindrome(n)       
     
     return str(smaller_palindrome) if abs(n - smaller_palindrome) <= abs(higher_palindrome - n) else str(higher_palindrome)
-
+   
 
 # Example usage:
 n = "1234"

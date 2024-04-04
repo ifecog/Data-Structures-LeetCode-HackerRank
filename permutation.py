@@ -5,25 +5,38 @@ def permute(nums):
         nums (int): an array of integers
     """
     
+    """
+    To solve this problem, here is my proposed solution:
+    
+    1. initiate an empty list 'result' to store the pernutations
+    
+    2. def a recursive nested function 'backtrack(start)'. This represents the backtracking algorithm. It recursively generates permutations of nums starting from the 'start' index.
+    
+    the best case is when start reaches the length of 'nums', indicating that all elements have been permuted.
+    
+    3. within the backtrack function,
+    a. iterate over the indices of nums from start to the end of nums, swapping each element with the start element.
+    b. recursively call backtrack(start + 1) to do the same for the remaining elements
+    c. after the recursive call, swap the elements to their original positions to explore other possibilities.
+    
+    4. call the backtrack function (within the permute function) with start initialized to 0, inidicating that the permutation should start from the 0-indexed element
+    
+    5. return the resultin list of permutations
+    """
+    
     result = []
     
-    # define a nested backtrack function
     def backtrack(start):
         if start == len(nums):
-            # when start reaches the length of num, make a copy of the current pemitation
-            return result.append(nums[:])
-        
+            result.append(nums[:])
+            
         for i in range(start, len(nums)):
-            # swap the current element with the element in the start index
             nums[start], nums[i] = nums[i], nums[start]
             
-            # recurively backtrack for the remaining elements by calling the backtrack function
             backtrack(start + 1)
             
-            # swap back to the original order to explore other possibilities
-            nums[start], nums[i] = nums[i], nums[start]
-            
-    # set the baktrack start parameter to 0 for the nums array
+            nums[i], nums[start] = nums[start], nums[i]
+    
     backtrack(0)
     
     return result
