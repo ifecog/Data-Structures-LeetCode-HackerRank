@@ -35,3 +35,47 @@
     # If we encounter a bus stop (next_stop) that we haven't visited before, we add it to the queue along with the number of buses taken to reach it (buses_taken + 1). We also mark it as visited.
     
     # """
+
+from collections import defaultdict, deque
+
+
+def num_buses_to_destination(routes, source, target):
+    if source == target:
+        return 0
+    
+    # Build graph 
+    
+    stop_to_routes = defaultdict(set)
+    for i, route in enumerate(routes):
+        for stop in route:
+            stop_to_routes[stop].add(i)
+            
+    # BFS
+    
+    visited_routes = set([source])
+    queue = deque([(source, 0)])
+    
+    while queue:
+        current_stop, buses_taken = queue.popleft()
+        if current_stop == target:
+            return buses_taken
+        
+        # make a copy of the set for the purpose of iteration
+        routes_for_current_stop = stop_to_routes[current_stop].copy()
+        # iterate over buses passing through the route
+        for route_index in routes_for_current_stop:
+            for next_stop in routes[route_index]:
+                if next_stop not in visited_routes:
+                    queue.append((next_stop, buses_taken + 1))
+                    visited_routes.add(next_stop)
+            
+            # remove the current stop from the set to avoid revisiting
+            stop_to_routes[current_stop].remove(route_index)
+    
+    return -1
+
+# Example usage:
+routes1 = [[1,2,7],[3,6,7]]
+source1 = 1
+target1 = 6
+print(num_buses_to_destination(routes1, source1, target1))  # Output: 2
