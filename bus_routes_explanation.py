@@ -43,16 +43,12 @@ def num_buses_to_destination(routes, source, target):
     if source == target:
         return 0
     
-    # Build graph 
-    
     stop_to_routes = defaultdict(set)
     for i, route in enumerate(routes):
         for stop in route:
             stop_to_routes[stop].add(i)
             
-    # BFS
-    
-    visited_routes = set([source])
+    visited_stops = set([source])
     queue = deque([(source, 0)])
     
     while queue:
@@ -60,16 +56,13 @@ def num_buses_to_destination(routes, source, target):
         if current_stop == target:
             return buses_taken
         
-        # make a copy of the set for the purpose of iteration
-        routes_for_current_stop = stop_to_routes[current_stop].copy()
-        # iterate over buses passing through the route
-        for route_index in routes_for_current_stop:
+        current_stop_to_routes = stop_to_routes[current_stop].copy()
+        for route_index in current_stop_to_routes:
             for next_stop in routes[route_index]:
-                if next_stop not in visited_routes:
+                if next_stop not in visited_stops:
                     queue.append((next_stop, buses_taken + 1))
-                    visited_routes.add(next_stop)
+                    visited_stops.add(next_stop)
             
-            # remove the current stop from the set to avoid revisiting
             stop_to_routes[current_stop].remove(route_index)
     
     return -1

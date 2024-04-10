@@ -22,30 +22,23 @@
 # print(permute(test_nums))
 
 
-# # 5. 
-# def merged_intervals(intervals):
-#     # sort the intervals based on the starting point of each interval
-#     intervals.sort(key=lambda i: i[0])
+# 5. 
+def merged_intervals(intervals):
+    # sort the intervals based on their starting point
+    intervals.sort(key=lambda i : i[0])
     
-#     # initiate an empty list to store merged intervals
-#     merged = []
-#     for interval in intervals:
-#         # check if the merged list is empty or the current interval does not overlap with the last merged interval. If these 2 conditions are met, append the  current interval into the merged list
-#         if not merged or interval[0] > merged[-1][1]:
-#             merged.append(interval)
-#         else:
-#             # merge overlapping intervals by updating the endpoint of the last merged interval
-#             merged[-1][1] = max(merged[-1][1], interval[1])
+    merged = []
+    for interval in intervals:
+        if not merged or interval[0] > merged[-1][1]:
+            merged.append(interval)
+        merged[-1][1] = max(merged[-1][1], interval[1])
     
-#     return merged
+    return merged
 
-#     return merged
-        
-
-# # Example usage:
-# intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
-# result = merged_intervals(intervals)
-# print(result)
+# Example usage:
+intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
+result = merged_intervals(intervals)
+print(result)
 
 
 # # 4
