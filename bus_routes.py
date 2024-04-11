@@ -61,3 +61,8 @@ routes1 = [[1,2,7],[3,6,7]]
 source1 = 1
 target1 = 6
 print(num_buses_to_destination(routes1, source1, target1))  # Output: 2
+
+routes2 = [[7,12],[4,5,15],[6],[15,19],[9,12,13]]
+source2 = 15
+target2 = 12
+print(num_buses_to_destination(routes2, source2, target2))  # Output: -1
