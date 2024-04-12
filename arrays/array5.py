@@ -8,14 +8,14 @@ def indices_sum(nums, target):
     
     result = []
     for i in range(len(nums)):
-        for j in range(i + 1, len(nums)):
+        for j in range(i, len(nums)):
             if nums[i] + nums[j] == target:
                 result.append((i, j))
     
     return result if result else None    
 
 
-array = [2, 3, 5, 7, 6]
+array = [2, 3, 4, 5, 7, 6]
 target = 11
 print(indices_sum(array, target))
 

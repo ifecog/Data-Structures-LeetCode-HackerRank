@@ -172,4 +172,64 @@ print(num_islands(grid))
 
 
 # 6. Longest Repeating Character Replacement
-def character_replacement(s, k)
+def character_replacement(s, k):
+    char_count = {}
+    left = 0
+    max_count = 0
+    max_length = 0
+    
+    for right in range(len(s)):
+        char_count[s[right]] = char_count.get(s[right], 0) + 1
+        
+        max_count = max(max_count, char_count[s[right]])
+        
+        if right - left + 1 - max_count > k:
+            char_count[s[left]] -= 1
+            left += 1
+        
+        max_length = max(max_length, right - left + 1)
+    
+    return max_length
+
+# Example usage:
+s = "AABABBA"
+k = 1
+result = character_replacement(s, k)
+print(result)
+
+
+# 7. Two Sum
+def two_sum(nums, target):
+    num_indices = {}
+    
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_indices:
+            return [num_indices[complement], i]
+        
+        num_indices[num] = i
+        
+# Example
+nums = [2,3,7,11,15]
+target = 9
+print(two_sum(nums, target))
+
+
+# 8. Longest Substring Without Repeating Characters
+def length_of_longest_substring(s):
+    char_index_map = {}
+    left = 0
+    max_length = 0
+    
+    for right in range(len(s)):
+        if s[right] in char_index_map and char_index_map[s[right]] >= left:
+            left = char_index_map[s[right]] + 1
+        
+        char_index_map[s[right]] = right
+        
+        max_length = max(max_length, right - left + 1)
+    
+    return max_length
+    
+s = "abcabcbb"
+print(length_of_longest_substring(s))
