@@ -261,4 +261,27 @@ def minimum_time(time, totalTrips):
 time_period = [2, 3, 5]
 total_trips_taken = 8
 print(minimum_time(time_period, total_trips_taken))
+
+
+# Permutation
+def permute(nums):
+    result = []
+    
+    def backtrack(start):
+        if start == len(nums):
+            result.append(nums[:])
+        
+        for i in range(start, len(nums)):
+            nums[start], nums[i] = nums[i], nums[start]
+            
+            backtrack(start + 1)
+            
+            nums[i], nums[start] = nums[start], nums[i]
+    
+    backtrack(0)
+    
+    return result
  
+# example test
+test_nums = [1, 2, 3]
+print(permute(test_nums))
