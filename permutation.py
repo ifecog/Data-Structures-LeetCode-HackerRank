@@ -43,5 +43,5 @@ def permute(nums):
 
 
 # example test
-test_nums = [1, 2, 3]
+test_nums = [1, 2, 3, 4, 5, 6]
 print(permute(test_nums))
