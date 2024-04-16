@@ -1,3 +1,35 @@
+# 10 Valid Parenthesis
+def is_valid(s):
+    # Initialize an empty stack
+    stack = []
+    
+    # Define a mapping dictionary
+    mapping = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    }
+    
+    for char in s:
+        if char in mapping:
+            top_element = stack.pop() if stack else '#'
+            
+            if mapping[char] != top_element:
+                return False
+        
+        else:
+            stack.append(char)
+    
+    # If the stack is empty, it means that all characters have been matched, so return True
+    return not stack
+
+# Example usage:
+s = "()[]{}"
+print(is_valid(s)) 
+
+a = "(]"
+print(is_valid(a))
+
 # # 9. 
 # from collections import Counter
 # def check_permutation(s1, s2):
