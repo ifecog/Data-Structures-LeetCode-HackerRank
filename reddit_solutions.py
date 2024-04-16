@@ -3,13 +3,16 @@ from collections import defaultdict, deque
 
 def num_buses_to_destination(routes, source, target):
     if source == target:
-        return 0
+        return 0 # indicating that there is no journey
+    
+    # 1. Build the graph
     
     stop_to_routes = defaultdict(set)
     for i, route in enumerate(routes):
         for stop in route:
             stop_to_routes[stop].add(i)
             
+    # 2. BFS
     visited_stops = set([source])
     queue = deque([(source, 0)])
     
@@ -19,17 +22,18 @@ def num_buses_to_destination(routes, source, target):
         if current_stop == target:
             return buses_taken
         
-        current_to_routes_copy = stop_to_routes[current_stop].copy()
-        for route_index in current_to_routes_copy:
+        # make a copy of the set for the purpose of iteration
+        current_stop_to_routes = stop_to_routes[current_stop].copy()
+        for route_index in current_stop_to_routes:
             for next_stop in routes[route_index]:
                 if next_stop not in visited_stops:
                     queue.append((next_stop, buses_taken + 1))
                     visited_stops.add(next_stop)
             
-        stop_to_routes[current_stop].remove(route_index)
-        
+            stop_to_routes[current_stop].remove(route_index)
     
     return -1
+    
 
 # Example usage:
 routes1 = [[1,2,7],[3,6,7]]
@@ -46,12 +50,15 @@ print(num_buses_to_destination(routes2, source2, target2))  # Output: -1
 # 2. Find the Closest Palindrome
 
 def nearest_palindrome(n):
+    # convert n to int for the purpose of iteration
     n = int(n)
     
+    # function to determine palindromic status
     def is_palindrome(s):
         return s == s[::-1]
     
     
+    # function for smaller palindrome
     def get_smaller_palindrome(x):
         x -= 1
         while x > 0 and not is_palindrome(str(x)):
@@ -60,15 +67,16 @@ def nearest_palindrome(n):
         return x
     
     
+    # function for greater_palindrome
     def get_greater_palindrome(x):
         x += 1
         while True:
             if is_palindrome(str(x)):
                 return x
             x += 1
-            
-    smaller_palindrome = get_smaller_palindrome(n)
-    greater_palindrome = get_greater_palindrome(n)
+    
+    smaller_palindrome = get_smaller_palindrome(n) 
+    greater_palindrome = get_greater_palindrome(n) 
     
     result = str(smaller_palindrome) if abs(n - smaller_palindrome) <= abs(greater_palindrome - n) else str(greater_palindrome)
     
@@ -83,18 +91,18 @@ print(output)
 
 # 3. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 def longest_subarray(nums, limit):
-    min_queue = deque()
     max_queue = deque()
+    min_queue = deque()
     
     left = 0
     result = 0
     
     for right, num in enumerate(nums):
-        while max_queue and num > max_queue[-1]:
+        while max_queue and num >= max_queue[-1]:
             max_queue.pop()
         max_queue.append(num)
-        
-        while min_queue and num < min_queue[-1]:
+    
+        while min_queue and num <= min_queue[-1]:
             min_queue.pop()
         min_queue.append(num)
         
@@ -108,9 +116,9 @@ def longest_subarray(nums, limit):
             left += 1
             
         result = max(result, right - left + 1)
-        
+    
     return result
-
+  
 # Example usage:
 nums = [8, 2, 4, 7]
 limit = 4
@@ -120,14 +128,15 @@ print(output)
 
 # 4. Merge Intervals
 def merge(intervals):
+    # sort the intervals based on their starting point
     intervals.sort(key=lambda i: i[0])
     
     merged = []
+    
     for interval in intervals:
-        if not merged or interval[0] > merged[-1][1]:
+        if not merged or interval[0] > merged[-1][-1]:
             merged.append(interval)
-        else:
-            merged[-1][1] = max(merged[-1][1], interval[1])
+        merged[-1][-1] = max(merged[-1][-1], interval[1])
     
     return merged
 
@@ -138,28 +147,33 @@ print(result)
 
 # 5. Number of Islands
 def num_islands(grid):
+    # Initiate islands_count to 0
     islands_count = 0
     
+    # Define elper function that takes in the current row and column as argument
     def dfs(row, col):
         if row < 0 or col < 0 or row >= len(grid) or col >= len(grid[0]) or grid[row][col] == '0':
             return
         
+        # Mark current cell as visited
         grid[row][col] = '0'
         
+        # Recursively explore other cells
         dfs(row + 1, col)
         dfs(row - 1, col)
         dfs(row, col + 1)
         dfs(row, col - 1)
         
-    
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == '1':
                 islands_count += 1
                 
+                # Traverse the islands
                 dfs(i, j)
     
     return islands_count
+
 
 # Example usage:
 grid = [
@@ -204,13 +218,21 @@ def two_sum(nums, target):
     
     for i, num in enumerate(nums):
         complement = target - num
+        
         if complement in num_indices:
             return [num_indices[complement], i]
         
         num_indices[num] = i
         
+    # result = []
+    # for j in range(len(nums)):
+    #     for k in range(j + 1, len(nums)):
+    #         if nums[j] + nums[k] == target:
+    #             result.append((j, k))
+    # return result
+        
 # Example
-nums = [2,3,7,11,15]
+nums = [2, 3, 7, 11, 15]
 target = 9
 print(two_sum(nums, target))
 
@@ -226,10 +248,10 @@ def length_of_longest_substring(s):
             left = char_index_map[s[right]] + 1
         
         char_index_map[s[right]] = right
-        
-        max_length = max(max_length, right - left + 1)
+        max_length = max(max_length, right - left + 1)            
     
     return max_length
+    
     
 s = "abcabcbb"
 print(length_of_longest_substring(s))
@@ -237,9 +259,11 @@ print(length_of_longest_substring(s))
 
 # 9. Minimum time to complete trips
 def minimum_time(time, totalTrips):
+    # Initialize left to 1 and right to the minimum time taken by any bus multiplied by totalTrips (represents the range of possille minimum times required)
     left = 1
     right = min(time) * totalTrips
     
+    # Define an helper function to check if its possible to complete totalTrips with the given time (max_time)
     def can_complete_trips(max_time):
         total_trips = 0
         for t in time:
@@ -247,6 +271,7 @@ def minimum_time(time, totalTrips):
             
         return total_trips >= totalTrips
     
+    # Implement binary time to find the minimum time required to complete at least totalTrips trips
     while left < right:
         mid = (left + right) // 2
         
@@ -254,7 +279,7 @@ def minimum_time(time, totalTrips):
             right = mid
         else:
             left = mid + 1
-    
+            
     return left
     
 # Example usage:
@@ -270,13 +295,13 @@ def permute(nums):
     def backtrack(start):
         if start == len(nums):
             result.append(nums[:])
-        
+            
         for i in range(start, len(nums)):
             nums[start], nums[i] = nums[i], nums[start]
             
             backtrack(start + 1)
             
-            nums[i], nums[start] = nums[start], nums[i]
+            nums[start], nums[i] = nums[i], nums[start]
     
     backtrack(0)
     
@@ -287,27 +312,27 @@ test_nums = [1, 2, 3]
 print(permute(test_nums))
 
 
-# 10. Leftmost Column with at Least a One
-def leftmost_column_with_one(binaryMatrix):
-    row, col = 0, len(binaryMatrix) - 1
+# # 10. Leftmost Column with at Least a One
+# def leftmost_column_with_one(binaryMatrix):
+#     row, col = 0, len(binaryMatrix) - 1
     
-    leftmost_col = -1
+#     leftmost_col = -1
     
-    while row < len(binaryMatrix) and col >= 0:
-        if binaryMatrix[row][col] == 1:
-            leftmost_col = col
-            col -= 1
-        else:
-            row -= 1
+#     while row < len(binaryMatrix) and col >= 0:
+#         if binaryMatrix[row][col] == 1:
+#             leftmost_col = col
+#             col -= 1
+#         else:
+#             row += 1
     
-    return leftmost_col
+#     return leftmost_col
 
-# Example usage:
-binaryMatrix = [
-    [0, 0, 0, 1],
-    [0, 0, 1, 1],
-    [0, 1, 1, 1],
-    [0, 0, 0, 0]
-]
+# # Example usage:
+# binaryMatrix = [
+#     [0, 0, 0, 1],
+#     [0, 0, 1, 1],
+#     [0, 1, 1, 1],
+#     [0, 0, 0, 0]
+# ]
 
-print(leftmost_column_with_one(binaryMatrix)) 
+# print(leftmost_column_with_one(binaryMatrix)) 

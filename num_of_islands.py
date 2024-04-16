@@ -1,7 +1,18 @@
 def num_islands(grid):
+    """Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+    An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+    Args:
+        grid (string): A map of '0s' and '1s'
+
+    Returns:
+        int: The numebr of islands
+    """
+    
     islands_count = 0
     
-    # Define helper function that takes the current row and column indics as arguments
+    # Define helper function that takes the current row and column indices as arguments
     def dfs(row, col):
         if row < 0 or col < 0 or row >= len(grid) or col >= len(grid[0]) or grid[row][col] == '0':
             return
@@ -9,7 +20,7 @@ def num_islands(grid):
         # Mark current cell as visited
         grid[row][col] = '0'
         
-        # Explore adjacent cells
+        # Recursively explore adjacent cells
         dfs(row + 1, col)
         dfs(row - 1, col)
         dfs(row, col + 1)
