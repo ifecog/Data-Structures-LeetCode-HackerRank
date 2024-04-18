@@ -27,8 +27,15 @@ def is_valid(s):
     After processing all characters, if the stack is empty, return True (indicating that all brackets are properly matched and closed). If the stack is not empty, return False.
     """
     
+    # Inialize an empty stack
     stack = []
-    mapping = {'}': '{', ')': '(', ']': '['}
+    
+    # Define a mapping dictonary
+    mapping = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    }
     
     for char in s:
         if char in mapping:
@@ -36,9 +43,10 @@ def is_valid(s):
             
             if mapping[char] != top_element:
                 return False
+        
         else:
             stack.append(char)
-                
+    
     return not stack
 
 # Example usage:
