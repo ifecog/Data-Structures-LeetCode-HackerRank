@@ -153,3 +153,4 @@ print(permute(test_nums))
 # slots2 = [[0,15],[60,70]]
 # duration = 8
 # print(min_available_duration(slots1, slots2, duration))
+

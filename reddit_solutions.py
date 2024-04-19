@@ -312,27 +312,60 @@ test_nums = [1, 2, 3]
 print(permute(test_nums))
 
 
-# # 10. Leftmost Column with at Least a One
-# def leftmost_column_with_one(binaryMatrix):
-#     row, col = 0, len(binaryMatrix) - 1
+# 10. Leftmost Column with at Least a One
+def leftmost_column_with_one(binaryMatrix):
+    row, col = 0, len(binaryMatrix) - 1
+    leftmost_column = -1
     
-#     leftmost_col = -1
+    while row < len(binaryMatrix) and col >= 0:
+        if binaryMatrix[row][col] == 1:
+            leftmost_column = col
+            col -= 1
+        else:
+            row += 1 
     
-#     while row < len(binaryMatrix) and col >= 0:
-#         if binaryMatrix[row][col] == 1:
-#             leftmost_col = col
-#             col -= 1
-#         else:
-#             row += 1
+    return leftmost_column
     
-#     return leftmost_col
 
-# # Example usage:
-# binaryMatrix = [
-#     [0, 0, 0, 1],
-#     [0, 0, 1, 1],
-#     [0, 1, 1, 1],
-#     [0, 0, 0, 0]
-# ]
+# Example usage:
+binaryMatrix = [
+    [0, 0, 0, 1],
+    [0, 0, 1, 1],
+    [0, 1, 1, 1],
+    [0, 0, 0, 0]
+]
 
-# print(leftmost_column_with_one(binaryMatrix)) 
+print(leftmost_column_with_one(binaryMatrix)) 
+
+
+# 11 .
+def island_perimeter(grid):
+    perimeter = 0
+    rows, cols = len(grid), len(grid[0])
+    
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 1:
+                # Initially add 4 to the perimeter for each land cell
+                perimeter += 4
+                
+                # Subtract the number of adjacent water cells
+                
+                # subtract 2 of there's land above
+                if i > 0 and grid[i - 1][j] == 1:
+                    perimeter -= 2
+                
+                # subtract 2 of there's land above
+                if i > 0 and grid[i][j - 1] == 1:
+                    perimeter -= 2
+        
+    return perimeter
+
+# Example usage:
+grid = [
+    [0, 1, 0, 0],
+    [1, 1, 1, 0],
+    [0, 1, 0, 0],
+    [1, 1, 0, 0]
+]
+print(island_perimeter(grid))
