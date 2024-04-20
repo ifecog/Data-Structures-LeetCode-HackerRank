@@ -288,7 +288,7 @@ total_trips_taken = 8
 print(minimum_time(time_period, total_trips_taken))
 
 
-# Permutation
+# 10. Permutation
 def permute(nums):
     result = []
     
@@ -312,7 +312,7 @@ test_nums = [1, 2, 3]
 print(permute(test_nums))
 
 
-# 10. Leftmost Column with at Least a One
+# 11. Leftmost Column with at Least a One
 def leftmost_column_with_one(binaryMatrix):
     row, col = 0, len(binaryMatrix) - 1
     leftmost_column = -1
@@ -338,7 +338,7 @@ binaryMatrix = [
 print(leftmost_column_with_one(binaryMatrix)) 
 
 
-# 11 .
+# 12 .
 def island_perimeter(grid):
     perimeter = 0
     rows, cols = len(grid), len(grid[0])
@@ -369,3 +369,35 @@ grid = [
     [1, 1, 0, 0]
 ]
 print(island_perimeter(grid))
+
+
+# 13. Flood Fill
+def flood_fill(image, sr, sc, color):
+    original_color = image[sr][sc]
+    
+    if original_color == color:
+        return image
+    
+    def dfs(r, c):
+        if r < 0 or c < 0 or r >= len(image) or c >= len(image[0]):
+            return
+        
+        if image[r][c] == original_color:
+            image[r][c] = color
+            
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+            
+    dfs(sr, sc)
+            
+    return image
+
+# Example usage
+image = [[1,1,1],[1,1,0],[1,0,1]]
+sr = 1
+sc = 1
+color = 2
+
+print(flood_fill(image, sr, sc, color))
