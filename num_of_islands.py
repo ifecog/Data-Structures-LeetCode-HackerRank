@@ -10,31 +10,32 @@ def num_islands(grid):
         int: The numebr of islands
     """
     
-    islands_count = 0
+    island_count = 0
     
-    # Define helper function that takes the current row and column indices as arguments
-    def dfs(row, col):
-        if row < 0 or col < 0 or row >= len(grid) or col >= len(grid[0]) or grid[row][col] == '0':
+    # Define a DFS helper function that takes in the current row and column as arguments
+    def dfs(r, c):
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == '0':
             return
         
-        # Mark current cell as visited
-        grid[row][col] = '0'
+        # Mark the current cell as visited
+        grid[r][c] = '0'
         
         # Recursively explore adjacent cells
-        dfs(row + 1, col)
-        dfs(row - 1, col)
-        dfs(row, col + 1)
-        dfs(row, col - 1)
+        dfs(r + 1, c)
+        dfs(r - 1, c)
+        dfs(r, c + 1)
+        dfs(r, c - 1)
         
+    # Iterate through each cell in the grid
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == '1':
-                islands_count += 1
+                island_count += 1
                 
-                # Traverse the island
+                # Traverse the island (DFS)
                 dfs(i, j)
     
-    return islands_count
+    return island_count
     
     
 # Example usage:
