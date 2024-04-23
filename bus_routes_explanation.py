@@ -28,7 +28,7 @@
     # 3. Exploring Neighbors:
     # During BFS traversal, for each bus stop (current_stop) popped from the queue, we examine all buses passing through that stop. 
     
-    # Note: modifying a set during iteration is not allowed in Python and would result in a runtime eror. So, a copy of the set is created before iterating ovet it.
+    # Note: modifying a set during iteration is not allowed in Python and would result in a runtime eror. So, a copy of the set is created before iterating over it.
     
     # For each bus route passing through current_stop, we iterate over all the stops on that route.
     

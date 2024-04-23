@@ -1,9 +1,2 @@
-    num_indices = {}
-    
-    for i, num in enumerate(nums):
-        complement = target - num
-        
-        if complement in num_indices:
-            return [num_indices[complement], i]
-        
-        num_indices[num] = i
+,13]]
+source2 = 15

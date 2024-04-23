@@ -24,35 +24,39 @@ def num_buses_to_destination(routes, source, target):
     
     # 1. Build the graph
     
+    # Initialize a set to store the stops on the routes using a dictionary stop_to_routes
     stop_to_routes = defaultdict(set)
+    
     for i, route in enumerate(routes):
         for stop in route:
             stop_to_routes[stop].add(i)
             
-    # 2. Perform BFS
+    # 2. BFS
     
-    # initialize a set to keep track of visited bus stops and a queue for BFS traversal
+    # Initialize a set to store the visited stops and a queue for BFS traversal
     visited_stops = set([source])
     queue = deque([(source, 0)])
     
     while queue:
+        # Initialize the current stop
         current_stop, buses_taken = queue.popleft()
         
         if current_stop == target:
             return buses_taken
         
-        # create a copy of the set before iterating over it
-        routes_for_current_stop = stop_to_routes[current_stop].copy()
-        # iterate over all busses passing through the current stop
-        for route_index in routes_for_current_stop:
+        # For each bus passing through the current stop, we iterate over all stops on that route. If there is a bus stop (next stop) that has not been visited, we append it to the queue while also incrementing the buses taken by 1. Also, we add it to the visited stops.
+        
+        # We create a copy of the stop_to_routes for the purpose of iteration. This is because making changes to a set during iteration on Python would result in a runtime error.
+        current_stop_to_routes = stop_to_routes[current_stop].copy()
+        
+        for route_index in current_stop_to_routes:
             for next_stop in routes[route_index]:
                 if next_stop not in visited_stops:
                     queue.append((next_stop, buses_taken + 1))
                     visited_stops.add(next_stop)
-                    
-            # remove the route from the dictionary to avoid revisiting
-            stop_to_routes[current_stop].remove(route_index) 
-    
+            
+            # After checking, the current route index is removed to avoid revisiting
+            stop_to_routes[current_stop].remove(route_index)
     
     return -1
 
