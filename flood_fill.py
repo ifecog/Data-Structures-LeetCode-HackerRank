@@ -27,7 +27,7 @@ def flood_fill(image, sr, sc, color):
         if r < 0 or c < 0 or r >= len(image) or c >= len(image[0]):
             return
         
-        # Check if the color of the current pixel is te same as the original color and replace with the new color
+        # Check if the color of the current pixel is the same as the original color and replace with the new color
         if image[r][c] == original_color:
             image[r][c] = color
             
