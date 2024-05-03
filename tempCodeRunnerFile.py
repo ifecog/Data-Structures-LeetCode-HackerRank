@@ -1,2 +1,1 @@
-,13]]
-source2 = 15
+len(binaryMatrix) - 1
