@@ -16,7 +16,7 @@ def min_available_duration(slots1, slots2, duration):
     """
     To solve this problem, here is my proposed solution:
     
-    1. sort the time slots based on their startin time
+    1. sort the time slots based on their starting time
     
     2. iterate through the pair of time slots using distinct initialized pointers for each
     
@@ -55,7 +55,7 @@ duration = 8
 print(min_available_duration(slots1, slots2, duration))
 
 
-# slots1 = [[10,50],[60,120],[140,210]]
-# slots2 = [[0,15],[60,70]]
-# duration = 12
-# print(min_available_duration(slots1, slots2, duration))
+slots1 = [[10,50],[60,120],[140,210]]
+slots2 = [[0,15],[60,70]]
+duration = 12
+print(min_available_duration(slots1, slots2, duration))
