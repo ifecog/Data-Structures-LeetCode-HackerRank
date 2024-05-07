@@ -1,22 +1,50 @@
-def merged_intervals(intervals):
-    # sort the intervals based on their starting index
-    intervals.sort(key=lambda i: i[0])
+def minimum_time(time, totalTrips):
+    left = 1
+    right = min(time) * totalTrips
     
-    merged = []
-    for interval in intervals:
-        # Append the merged list with the current interval if the list is empty of the current interval does not overlap with the last merged interval.
-        if not merged or interval[0] > merged[-1][1]:
-            merged.append(interval)
+    def can_complete_trips(max_time):
+        total_trips = 0
+        for t in time:
+            total_trips += max_time // t
+            
+        return total_trips >= totalTrips
+    
+    while left < right:
+        mid = (left + right) // 2
         
-        # Merge overlapping intervals by updating the end point of the last merged interval
-        merged[-1][1] = max(merged[-1][1], interval[1])
+        if can_complete_trips(mid):
+            right = mid
+        else:
+            left = mid + 1
     
-    return merged
+    return left
 
 # Example usage:
-intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
-result = merged_intervals(intervals)
-print(result)
+time_period = [2, 3, 5]
+total_trips_taken = 8
+print(minimum_time(time_period, total_trips_taken))
+
+
+
+# def merged_intervals(intervals):
+#     # sort the intervals based on their starting index
+#     intervals.sort(key=lambda i: i[0])
+    
+#     merged = []
+#     for interval in intervals:
+#         # Append the merged list with the current interval if the list is empty of the current interval does not overlap with the last merged interval.
+#         if not merged or interval[0] > merged[-1][1]:
+#             merged.append(interval)
+        
+#         # Merge overlapping intervals by updating the end point of the last merged interval
+#         merged[-1][1] = max(merged[-1][1], interval[1])
+    
+#     return merged
+
+# # Example usage:
+# intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
+# result = merged_intervals(intervals)
+# print(result)
 
 
 # def min_available_duration(slots1, slots2, duration):
