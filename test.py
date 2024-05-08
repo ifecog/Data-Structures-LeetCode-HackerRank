@@ -1,28 +1,90 @@
-def minimum_time(time, totalTrips):
-    left = 1
-    right = min(time) * totalTrips
-    
-    def can_complete_trips(max_time):
-        total_trips = 0
-        for t in time:
-            total_trips += max_time // t
-            
-        return total_trips >= totalTrips
-    
-    while left < right:
-        mid = (left + right) // 2
-        
-        if can_complete_trips(mid):
-            right = mid
-        else:
-            left = mid + 1
-    
-    return left
 
-# Example usage:
-time_period = [2, 3, 5]
-total_trips_taken = 8
-print(minimum_time(time_period, total_trips_taken))
+
+# from collections import deque
+
+# def longest_subarray(nums, limit):
+#     max_queue = deque()
+#     min_queue = deque()
+    
+#     left = 0
+#     result = 0
+    
+#     for right, num in enumerate(nums):
+#         while max_queue and num > max_queue[-1]:
+#             max_queue.pop()
+#         max_queue.append(num)
+        
+#         while min_queue and num < min_queue[-1]:
+#             min_queue.pop()
+#         min_queue.append(num)
+        
+#         while max_queue[0] - min_queue[0] > limit:
+#             if max_queue[0] == nums[left]:
+#                 max_queue.popleft()
+#             if min_queue[0] == nums[left]:
+#                 min_queue.popleft()
+            
+#             left += 1
+            
+#         result = max(result, right - left + 1)
+    
+#     return result
+
+# # Example usage:
+# nums = [8, 2, 4, 7]
+# limit = 4
+# output = longest_subarray(nums, limit)
+# print(output)
+
+
+# def permute(nums):
+#     result = []
+    
+#     def backtrack(start):
+#         if start == len(nums):
+#             result.append(nums[:])
+        
+#         for i in range(start, len(nums)):
+#             nums[start], nums[i] = nums[i], nums[start]
+            
+#             backtrack(start + 1)
+            
+#             nums[start], nums[i] = nums[i], nums[start]
+    
+#     backtrack(0)
+    
+#     return result
+
+# # example test
+# test_nums = [1, 2, 3]
+# print(permute(test_nums))
+
+
+# def minimum_time(time, totalTrips):
+#     left = 1
+#     right = min(time) * totalTrips
+    
+#     def can_complete_trips(max_time):
+#         total_trips = 0
+#         for t in time:
+#             total_trips += max_time // t
+
+#         return total_trips >= totalTrips
+    
+#     while left < right:
+#         mid = (left + right) // 2
+        
+#         if can_complete_trips(mid):
+#             right = mid
+#         else:
+#             left = mid + 1
+    
+#     return left
+    
+# # Example usage:
+# time_period = [2, 3, 5]
+# total_trips_taken = 8
+# print(minimum_time(time_period, total_trips_taken))
 
 
 
