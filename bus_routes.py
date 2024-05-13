@@ -47,9 +47,10 @@ def num_buses_to_destination(routes, source, target):
         # For each bus passing through the current stop, we iterate over all stops on that route. If there is a bus stop (next stop) that has not been visited, we append it to the queue while also incrementing the buses taken by 1. Also, we add it to the visited stops.
         
         # We create a copy of the stop_to_routes for the purpose of iteration. This is because making changes to a set during iteration on Python would result in a runtime error.
-        current_stop_to_routes = stop_to_routes[current_stop].copy()
+        # current_stop_to_routes = stop_to_routes[current_stop].copy()
         
-        for route_index in current_stop_to_routes:
+        # for route_index in current_stop_to_routes:
+        for route_index in list(stop_to_routes[current_stop]):
             for next_stop in routes[route_index]:
                 if next_stop not in visited_stops:
                     queue.append((next_stop, buses_taken + 1))
