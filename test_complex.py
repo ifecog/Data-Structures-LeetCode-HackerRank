@@ -8,24 +8,21 @@ class TreeNode:
 
 def kth_smallest(root, k):
     stack = []
-    count = 0
-    current = root
     
-    while stack or current:
-        while current:
-            stack.append(current)
-            current = current.left
+    while root or stack:
+        while root:
+            stack.append(root)
+            root = root.left
         
-        current = stack.pop()
-        count += 1
+        root = stack.pop()
         
-        if count == k:
-            return current.val
+        k -= 1
+        if k == 0:
+            return root.val
         
-        current = current.right
-    
-    return -1
+        root = root.right
         
+  
 # Example usage:
 # Construct a binary search tree: [3,1,4,null,2]
 root = TreeNode(3)
