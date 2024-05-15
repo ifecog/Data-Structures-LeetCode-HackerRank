@@ -100,23 +100,25 @@ result = min_subarray_length(nums, target)
 print(result) 
 
 
-# #  7.
-# def two_sum(nums, target):
-#     nums_indices = {}
+# 7. Two Sum
+def two_sum(nums, target):
+    hashmap = {}
     
-#     for i, num in enumerate(nums):
-#         complement = target - num
+    for i, num in enumerate(nums):
+        complement = target - num
         
-#         if complement in nums_indices:
-#             return [nums_indices[complement], i]
+        if complement in hashmap:
+            return [hashmap[complement], i]
         
-#         nums_indices[num] = i
+        hashmap[num] = i
+    
+    return []
 
-# # Example usage:
-# nums = [2, 4, 6, 7, 1]
-# target = 9
-# result = two_sum(nums, target)
-# print(result)
+# Example usage:
+nums = [2, 4, 6, 7, 1]
+target = 9
+result = two_sum(nums, target)
+print(result)
 
 
 # # 6.

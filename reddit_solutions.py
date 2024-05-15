@@ -3,16 +3,15 @@ from collections import defaultdict, deque
 
 def num_buses_to_destination(routes, source, target):
     if source == target:
-        return 0 # indicating that there is no journey
+        return 0
     
     # 1. Build the graph
-    
     stop_to_routes = defaultdict(set)
     for i, route in enumerate(routes):
         for stop in route:
             stop_to_routes[stop].add(i)
             
-    # 2. BFS
+    # 2. Initialize BFS
     visited_stops = set([source])
     queue = deque([(source, 0)])
     
@@ -22,9 +21,14 @@ def num_buses_to_destination(routes, source, target):
         if current_stop == target:
             return buses_taken
         
-        # make a copy of the set for the purpose of iteration
-        current_stop_to_routes = stop_to_routes[current_stop].copy()
-        for route_index in current_stop_to_routes:
+        # Make a copy of the set or convert the set to list
+        
+        # make a copy
+        # current_stop_to_routes = stop_to_routes[current_stop].copy()
+        # for route_index in current_stop_to_routes:
+        
+        # convert to list
+        for route_index in list(stop_to_routes[current_stop]):
             for next_stop in routes[route_index]:
                 if next_stop not in visited_stops:
                     queue.append((next_stop, buses_taken + 1))
@@ -33,7 +37,6 @@ def num_buses_to_destination(routes, source, target):
             stop_to_routes[current_stop].remove(route_index)
     
     return -1
-    
 
 # Example usage:
 routes1 = [[1,2,7],[3,6,7]]
@@ -401,3 +404,20 @@ sc = 1
 color = 2
 
 print(flood_fill(image, sr, sc, color))
+
+
+# 14. Top K frequent elements
+def top_k_frequent(nums, k):
+    count = {}
+    
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+        
+    sorted_nums = sorted(count, key=count.get, reverse=True)
+    
+    return sorted_nums[:k]
+
+# Example usage:
+nums = [1, 1, 1, 2, 2, 3]
+k = 2
+print(top_k_frequent(nums, k)) 

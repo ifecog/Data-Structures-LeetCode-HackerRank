@@ -5,19 +5,19 @@ def frequency_sort(s):
         s (string): a string of characters
     """
     
-    sorted_string = ''
+    sorted_str = ''
     char_freq = {}
     
     for char in s:
         char_freq[char] = char_freq.get(char, 0) + 1
-    
-    sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
+        
+    sorted_chars = sorted(char_freq, key=char_freq.get, reverse=True)
+    # sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
     
     for char in sorted_chars:
-        sorted_string += char * char_freq[char]
+        sorted_str += char * char_freq[char]
     
-    return sorted_string
-    
+    return sorted_str
     
 # Example usage:
 s = "tree"

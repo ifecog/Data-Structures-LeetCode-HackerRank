@@ -24,18 +24,34 @@ def length_of_longest_substring(s):
     Finally, return max_length, which represents the length of the longest substring without repeating characters.
     
     """
+    # 1. Using dict
+    # char_index_map = {}
+    # left = 0
+    # max_length = 0
     
-    char_index_map = {}
+    # for right in range(len(s)):
+    #     # If the character in the right index is already in the char_count dict and its index is greater than or equal to 'left', it means that the character is repeating. Hence, update start to the index after the last occurence of the repeating character.
+    #     if s[right] in char_index_map and char_index_map[s[right]] >= left:
+    #         left = char_index_map[s[right]] + 1
+        
+    #     char_index_map[s[right]] = right
+    #     max_length = max(max_length, right - left + 1)  
+    
+    # return max_length
+    
+    # 2. Using set
+    char_set = set()
     left = 0
     max_length = 0
     
     for right in range(len(s)):
-        # If the character in the right index is already in the char_count dict and its index is greater than or equal to 'left', it means that the character is repeating. Hence, update start to the index after the last occurence of the repeating character.
-        if s[right] in char_index_map and char_index_map[s[right]] >= left:
-            left = char_index_map[s[right]] + 1
+        while s[right] in char_set:
+            char_set.remove(s[left])
+            left += 1
         
-        char_index_map[s[right]] = right
-        max_length = max(max_length, right - left + 1)  
+        char_set.add(s[right])
+        
+        max_length = max(max_length, right - left + 1)
     
     return max_length
 
