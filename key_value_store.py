@@ -14,11 +14,12 @@ class TimeMap:
     def __init__(self):
         self.data = defaultdict()
         
-        
+    # Set method to append a new (timestamp, value) pair to list
     def set(self, key, value, timestamp):
-        return self.data[key].append((timestamp, value))
+        self.data[key].append((timestamp, value))
     
     
+    # Get method to find the value with the largest timestamp
     def get(self, key, timestamp):
         if key not in self.data:
             return ''
@@ -27,19 +28,19 @@ class TimeMap:
         idx = self.binary_search(values, timestamp)
         if idx == 0:
             return ''
-
+        
         return values[idx - 1][1]
         
     
+    # Helper function that performs binary search operation
     def binary_search(self, values, timestamp):
-        right, left = 0, len(values)
+        left, right = 0, len(values)
         
         while left < right:
             mid = (left + right) // 2
             
-            if values[mid] <= timestamp:
+            if values[mid][0] <= timestamp:
                 left = mid + 1
             else:
                 right = mid
-        
         return left
