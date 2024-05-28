@@ -412,7 +412,7 @@ def top_k_frequent(nums, k):
     
     for num in nums:
         count[num] = count.get(num, 0) + 1
-        
+    
     sorted_nums = sorted(count, key=count.get, reverse=True)
     
     return sorted_nums[:k]
@@ -421,3 +421,4 @@ def top_k_frequent(nums, k):
 nums = [1, 1, 1, 2, 2, 3]
 k = 2
 print(top_k_frequent(nums, k)) 
+
