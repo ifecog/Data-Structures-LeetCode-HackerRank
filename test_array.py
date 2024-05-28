@@ -1,3 +1,24 @@
+# 11. First no-repeating element
+def first_non_repeating(nums):
+    freq = {}
+    
+    for num in nums:
+        if num in freq:
+            freq[num] += 1
+        else:
+            freq[num] = 1
+    
+    for num in nums:
+        if freq[num] == 1:
+            return num
+    
+    return None
+
+# Example usage
+arr = [9, 4, 6, 8, 8, 2, 5, 8, 4, 6, 9]
+print(first_non_repeating(arr)) 
+
+
 # # 10. 
 # def sorted_squares(nums):
 #     nums_square = [i * i for i in nums]
@@ -12,113 +33,113 @@
 # print(result)
 
 # 9(a). Merge Sorted Array (different lengths)
-def merge_arrays(nums1, m, nums2, n):
-    # Ensure that nums1 has the capacity to hold all elements in the combination of both arrays
-    nums1 += [0] * n
+# def merge_arrays(nums1, m, nums2, n):
+#     # Ensure that nums1 has the capacity to hold all elements in the combination of both arrays
+#     nums1 += [0] * n
     
-    # Initialize pointers
-    p1, p2, p_merged = m - 1, n - 1, m + n - 1
+#     # Initialize pointers
+#     p1, p2, p_merged = m - 1, n - 1, m + n - 1
     
-    while p1 >= 0 and p2 >= 0:
-        if nums1[p1] >= nums2[p2]:
-            nums1[p_merged] = nums1[p1]
-            p1 -= 1
-        else:
-            nums1[p_merged] = nums2[p2]
-            p2 -= 1
-        p_merged -= 1
+#     while p1 >= 0 and p2 >= 0:
+#         if nums1[p1] >= nums2[p2]:
+#             nums1[p_merged] = nums1[p1]
+#             p1 -= 1
+#         else:
+#             nums1[p_merged] = nums2[p2]
+#             p2 -= 1
+#         p_merged -= 1
         
-    if p2 >= 0:
-        nums1[:p2 + 1] = nums2[:p2 + 1]
+#     if p2 >= 0:
+#         nums1[:p2 + 1] = nums2[:p2 + 1]
     
     
     
-# Example usage:
-nums1 = [1, 2, 3, 5, 7, 8]
-m = 6
-nums2 = [2, 5, 6]
-n = 3
+# # Example usage:
+# nums1 = [1, 2, 3, 5, 7, 8]
+# m = 6
+# nums2 = [2, 5, 6]
+# n = 3
 
-merge_arrays(nums1, m, nums2, n)
-print(nums1)
+# merge_arrays(nums1, m, nums2, n)
+# print(nums1)
 
 
-# 9(a). Merge Sorted Array (same length)
-def merge_arrays(nums1, m, nums2, n):
-    # Initialize pointers
-    p1, p2, p_merged = m - 1, n - 1, m + n - 1
+# # 9(a). Merge Sorted Array (same length)
+# def merge_arrays(nums1, m, nums2, n):
+#     # Initialize pointers
+#     p1, p2, p_merged = m - 1, n - 1, m + n - 1
     
-    while p1 >= 0 and p2 >= 0:
-        if nums1[p1] >= nums2[p2]:
-            nums1[p_merged] = nums1[p1]
-            p1 -= 1
-        else:
-            nums1[p_merged] = nums2[p2]
-            p2 -= 1
-        p_merged -= 1
+#     while p1 >= 0 and p2 >= 0:
+#         if nums1[p1] >= nums2[p2]:
+#             nums1[p_merged] = nums1[p1]
+#             p1 -= 1
+#         else:
+#             nums1[p_merged] = nums2[p2]
+#             p2 -= 1
+#         p_merged -= 1
         
-    # If there are remaining elements in nums2, copy to nums1
-    nums1[:p2 + 1] = nums2[:p2 + 1]
+#     # If there are remaining elements in nums2, copy to nums1
+#     nums1[:p2 + 1] = nums2[:p2 + 1]
     
     
-# Example usage:
-nums1 = [1, 2, 3, 0, 0, 0]
-m = 3
-nums2 = [2, 5, 6]
-n = 3
+# # Example usage:
+# nums1 = [1, 2, 3, 0, 0, 0]
+# m = 3
+# nums2 = [2, 5, 6]
+# n = 3
 
-merge_arrays(nums1, m, nums2, n)
-print(nums1)
+# merge_arrays(nums1, m, nums2, n)
+# print(nums1)
 
 
-# 8. Minimum Size Subarray Sum
-def min_subarray_length(nums, target):
-    min_length = len(nums) + 1
-    current_sum = 0
-    left = 0
+# # 8. Minimum Size Subarray Sum
+# def min_subarray_length(nums, target):
+#     min_length = len(nums) + 1
+#     current_sum = 0
+#     left = 0
     
-    # Iterate through the array using the sliding windo approach
-    for right, num in enumerate(nums):
-        # Add current element 'num' to current_sum
-        current_sum += num
+#     # Iterate through the array using the sliding windo approach
+#     for right, num in enumerate(nums):
+#         # Add current element 'num' to current_sum
+#         current_sum += num
         
-        while current_sum >= target:
-            # Update min_length
-            min_length = min(min_length, right - left + 1)
+#         while current_sum >= target:
+#             # Update min_length
+#             min_length = min(min_length, right - left + 1)
             
-            # Remove the meftmost element and move the left pointer to the right
-            current_sum -= nums[left]
-            left += 1
+#             # Remove the meftmost element and move the left pointer to the right
+#             current_sum -= nums[left]
+#             left += 1
     
-    return min_length if min_length <= len(nums) else 0
+#     return min_length if min_length <= len(nums) else 0
         
 
-# Example usage
-nums = [2, 3, 1, 2, 4, 3]
-target = 7
-result = min_subarray_length(nums, target)
-print(result) 
+# # Example usage
+# nums = [2, 3, 1, 2, 4, 3]
+# target = 7
+# result = min_subarray_length(nums, target)
+# print(result) 
 
 
-# 7. Two Sum
-def two_sum(nums, target):
-    hashmap = {}
+# # 7. Two Sum
+# def two_sum(nums, target):
+#     hashmap = {}
     
-    for i, num in enumerate(nums):
-        complement = target - num
+#     for i, num in enumerate(nums):
+#         complement = target - num
         
-        if complement in hashmap:
-            return [hashmap[complement], i]
+#         if complement in hashmap:
+#             return [hashmap[complement], i]
         
-        hashmap[num] = i
+#         hashmap[num] = i
     
-    return []
+#     return []
 
-# Example usage:
-nums = [2, 4, 6, 7, 1]
-target = 9
-result = two_sum(nums, target)
-print(result)
+# # Example usage:
+# nums = [2, 4, 6, 7, 1]
+# target = 9
+# result = two_sum(nums, target)
+# print(result)
 
 
 # # 6.
