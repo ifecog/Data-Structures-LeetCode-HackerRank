@@ -10,6 +10,7 @@ def array_median(nums1, nums2):
     # Define a nested function to merge the arrays
     def merge_arrays(arr1, arr2):
         # Ensure that arr1 has the capacity hold all the elements in the combination of both arrays
+        # This is done by extending arr1 with 0s to match the length of the combined array
         arr1 += [0] * len(arr2)
         
         # Initialize pointers
@@ -30,14 +31,14 @@ def array_median(nums1, nums2):
         return arr1
     
     # Implement the merge_arrays function to merge nums1 and nums2
-    merged_array = merge_arrays(nums1, nums2)
-    print('Merged Array:', merged_array)
-    n = len(merged_array)
+    nums = merge_arrays(nums1, nums2)
+    print('Merged Array:', nums)
+    n = len(nums)
     
     if n % 2 == 0:
-        return (merged_array[(n // 2) - 1] + merged_array[n // 2]) / 2
+        return (nums[(n // 2) - 1] + nums[n // 2]) / 2
     else:
-        return merged_array[n // 2]
+        return nums[n // 2]
     
     
 # Example usage:
