@@ -1,35 +1,30 @@
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-        
-
-def kth_smallest(root, k):
-    # Initialize an empty stack to store nodes for traversal
-    stack = []
+def closest_palindrome(n):
+    n = int(n)
     
-    while stack or root:
-        while root:
-            stack.append(root)
-            root = root.left
-        
-        root = stack.pop()
-        k -= 1
-        
-        if k == 0:
-            return root.val
-        
-        root = root.right
+    def is_palindrome(s):
+        return s == s[::-1]
     
-    return -1
+    
+    def get_smaller_palindrome(x):
+        x -= 1
+        while x > 0 and not is_palindrome(str(x)):
+            x -= 1
+        return x
+    
+    
+    def get_greater_palindrome(x):
+        x += 1
+        while True:
+            if is_palindrome(str(x)):
+                return x            
+            x += 1
+            
+    smaller_palindrome = get_smaller_palindrome(n)
+    greater_palindrome = get_greater_palindrome(n)
+    
+    return str(smaller_palindrome) if (n - smaller_palindrome) <= (greater_palindrome - n) else str(greater_palindrome)
 
 # Example usage:
-# Construct a binary search tree: [3,1,4,null,2]
-root = TreeNode(3)
-root.left = TreeNode(1)
-root.right = TreeNode(4)
-root.left.right = TreeNode(2)
-
-k = 2
-print(kth_smallest(root, k))
+n = "12345"
+output = closest_palindrome(n)
+print(output)

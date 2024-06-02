@@ -21,7 +21,7 @@ def closest_palindrome(n):
     6. applying the condition for choosing, return the nearest palindrome
     """ 
     
-    n = int (n)
+    n = int(n)
     
     def is_palindrome(s):
         return s == s[::-1]
@@ -46,11 +46,11 @@ def closest_palindrome(n):
     smaller_palindrome = get_smaller_palindrome(n)       
     higher_palindrome = get_higher_palindrome(n)       
     
-    return str(smaller_palindrome) if abs(n - smaller_palindrome) <= abs(higher_palindrome - n) else str(higher_palindrome)
+    return str(smaller_palindrome) if abs(n - smaller_palindrome) <= abs(n - higher_palindrome) else str(higher_palindrome)
    
 
 # Example usage:
-n = "1234"
+n = "12345"
 output = closest_palindrome(n)
 print(output)
             
