@@ -64,5 +64,5 @@ root.left = TreeNode(1)
 root.right = TreeNode(4)
 root.left.right = TreeNode(2)
 
-k = 1
+k = 2
 print(kth_smallest(root, k))
