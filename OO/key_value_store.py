@@ -11,6 +11,7 @@ String get(String key, int timestamp) Returns a value such that set was called p
 from collections import defaultdict
 
 class TimeMap:
+    
     def __init__(self):
         self.data = defaultdict()
         
