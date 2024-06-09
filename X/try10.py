@@ -1,7 +1,8 @@
 def minimum_time(time, totalTrips):
     left = 1
-    # Initialize right pointer to minimum time taken by any bus multiplied by titakTrips
+    # Initialize right pointer to minimum time taken by any bus multiplied by totalTrips
     right = min(time) * totalTrips
+    
     
     def can_complete_trips(max_time):
         total_trips = 0

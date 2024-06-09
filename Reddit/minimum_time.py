@@ -22,6 +22,7 @@ def minimum_time(time, totalTrips):
     """
     
     left = 1
+    # Initialize the right pointer which would be the minimum time taken by ant bus multiplied by the totalTrips 
     right = min(time) * totalTrips
     
     def can_complete_trips(max_time):
