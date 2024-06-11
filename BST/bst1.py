@@ -13,32 +13,8 @@ def kth_smallest(root, k):
         k (int): parameter
 
     Returns:
-        int: kth cmallest value
+        int: kth smallest value
     """
-    
-    # Method 1
-    # # Initialize an empty stack and counter to keep track of the number of visited nodes
-    # stack = []
-    # count = 0
-    # current = root
-    
-    # while stack or current:
-    #     # Start from the root node and push all left child nodes to the stack until the leftmost node (smallest) is reached.
-    #     while current:
-    #         stack.append(current)
-    #         current = current.left
-        
-    #     # Pop nodes one by one incrementing the counter for every op action.
-    #     current = stack.pop()
-    #     count += 1
-        
-    #     # If counter becomes equal to k, return the value of the current node.
-    #     if count == k:
-    #         return current.val
-        
-    #     current = current.right
-    
-    # return -1
     
     # Method 2
     stack = []
@@ -66,3 +42,29 @@ root.left.right = TreeNode(2)
 
 k = 2
 print(kth_smallest(root, k))
+
+
+    # Method 1
+    # # Initialize an empty stack and counter to keep track of the number of visited nodes
+    # stack = []
+    # count = 0
+    # current = root
+    
+    # while stack or current:
+    #     # Start from the root node and push all left child nodes to the stack until the leftmost node (smallest) is reached.
+    #     while current:
+    #         stack.append(current)
+    #         current = current.left
+        
+    #     # Pop nodes one by one incrementing the counter for every op action.
+    #     current = stack.pop()
+    #     count += 1
+        
+    #     # If counter becomes equal to k, return the value of the current node.
+    #     if count == k:
+    #         return current.val
+        
+    #     current = current.right
+    
+    # return -1
+    
