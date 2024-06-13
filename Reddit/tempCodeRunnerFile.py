@@ -1,1 +1,1 @@
-                    # break
+sol = Solution()
