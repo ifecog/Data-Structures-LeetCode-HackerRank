@@ -10,28 +10,26 @@ def is_valid_sudoku(board):
             if num == '.':
                 continue
             
-            # Check row
+            # Check rows
             if num in rows[i]:
                 return False
             rows[i].add(num)
-            
-            # Checl col
+    
+            # Check columns
             if num in cols[j]:
                 return False
             cols[j].add(num)
             
-            # Check 3x3 sub-box
+            # Check 3x3 sub boxes
             box_index = (i // 3) * 3 + (j // 3)
-
             if num in boxes[box_index]:
                 return False
             boxes[box_index].add(num)
-            
+    
     return True
 
 
-# Example usage:
-# sol = Solution()
+# Example usage
 board = [
     ["5","3",".",".","7",".",".",".","."],
     ["6",".",".","1","9","5",".",".","."],

@@ -4,57 +4,31 @@ class TreeNode:
         self.left = left
         self.right = right
         
-
-def kth_smallest(root, k):
-    # Initialze an empty stack to store nodes for traversals
-    stack = []
-    
-    while root or stack:
-        while root:
-            stack.append(root)
-            root = root.left
         
-        root = stack.pop()
-        k -= 1
-        if k == 0:
-            return root.val
-        
-        root = root.right
+# 1. Right Side View of a Binary Tree
+def right_side_view(root):
+    result = []
+    if not root:
+        return []
     
-    return -1
-        
-# # Example usage:
-# # Construct a binary search tree: [3,1,4,null,2]
-# root = TreeNode(3)
-# root.left = TreeNode(1)
-# root.right = TreeNode(4)
-# root.left.right = TreeNode(2)
-
-# k = 2
-# print(kth_smallest(root, k))
-
-# def right_side_view(root):
-#     if not root:
-#         return []
+    queue = [root]
     
-#     result = []
-#     queue = [root]
-    
-#     while queue:
-#         level_length = len(queue)
+    while queue:
+        level_length = len(queue)
         
-#         for i in range(level_length):
-#             node = queue.pop(0)
+        for i in range(level_length):
+            node = queue.pop(0)
             
-#             if i == level_length - 1:
-#                 result.append(node.val)
+            if i == level_length - 1:
+                result.append(node.val)
                 
-#             if node.left:
-#                 queue.append(node.left)
-#             if node.right:
-#                 queue.append(node.right)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
     
-#     return result
+    return result
+    
 
 # # Example usage
 # # root = [1,2,3,null,5,null,4]
@@ -66,99 +40,65 @@ def kth_smallest(root, k):
 # print(right_side_view(root))
 
 
-# def is_valid_sudoku(board):
-#     # Use sets to keep track of seene numbers in rows, cols, and sun-boxes
-#     rows = [set() for _ in range(9)]
-#     cols = [set() for _ in range(9)]
-#     boxes = [set() for _ in range(9)]
+# 2. Lowest Common Ancestor
+def lowest_common_ancestor(root, p, q):
+    if not root:
+        return None
     
-#     for i in range(9):
-#         for j in range(9):
-#             num = board[i][j]
-#             if num == '.':
-#                 continue
-            
-#             if num in rows[i]:
-#                 return False
-#             rows[i].add(num)
+    # If both node values have values lesser than the root node, move the root node to the left
+    if p.val < root.val and q.val < root.val:
+        return lowest_common_ancestor(root.left, p, q)
     
-#             if num in cols[j]:
-#                 return False
-#             cols[j].add(num)
-            
-#             box_index = (i // 3) * 3 + (j // 3)
-            
-#             if num in boxes[box_index]:
-#                 return False
-#             boxes[box_index].add(num)
+    # If both node values have values greater than the root node, move the root node to the right
+    if p.val > root.val and q.val > root.val:
+        return lowest_common_ancestor(root.right, p, q)
     
-#     return True
+    return root
+
+
+# # Example usage:
+# root = TreeNode(6)
+# root.left = TreeNode(2)
+# root.right = TreeNode(8)
+# root.left.left = TreeNode(0)
+# root.left.right = TreeNode(4)
+# root.right.left = TreeNode(7)
+# root.right.right = TreeNode(9)
+# root.left.right.left = TreeNode(3)
+# root.left.right.right = TreeNode(5)
+
+# p = root.left.right.left
+# q = root.left.right.right
+
+# result = lowest_common_ancestor(root, p, q)
+# print(result.val)  # Output: 4
+
+
+# 3. Kth smallest vallue in a binary search tree
+def kth_smallest(root, k):
+    # Initialize an empty stack to store node for traversal
+    stack = []
     
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        
+        root = stack.pop()
+        k -= 1
+        if k == 0:
+            return root.val
+        
+        root = root.right
+    
+    return stack
 
 # Example usage:
-# board = [
-#     [".",".","4",".",".",".","6","3","."],
-#     [".",".",".",".",".",".",".",".","."],
-#     ["5",".",".",".",".",".",".","9","."],
-#     [".",".",".","5","6",".",".",".","."],
-#     ["4",".","3",".",".",".",".",".","1"],
-#     [".",".",".","7",".",".",".",".","."],
-#     [".",".",".","5",".",".",".",".","."],
-#     [".",".",".",".",".",".",".",".","."],
-#     [".",".",".",".",".",".",".",".","."]
-# ]
-# print(is_valid_sudoku(board))  # Output should be False
+# Construct a binary search tree: [3,1,4,null,2]
+root = TreeNode(3)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.left.right = TreeNode(2)
 
-
-
-def solve_sudoku(board):
-    def is_valid(board, r, c, num):
-        # Check the row
-        for i in range(9):
-            if board[r][i] == num:
-                return False
-        
-        # Check the col
-        for i in range(9):
-            if board[i][c] == num:
-                return False
-        
-        # Check the 3x3 sub-boxes
-        box_r, box_c = (r // 3) * 3, (c // 3) * 3
-        for i in range(3):
-            for j in range(3):
-                if board[box_r + i][box_c + j] == num:
-                    return False
-                
-        return True
-    
-    def solve(board):
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == '.':
-                    for num in '123456789':
-                        if is_valid(board, r, c, num):
-                            board[r][c] = num
-                            if solve(board):
-                                return True
-                            board[r][c] = '.'
-                    return False
-        
-        return True
-    
-    solve(board)
-    
-board = [
-    ["5","3",".",".","7",".",".",".","."],
-    ["6",".",".","1","9","5",".",".","."],
-    [".","9","8",".",".",".",".","6","."],
-    ["8",".",".",".","6",".",".",".","3"],
-    ["4",".",".","8",".","3",".",".","1"],
-    ["7",".",".",".","2",".",".",".","6"],
-    [".","6",".",".",".",".","2","8","."],
-    [".",".",".","4","1","9",".",".","5"],
-    [".",".",".",".","8",".",".","7","9"]
-]
-solve_sudoku(board)
-for row in board:
-    print(row)
+k = 2
+print(kth_smallest(root, k))
