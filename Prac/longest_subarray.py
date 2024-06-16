@@ -1,6 +1,5 @@
 from collections import deque
 
-
 def longest_subarray(nums, limit):
     """Given an array of integers nums and an integer limit, return the size of the longest non-empty subarray such that the absolute difference between any two elements of this subarray is less than or equal to limit.
 
@@ -34,14 +33,17 @@ def longest_subarray(nums, limit):
     result = 0
     
     for right, num in enumerate(nums):
+        # Maintain the max queue in decreasing order
         while max_queue and num > max_queue[-1]:
             max_queue.pop()
         max_queue.append(num)
         
+        # MAintain the min queue in increasing order
         while min_queue and num < min_queue[-1]:
             min_queue.pop()
         min_queue.append(num)
         
+        # If the difference between the max queue and the min queue exceeds the limit, shrink the window
         while max_queue[0] - min_queue[0] > limit:
             if max_queue[0] == nums[left]:
                 max_queue.popleft()

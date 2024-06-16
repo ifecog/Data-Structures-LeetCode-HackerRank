@@ -19,9 +19,11 @@ def right_side_view(root):
         for i in range(level_length):
             node = queue.pop(0)
             
+            # If this is the last node in the current level. add it to the result
             if i == level_length - 1:
                 result.append(node.val)
-                
+            
+            # Add the left and right children to the queue 
             if node.left:
                 queue.append(node.left)
             if node.right:
