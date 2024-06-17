@@ -1,38 +1,70 @@
-from collections import deque
+def minimum_time(time, totalTrips):
+    left = 1
+    right = min(time) * totalTrips
+    
+    return left
 
-def longest_subarray(nums, limit):
-    max_queue = deque()
-    min_queue = deque()
+
+# def length_of_longest_substring(s):
+#     char_set = set()
+#     left = 0
+#     max_length = 0
     
-    left = 0
-    result = 0
+#     for right in range(len(s)):
+#         # If the current character is already in the cell, remove characters from the left
+#         while s[right] in char_set:
+#             char_set.remove(s[left])
+#             left += 1
+        
+#         # Add the current character to the set
+#         char_set.add(s[right])
+        
+#         # Update the maximum length
+#         max_length = max(max_length, right - left + 1)
     
-    for right, num in enumerate(nums):
-        while max_queue and num > max_queue[-1]:
-            max_queue.pop()
-        max_queue.append(num)
+#     return max_length
+
+
+# # Example usage
+# s = "abcabcbb"
+# print(length_of_longest_substring(s))
+
+
+# from collections import deque
+
+# def longest_subarray(nums, limit):
+#     max_queue = deque()
+#     min_queue = deque()
+    
+#     left = 0
+#     result = 0
+    
+#     for right, num in enumerate(nums):
+#         while max_queue and num > max_queue[-1]:
+#             max_queue.pop()
+#         max_queue.append(num)
         
-        while min_queue and num < min_queue[-1]:
-            min_queue.pop()
-        min_queue.append(num)
+#         while min_queue and num < min_queue[-1]:
+#             min_queue.pop()
+#         min_queue.append(num)
         
-        # If the difference between the max queue and the min queue exceeds the limit, shrink the window
-        while max_queue[0] - min_queue[0] > limit:
-            if max_queue[0] == nums[left]:
-                max_queue.popleft()
-            if min_queue[0] == nums[left]:
-                min_queue.popleft()
-            left += 1
+#         # If the difference between the max queue and the min queue exceeds the limit, shrink the window
+#         while max_queue[0] - min_queue[0] > limit:
+#             if max_queue[0] == nums[left]:
+#                 max_queue.popleft()
+#             if min_queue[0] == nums[left]:
+#                 min_queue.popleft()
+#             left += 1
             
-        result = max(result, right - left + 1)
+#         result = max(result, right - left + 1)
     
-    return result
+#     return result
 
-# Example usage:
-nums = [8, 2, 4, 7]
-limit = 4
-output = longest_subarray(nums, limit)
-print(output)
+# # Example usage:
+# nums = [8, 2, 4, 7]
+# limit = 4
+# output = longest_subarray(nums, limit)
+# print(output)
 
 # def leftmost_column_with_one(binaryMatrix):
 #     row, col = 0, len(binaryMatrix) - 1
