@@ -1,8 +1,32 @@
 def minimum_time(time, totalTrips):
     left = 1
+    # The maximum time needed if only the fastest bus was used to complete all trips
     right = min(time) * totalTrips
     
+    # Helper function to determine if it is possible to complete the required number of trips within max_time
+    def can_complete_trips(max_time):
+        total_trips = 0
+        for t in time:
+            total_trips += max_time // t
+        
+        return total_trips >= totalTrips
+    
+    while left < right:
+        mid = (left + right) // 2
+        
+        if can_complete_trips(mid):
+            right = mid
+        else:
+            left = mid + 1
+    
+    # When left meets right, we have found the minimum time required
     return left
+
+
+# Example usage:
+time_period = [2, 3, 5]
+total_trips_taken = 8
+print(minimum_time(time_period, total_trips_taken))
 
 
 # def length_of_longest_substring(s):

@@ -22,9 +22,10 @@ def minimum_time(time, totalTrips):
     """
     
     left = 1
-    # Initialize the right pointer which would be the minimum time taken by ant bus multiplied by the totalTrips 
+    # The maximum time needed if only the fastest bus was used to complete all trips
     right = min(time) * totalTrips
     
+    # Helper function to determine if it is possible to complete the required number of trips within max_time
     def can_complete_trips(max_time):
         total_trips = 0
         for t in time:
@@ -40,6 +41,7 @@ def minimum_time(time, totalTrips):
         else:
             left = mid + 1
     
+    # When left meets right, we have found the minimum time required
     return left
    
     
