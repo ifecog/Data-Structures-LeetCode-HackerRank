@@ -35,7 +35,7 @@ print(minimum_time(time_period, total_trips_taken))
 #     max_length = 0
     
 #     for right in range(len(s)):
-#         # If the current character is already in the cell, remove characters from the left
+#         # If the current character is already in the set, remove characters from the left
 #         while s[right] in char_set:
 #             char_set.remove(s[left])
 #             left += 1
