@@ -1,13 +1,12 @@
 import random
 
 class RandomizedSet:
-    
     def __init__(self):
         self.dict = {}
         self.list = []
         
     
-    def insert(self, val: int) -> bool:
+    def insert(self, val: int):
         if val in self.dict:
             return False
         
@@ -17,24 +16,24 @@ class RandomizedSet:
         return True
     
     
-    def remove(self, val: int) -> bool:
+    def remove(self, val: int):
         if val not in self.dict:
             return False
         
-        # Move the last element to the place of the element to delete
+        # Move the index to be removed to the end of the list by swapping it with the last element
         last_element = self.list[-1]
         idx_to_remove = self.dict[val]
         self.list[idx_to_remove] = last_element
         self.dict[last_element] = idx_to_remove
         
-        # Remove the last element
+        # Remove the element from the dict and list
         self.list.pop()
         del self.dict[val]
         
         return True
     
     
-    def get_random(self) -> int:
+    def get_random(self):
         return random.choice(self.list)
     
     
