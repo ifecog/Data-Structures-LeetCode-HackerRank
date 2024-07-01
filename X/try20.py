@@ -26,7 +26,7 @@ def length_of_longest_substring(s):
 #     max_length = 0
     
 #     for right in range(len(s)):
-#         # If the current character is already in the dictionary, move the left pointer on place to the right
+#         # If the current character is already in the dictionary, move the left pointer one place to the right
 #         if s[right] in char_index_map and char_index_map[s[right]] >= left:
 #             left = char_index_map[s[right]] + 1
         

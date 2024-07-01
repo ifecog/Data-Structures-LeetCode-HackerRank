@@ -4,7 +4,7 @@ def minimum_time(time, totalTrips):
     # Set the right pointer to the maximum time needed for the rastest bus to complete all trips
     right = min(time) * totalTrips
     
-    # Define a helper function tp determine if it is possible to complete the required number of trips within max_time
+    # Define a helper function to determine if it is possible to complete the required number of trips within max_time
     def can_complete_trips(max_time):
         total_trips = 0
         for t in time:

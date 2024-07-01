@@ -20,12 +20,13 @@ def minimum_time(time, totalTrips):
 
     Once the binary search terminates (left is equal to right), return left, which represents the minimum time required to complete at least totalTrips trips.
     """
+    # This is solved using binary search
     
     left = 1
-    # The maximum time needed if only the fastest bus was used to complete all trips
+    # Initialize the right pointer the minimum time multiplied by the total trips. This is the worst case scenario where the fastest bus completes all trips
     right = min(time) * totalTrips
     
-    # Helper function to determine if it is possible to complete the required number of trips within max_time
+    # Helper function to determine if it is possible to complete the required number of trups within max_time
     def can_complete_trips(max_time):
         total_trips = 0
         for t in time:
@@ -33,15 +34,18 @@ def minimum_time(time, totalTrips):
         
         return total_trips >= totalTrips
     
+    # Implement binary search algorithm
     while left < right:
-        mid = (left + right) // 2
+        mid = (right + left) // 2
         
         if can_complete_trips(mid):
+            # If true, search the lower half
             right = mid
         else:
+            # If false, search the upper half
             left = mid + 1
     
-    # When left meets right, we have found the minimum time required
+    # When left meets right, we have found the minimum time
     return left
    
     
