@@ -20,13 +20,13 @@ class RandomizedSet:
         if val not in self.dict:
             return False
         
-        # Move the index to be removed to the end of the list by swapping it with the last element
+        # Move the element to be removed to the last position in the list
         last_element = self.list[-1]
         idx_to_remove = self.dict[val]
         self.list[idx_to_remove] = last_element
         self.dict[last_element] = idx_to_remove
         
-        # Remove the element
+        # Remove the element from the list and dict
         self.list.pop()
         del self.dict[val]
         
