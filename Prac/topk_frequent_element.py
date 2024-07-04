@@ -1,4 +1,4 @@
-def top_k_frequent(nums, k):
+def topK_frequent(nums, k):
     """Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
 
     Args:
@@ -24,5 +24,5 @@ def top_k_frequent(nums, k):
 # Example usage:
 nums = [1, 1, 1, 2, 2, 3]
 k = 2
-print(top_k_frequent(nums, k)) 
+print(topK_frequent(nums, k)) 
 

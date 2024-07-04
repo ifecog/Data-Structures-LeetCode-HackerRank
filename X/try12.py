@@ -1,52 +1,31 @@
-def solve_sudoku(board):
-    # Helper function to check validity of board
-    def is_valid(board, r, c, num):
-        for i in range(9):
-            if board[r][i] == num:
-                return False
-            
-        for i in range(9):
-            if board[i][c] == num:
-                return False
-            
-        box_r, box_c = (r // 3) * 3, (c // 3) * 3
-        for i in range(3):
-            for j in range(3):
-                if board[box_r + i][box_c + j] == num:
-                    return False
+def character_replacement(s, k):
+    # This is solved using the slidin window approach
+    char_count = {}
+    left = 0
+    max_count = 0
+    max_length = 0
+    
+    for right in range(len(s)):
+        # Increment the count for the current character
+        char_count[s[right]] = char_count.get(s[right], 0) + 1
         
-        return True
+        # Update the max count to the hihest count of any character in the window
+        max_count = max(max_count, char_count[s[right]])
+        
+        # If the current window size minus the max_count character is greater than k, it means that we need more than k replacements to make all the characters the same.
+        # a. decrement the characters in the left pointer
+        # b. shrink the window from the left by incrementing the left pointer
+        if right - left + 1 - max_count > k:
+            char_count[s[left]] -= 1
+            left += 1
+        
+        # Update the length of longest substring
+        max_length = max(max_length, right - left + 1)
     
-    
-    def solve(board):
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == '.':
-                    for num in '123456789':
-                        if is_valid(board, r, c, num):
-                            board[r][c] = num
-                            if solve(board):
-                                return True
-                            
-                            board[r][c] = '.'
-                    
-                    return False
-                
-        return True
-    
-    solve(board)
-    
-board = [
-    ["5","3",".",".","7",".",".",".","."],
-    ["6",".",".","1","9","5",".",".","."],
-    [".","9","8",".",".",".",".","6","."],
-    ["8",".",".",".","6",".",".",".","3"],
-    ["4",".",".","8",".","3",".",".","1"],
-    ["7",".",".",".","2",".",".",".","6"],
-    [".","6",".",".",".",".","2","8","."],
-    [".",".",".","4","1","9",".",".","5"],
-    [".",".",".",".","8",".",".","7","9"]
-]
-solve_sudoku(board)
-for row in board:
-    print(row)
+    return max_length
+
+# Example usage:
+s = "AABABBA"
+k = 1
+result = character_replacement(s, k)
+print(result)

@@ -21,7 +21,9 @@ def character_replacement(s, k):
         # Update max count to be the highest count of any character in the window
         max_count = max(max_count, char_count[s[right]])
         
-        # If the number of characters that needs to be replaced is more than k, shrink the window from the left
+        # If the current window size minus the max_count character is greater than k, it means that we need more than k replacements to make all the characters the same.
+        # a. decrement the characters in the left pointer
+        # b. shrink the window from the left by incrementing the left pointer
         if right - left + 1 - max_count > k:
             char_count[s[left]] -= 1
             left += 1
