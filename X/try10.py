@@ -1,28 +1,36 @@
-def minimum_time(time, totalTrips):
-    left = 1
-    # Initialize right pointer to minimum time taken by any bus multiplied by totalTrips
-    right = min(time) * totalTrips
-    
-    
-    def can_complete_trips(max_time):
-        total_trips = 0
-        for t in time:
-            total_trips += max_time // t
+def exist(board, word):
+    # This is sloved using the depth-forst-search approach (DFS)
+    def dfs(i, j, k):
+        # If we've matched all the charaters in the word, return True
+        if k == len(word):
+            return True
         
-        return total_trips >= totalTrips
-    
-    while left < right:
-        mid = (left + right) // 2
+        # If the indices are out of bound or the current cell does not match the character in the word, return False
+        if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) or board[i][j] != word[k]:
+            return False
         
-        if can_complete_trips(mid):
-            right = mid
-        else:
-            left = mid + 1
+        # Temporarily mark the current cell as visited
+        temp, board[i][j] = board[i][j], None
+        
+        # Explore adjacent cells
+        for x, y in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if dfs(x + i, y + j, k + 1):
+                return True
+        
+        # Restore the current cell's value
+        board[i][j] = temp
+        return False
     
-    return left
-            
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            # Perform DFS starting from the first cell
+            if dfs(i, j, 0):
+                return True
+    
+    return False
 
-# Example usage:
-time_period = [2, 3, 5]
-total_trips_taken = 8
-print(minimum_time(time_period, total_trips_taken))
+
+# Example usage
+board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+word = "ABCCED"
+print(exist(board, word))  # Output should be True
