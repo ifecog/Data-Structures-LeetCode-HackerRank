@@ -17,7 +17,25 @@ def exist(board, word):
         if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) or board[i][j] != word[k]:
             return False
         
-        # Temporarily mark the current cell as visited by storing the 
+        # Temporarily mark the current cell as visited by storing the current value and setting it to None
+        temp, board[i][j] = board[i][j], None
+        
+        # Explore all 4 possible directions (right, left, up, down)
+        for x, y in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if dfs(i + x, j + y, k + 1):
+                return True
+        
+        # Restore the current cell's value before returning False
+        board[i][j] = temp
+        return False
+    
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            # Start DFS from the current cell if it matches the first character in the word
+            if dfs(i, j, 0):
+                return True
+    
+    return False
     
 
 # Example usage
