@@ -6,13 +6,13 @@ def rotate_array(nums, k):
         k (_type_): no of steps
     """
     
-    # ensure that k is less than the length of nums
+    # Ensure that k is less than the length of the array nums
     k = k % len(nums)
     
-    # # 1. use array slicing
+    # # 1. Use array slicing
     nums[:] = nums[-k:] + nums[:-k]
     
-    # 2. use the reverse function
+    # 2. Use the reverse function
     # nums.reverse()
     
     # nums[:k] = reversed(nums[:k])
@@ -21,8 +21,7 @@ def rotate_array(nums, k):
     return nums
     
 
-
-# text examole
+# Test example
 nums = [-1,-100,3,99]
 k = 2
 print(rotate_array(nums, k))

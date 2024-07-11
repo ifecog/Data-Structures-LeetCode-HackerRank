@@ -1,42 +1,46 @@
-5.
-
-
-# # 4.
-# def merge_arrays(arr1, arr2):
-#     arr1 += [0] * len(arr2)
+# 4. Median of 2 sorted arrays
+def array_median(nums1, nums2):
+    # First, the arrays are merged and then the median is found
     
-#     p1, p2, p_merged = len(arr1) - len(arr2) - 1, len(arr2) - 1, len(arr1) - 1
-    
-#     while p1 >= 0 and p2 >= 0:
-#         if arr1[p1] >= arr2[p2]:
-#             arr1[p_merged] = arr1[p1]
-#             p1 -= 1
-#         else:
-#             arr1[p_merged] = arr2[p2]
-#             p2 -= 1
-#         p_merged -= 1
-    
-#     if p2 >= 0:
-#         arr1[:p2 + 1] = arr2[:p2 + 1]
+    def merge_arrays(arr1, arr2):
+        # Endure that arr1 has the capacity to hold all elements in the combination of both arrays. This is done by extending arr1 with 0s to match the length of the combined arrays
+        arr1 += [0] * len(arr2)
         
-#     return arr1
-
-
-# def array_median(nums1, nums2):
-#     merge = merge_arrays(nums1, nums2)
-#     n = len(merge)
+        # Initialize pointers
+        p1, p2, p_merged = len(arr1) - len(arr2) - 1, len(arr2) - 1, len(arr1) - 1
+        
+        while p1 >= 0 and p2 >= 0:
+            if arr1[p1] >= arr2[p2]:
+                arr1[p_merged] = arr1[p1]
+                p1 -= 1
+            else:
+                arr1[p_merged] = arr2[p2]
+                p2 -= 1
+            p_merged -= 1
+            
+        # Add the remaining elements in arr2 to the merged array, arr1
+        arr1[:p2 + 1] = arr2[:p2 + 1]
+        
+        return arr1
+        
+    nums = merge_arrays(nums1, nums2)
+    print(nums)
+    n = len(nums)
     
-#     if n % 2 == 0:
-#         return (merge[n // 2 - 1] + merge[n // 2]) / 2
-#     else:
-#         return merge[n // 2]
+    # Calculate the median
+    if n % 2 == 0:
+        median = (nums[(n // 2) - 1] + nums[n // 2]) / 2
+    else:
+        median = nums[n // 2]
+    
+    return median
 
 
-# # Example usage:
-# nums1 = [1, 2]
-# nums2 = [3, 4]
-# result = array_median(nums1, nums2)
-# print(result) 
+# Example usage:
+nums1 = [1, 2]
+nums2 = [3, 4]
+result = array_median(nums1, nums2)
+print(result) 
 
 
 # # 3. 
