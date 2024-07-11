@@ -88,22 +88,22 @@
 
 
 
-def merged_intervals(intervals):
-    intervals.sort(key=lambda i: i[0])
+# def merged_intervals(intervals):
+#     intervals.sort(key=lambda i: i[0])
     
-    merged = []
-    for interval in intervals:
-        if not merged or interval[0] > merged[-1][1]:
-            merged.append(interval)
-        else:
-            merged[-1][1] = max(merged[-1][1], interval[1])
+#     merged = []
+#     for interval in intervals:
+#         if not merged or interval[0] > merged[-1][1]:
+#             merged.append(interval)
+#         else:
+#             merged[-1][1] = max(merged[-1][1], interval[1])
     
-    return merged
+#     return merged
 
-# Example usage:
-intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
-result = merged_intervals(intervals)
-print(result)
+# # Example usage:
+# intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
+# result = merged_intervals(intervals)
+# print(result)
 
 
 # def min_available_duration(slots1, slots2, duration):
@@ -137,25 +137,25 @@ print(result)
 # print(min_available_duration(slots1, slots2, duration))
 
 
-def length_of_longest_substring(s):
-    # Ths is solved using the sliding window approach
-    char_index_map = {}
-    left = 0
-    max_length = 0
+# def length_of_longest_substring(s):
+#     # Ths is solved using the sliding window approach
+#     char_index_map = {}
+#     left = 0
+#     max_length = 0
     
-    for right in range(len(s)):
-        # If right index is alread in char_index_map and its character is greater than or equal to 'left', it means that the character is repeating within the current window. :. Update left to the index after the last occcurrence ot the repeating character.
-        if s[right] in char_index_map and char_index_map[s[right]] >= left:
-            left = char_index_map[s[right]] + 1
+#     for right in range(len(s)):
+#         # If right index is alread in char_index_map and its character is greater than or equal to 'left', it means that the character is repeating within the current window. :. Update left to the index after the last occcurrence ot the repeating character.
+#         if s[right] in char_index_map and char_index_map[s[right]] >= left:
+#             left = char_index_map[s[right]] + 1
             
-        char_index_map[s[right]] = right
-        max_length = max(max_length, right - left + 1)
+#         char_index_map[s[right]] = right
+#         max_length = max(max_length, right - left + 1)
     
-    return max_length
+#     return max_length
         
 
-s = "abcabcbb"
-print(length_of_longest_substring(s))
+# s = "abcabcbb"
+# print(length_of_longest_substring(s))
 
 # def leftmost_column_with_one(binaryMatrix):
 #     # Initiaize row and col
@@ -180,3 +180,44 @@ print(length_of_longest_substring(s))
 # ]
 
 # print(leftmost_column_with_one(binaryMatrix)) 
+
+
+def find_words(board, words):
+    def dfs(i, j, k, word, visited):
+        # If we have matched all characters in the word, return True
+        if k == len(word):
+            return True
+        
+        # If the indices are out of range or the current cell does not match the charaters in the word or the cell is already visited, return False
+        if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) or board[i][j] != word[k] or (i, j) in visited:
+            return False
+        
+        # Mark the current cell as visited
+        visited.add((i, j))
+        
+        # Explore adjacendt cells
+        for (x, y) in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if dfs(x + i, y + j, k + 1, word, visited.copy()):
+                return True
+            
+        # Remove the current cell from the visited set
+        visited.remove((i, j))
+        
+        return False
+    
+    visited = set()
+    found_words = set()
+    
+    for word in words:
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if dfs(i, j, 0, word, visited):
+                    found_words.add(word)
+                    visited.clear()
+                    break
+    
+    return list(found_words)
+
+board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]
+words = ["oath","pea","eat","rain"]
+print(find_words(board, words))
