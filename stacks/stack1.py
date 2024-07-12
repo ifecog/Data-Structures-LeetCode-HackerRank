@@ -1,4 +1,3 @@
-# Valid Parenthesis
 def is_valid(s):
     """Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
@@ -47,11 +46,13 @@ def is_valid(s):
         else:
             stack.append(char)
     
+        # print(stack)
+    
     return not stack
 
 # Example usage:
 s = "()[]{}"
 print(is_valid(s)) 
 
-a = "(]"
-print(is_valid(a))
+# a = "(]"
+# print(is_valid(a))
