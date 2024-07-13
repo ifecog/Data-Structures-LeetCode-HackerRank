@@ -7,25 +7,9 @@ def longest_subarray(nums, limit):
         nums (int): an array of integers
         limit (int): a limiting integer
     """
+    # This is solved using the sliding window approach
     
-    """
-    To solve this problem, here is the solution I propose the ffg steps:
-    
-    1. We use the double ended queue (deque) class from the Python collections library. This allow us to perform some specific element removing operations
-    
-    2. store the min and max values of the current subarray in using the deque class
-    
-    3. initialize the left pointer of the array and the initial result to 0
-    
-    4. Using the enumerate iteration, we can get the position and value of elements in the array (i.e. for right, num in enumerate(nums))
-    
-    5. update max_queue and min_queue. This is done by checking if the current element is greater than (for max_queue) or less than (for min_queue) the last element in the queues
-    
-    6. if the difference between the max_queue and the min_queue is greater than the limit, move the left pointer to the right and pop elements from the left for both the max_queue and the min_queue until the condition is met.
-    
-    7. return the result which is the maximum of the initial result and the difference between the right and left pointers.
-    """
-    
+    # Double ended queues to store the min and max values of the current window
     max_queue = deque()
     min_queue = deque()
     
@@ -38,7 +22,7 @@ def longest_subarray(nums, limit):
             max_queue.pop()
         max_queue.append(num)
         
-        # MAintain the min queue in increasing order
+        # Maintain the min queue in increasing order
         while min_queue and num < min_queue[-1]:
             min_queue.pop()
         min_queue.append(num)

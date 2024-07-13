@@ -9,6 +9,8 @@ def length_of_longest_substring(s):
         int: length of the longest substring without repeating characters
     """
     
+    # This is solved using the sliding window approach
+    
     # # 1. Using Set
     # char_set = set()
     # left = 0
@@ -16,7 +18,7 @@ def length_of_longest_substring(s):
     
     # # Iterate using the sliding window approach
     # for right in range(len(s)):
-    #     # If the character is already in the set, remove elements from the lelft
+    #     # If the character is already in the set, remove elements from the left
     #     while s[right] in char_set:
     #         char_set.remove(s[left])
     #         left += 1
@@ -39,7 +41,7 @@ def length_of_longest_substring(s):
         if s[right] in char_index_map and char_index_map[s[right]] >= left:
             left = char_index_map[s[right]] + 1
         
-        # Add rhe current char to the dict
+        # Add the current char to the dict
         char_index_map[s[right]] = right
         
         # Update the maximum length

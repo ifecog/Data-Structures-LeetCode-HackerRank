@@ -9,27 +9,29 @@ def find_anagrams(s, p):
         p (_type_): a string variable
     """
     
+    # This is solved using the sliding window approach
+    
     result = []
     
     len_s, len_p = len(s), len(p)
     if len_s < len_p:
         return result
     
-    # count the occurence of characters in p
+    # Count the occurence of characters in p
     p_counter = Counter(p)
     
-    # initialize the sliding window counter for the fordt window
+    # Initialize the sliding window counter for the fordt window
     window_counter = Counter(s[:len_p])
     
-    # check if the first window is an anagram
+    # Check if the first window is an anagram
     if window_counter == p_counter:
         result.append(0)
         
-    # slide the window through the rest of s
+    # Slide the window through the rest of s
     for i in range(len_p, len_s):
         window_counter[s[i]] += 1
         
-        # remove the left most element
+        # Remove the leftmost element after sliding
         if window_counter[s[i - len_p]] == 1:
             del window_counter[s[i - len_p]]
         else:

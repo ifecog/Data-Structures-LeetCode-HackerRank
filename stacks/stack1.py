@@ -10,23 +10,9 @@ def is_valid(s):
     Args:
         words (string): a sting of characters
         k (_type_): _description_
-        
-    Solution:
-    
-    Initialize an empty stack.
-    
-    Define a dictionary mapping that maps each closing bracket to its corresponding opening bracket.
-
-    Iterate through each character in the input string s.
-
-    If the character is a closing bracket, check if the top element of the stack matches the corresponding opening bracket. If they don't match, return False, indicating that the string is not valid.
-
-    If the character is an opening bracket, push it onto the stack.
-
-    After processing all characters, if the stack is empty, return True (indicating that all brackets are properly matched and closed). If the stack is not empty, return False.
     """
     
-    # Inialize an empty stack
+    # Inialize an empty stack to keep track of opening brackets
     stack = []
     
     # Define a mapping dictonary
@@ -45,9 +31,7 @@ def is_valid(s):
         
         else:
             stack.append(char)
-    
-        # print(stack)
-    
+        
     return not stack
 
 # Example usage:

@@ -21,17 +21,6 @@ def remove_anagrams(words):
     return non_anagrams
 
 
-
-
-    # initialize an empty list to store the non_anagram words
-    # non_anagrams = []
-    
-    # for i, word in enumerate(words):
-    #     if i == 0 or sorted(word) != sorted(words[i - 1]):
-    #         non_anagrams.append(word)
-    
-    # return non_anagrams
-
 # Example usage:
 words = ["dacb", "abdc", "abc", "cba"]
 result = remove_anagrams(words)

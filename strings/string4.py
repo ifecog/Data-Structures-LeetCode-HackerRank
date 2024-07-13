@@ -7,6 +7,7 @@ def character_replacement(s, k):
         s (str): a string of characters
         k (int): an integer representing the number of times for replacement
     """
+    # This is solved using the sliding window approach
     
     char_count = {}
     left = 0

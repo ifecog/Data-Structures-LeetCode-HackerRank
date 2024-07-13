@@ -1,3 +1,23 @@
+def frequency_sort(s):
+    sorted_str = ''
+    char_freq = {}
+    
+    for char in s:
+        char_freq[char] = char_freq.get(char, 0) + 1
+        
+    sorted_char = sorted(char_freq.keys(), key=lambda x: char_freq[x], reverse=True)
+    
+    for char in sorted_char:
+        sorted_str += char * char_freq[char]
+    
+    return sorted_str
+
+# Example usage:
+s = "tree"
+result = frequency_sort(s)
+print(result)  
+
+
 # import json
 
 # def correct_num_bedrooms(jsonData):
@@ -53,27 +73,29 @@
 # # Test the function
 # print(correct_num_bedrooms(jsonData))
 
-def min_available_duration(slots1, slots2, duration):
-    slots1.sort()
-    slots2.sort()
+# def min_available_duration(slots1, slots2, duration):
+#     slots1.sort()
+#     slots2.sort()
     
-    i, j = 0, 0
-    while i < len(slots1) and j < len(slots2):
-        start = max(slots1[i][0], slots2[j][0])
-        end = min(slots1[i][1], slots2[j][1])
+#     i, j = 0, 0
+#     while i < len(slots1) and j < len(slots2):
+#         start = max(slots1[i][0], slots2[j][0])
+#         end = min(slots1[i][1], slots2[j][1])
         
-        if start - end >= duration:
-            return [start, start + duration]
+#         if start - end >= duration:
+#             return [start, start + duration]
         
-        if slots1[i][1] < slots2[j][1]:
-            i += 1
-        else:
-            j += 1
+#         if slots1[i][1] < slots2[j][1]:
+#             i += 1
+#         else:
+#             j += 1
     
-    return []
+#     return []
 
-# Example usage:
-slots1 = [[10,50],[60,120],[140,210]]
-slots2 = [[0,15],[60,70]]
-duration = 8
-print(min_available_duration(slots1, slots2, duration))
+# # Example usage:
+# slots1 = [[10,50],[60,120],[140,210]]
+# slots2 = [[0,15],[60,70]]
+# duration = 8
+# print(min_available_duration(slots1, slots2, duration))
+
+

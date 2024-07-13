@@ -8,19 +8,19 @@ def next_permutation(nums):
         int: the next permutation of numbers
     """
     
-    # find the decreasing element
+    # Find the decreasing element
     i = len(nums) - 2
     while i >= 0 and nums[i] >= nums[i + 1]:
         i -= 1
         
-    # find the smallest element to the right that is greater than nums[i]
+    # Find the smallest element to the right that is greater than nums[i]
     if i >= 0:
         j = len(nums) - 1
         while j >= 0 and nums[i] >= nums[j]:
             j -= 1
         nums[i], nums[j] = nums[j], nums[i]
         
-    # reverse the right subarray (reverse the array to the right of nums[i])
+    # Reverse the array to the right of nums[i] (the right subarray)
     left, right = i + 1, len(nums) - 1
     while left < right:
         nums[left], nums[right] = nums[right], nums[left]
@@ -28,7 +28,7 @@ def next_permutation(nums):
         right -= 1
         
 
-# example test
+# Example usage
 num_perm = [1, 2, 3, 4]
 next_permutation(num_perm)
 print('Next Permutation:', num_perm)

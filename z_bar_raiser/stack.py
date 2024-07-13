@@ -1,7 +1,9 @@
 # 1. Valid Parenthesis
 def is_valid(s):
+    # Initialize an empty stack to keep track of opening brackets
     stack = []
     
+    # DEfine a mapping dictionary for each bracket pair
     bracket_map = {
         ')': '(',
         ']': '[',

@@ -11,8 +11,7 @@ def frequency_sort(s):
     for char in s:
         char_freq[char] = char_freq.get(char, 0) + 1
         
-    sorted_chars = sorted(char_freq, key=char_freq.get, reverse=True)
-    # sorted_chars = sorted(char_freq.keys(), key=lambda x : char_freq[x], reverse=True)
+    sorted_chars = sorted(char_freq.keys(), key=lambda x: char_freq[x], reverse=True)
     
     for char in sorted_chars:
         sorted_str += char * char_freq[char]
