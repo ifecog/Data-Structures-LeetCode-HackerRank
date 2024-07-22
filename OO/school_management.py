@@ -31,16 +31,16 @@ class Student:
 
 class School:
     def __init__(self):
-        self.students = []
+        self._students = []
         
     
     def add_students(self, student):
-        return self.students.append(student)
+        return self._students.append(student)
         
     
     def calc_avg_gpa(self):
-        total_gpa = sum(student.get_gpa() for student in self.students)
-        average_gpa = round((total_gpa / len(self.students)), 2)
+        total_gpa = sum(student.get_gpa() for student in self._students)
+        average_gpa = total_gpa / len(self._students)
         return average_gpa
     
 
@@ -54,4 +54,6 @@ if __name__ == '__main__':
     school.add_students(student2)
     school.add_students(student3)
     
-    print(f'The average GPA of the students is {school.calc_avg_gpa()}')
+    average_gpa = school.calc_avg_gpa()
+    
+    print(f'The average GPA of the students is {average_gpa:.2f}')
