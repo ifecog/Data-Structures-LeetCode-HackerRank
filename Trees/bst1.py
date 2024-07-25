@@ -16,10 +16,10 @@ def kth_smallest(root, k):
         int: kth smallest value
     """
     
-    # Method 2
+    # Initialize an empty stack to store nodes for traversal
     stack = []
     
-    while root or stack:
+    while stack or root:
         while root:
             stack.append(root)
             root = root.left
@@ -31,8 +31,8 @@ def kth_smallest(root, k):
         
         root = root.right
     
-    return -1
-        
+    return stack
+    
 # Example usage:
 # Construct a binary search tree: [3,1,4,null,2]
 root = TreeNode(3)

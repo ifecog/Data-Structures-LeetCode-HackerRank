@@ -6,12 +6,24 @@ class TreeNode:
 
 
 def lowest_common_ancestor(root, p, q):
-    if not root:
-        return None
+    """Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
+
+    According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+    Args:
+        root (int): root of the binary search tree
+        p (int): node 1
+        q (int): node 2
+
+    Returns:
+        _type_: _description_
+    """
     
+    # If both nodes have values lesser than the root node, move the root node to the left
     if p.val < root.val and q.val < root.val:
         return lowest_common_ancestor(root.left, p, q)
     
+    # If both nodes have values greater than the root node, move the root node to the right
     if p.val > root.val and q.val > root.val:
         return lowest_common_ancestor(root.right, p, q)
     
