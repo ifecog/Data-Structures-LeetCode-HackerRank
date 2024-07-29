@@ -5,12 +5,12 @@ def merged_intervals(intervals):
         intervals (int): an array of intervals
     """
     
-    # sort intervals based on the starting point of each interval
+    # Sort intervals based on the starting point of each interval
     intervals.sort(key=lambda i: i[0])
     
     merged = []
     for interval in intervals:
-        # Append the merged list with the current interval if the list is empty of the current interval does not overlap with the last merged interval.
+        # Append the merged list with the current interval if the list is empty or the current interval does not overlap with the last merged interval.
         if not merged or interval[0] > merged[-1][1]:
             merged.append(interval)
         

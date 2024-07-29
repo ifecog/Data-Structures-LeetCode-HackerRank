@@ -5,22 +5,6 @@ def closest_palindrome(n):
         n (str): a string of characters
     """
     
-    """
-    To solve this problem, here is my proposed solution:
-    
-    1. convert n to int for the purpose of iteration
-    
-    2. def a nested function to determine palindromic status
-    
-    3. def a nested function to determine the nearest smaller palindrome
-    
-    4. def a nested function to determine the nearest higher palindrome
-    
-    5. assign variable names to smaller and higher palindromes by applying their respective functions
-    
-    6. applying the condition for choosing, return the nearest palindrome
-    """ 
-    
     n = int(n)
     
     def is_palindrome(s):
