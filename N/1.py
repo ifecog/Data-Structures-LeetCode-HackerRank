@@ -5,6 +5,7 @@ def find_three_numbers(nums, target):
         nums (array): an array of integers
         target (int): the target sum for three numbers
     """
+    # This is solved using the 2 pointers approach
     # Sort the array
     nums.sort()
     n = len(nums)
@@ -16,7 +17,8 @@ def find_three_numbers(nums, target):
             current_sum = nums[i] + nums[left] + nums[right]
             
             if current_sum == target:
-                return ((nums[left], nums[i], nums[right]))
+                return True
+                # return ((nums[left], nums[i], nums[right]))
             
             else:
                 if current_sum < target:
