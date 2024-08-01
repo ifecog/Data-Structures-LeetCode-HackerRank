@@ -18,10 +18,10 @@ def kth_smallest(matrix, k):
     
     # solution 2
     
-    # intialize low and high pointers to the start and end of the 2-D array
+
     low, high = matrix[0][0], matrix[-1][-1]
     
-    # define a function to count elements less than or equal to a given target
+    # Nested function to count elements less than or equal to a given target
     def count_less_equal(array, target):
         n = len(matrix)
         row, col = n - 1, 0
@@ -36,7 +36,7 @@ def kth_smallest(matrix, k):
         
         return count
     
-    # use binary search algorithm and the count less function to locate the element
+    # Apply binary search algorithm and the count less function to locate the element
     while low < high:
         mid = (low + high) // 2
         count = count_less_equal(matrix, mid)
@@ -50,7 +50,7 @@ def kth_smallest(matrix, k):
         
 
 
-# example
+# Example usage
 matrix = [
     [1, 5, 9],
     [10, 11, 13],

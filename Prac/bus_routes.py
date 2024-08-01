@@ -38,7 +38,7 @@ def num_buses_to_destination(routes, source, target):
     queue = deque([(source, 0)])
     
     while queue:
-        # Initialize the current stop
+        # Get the current stop
         current_stop, buses_taken = queue.popleft()
         
         if current_stop == target:

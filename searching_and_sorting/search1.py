@@ -6,7 +6,7 @@ def binary_search(list, n):
         n (int): the target to be searchd in the list.
     """
     
-    # initialize the lower boundary, upper boundary and middle for the list
+    # Initialize the lower boundary, upper boundary and middle for the list
     lb, ub, mid = 0, len(list) - 1, 0
     step = 0
     
@@ -14,10 +14,10 @@ def binary_search(list, n):
         print('step', step, ':', str(list[lb:ub+1]))
         step += 1 # step increment until element is located
         
-        # get the midpoint
+        # et the midpoint
         mid = (lb + ub) // 2
         
-        # set conditions for search execution
+        # Set conditions for search execution
         if n == list[mid]:
             return mid
         else:
