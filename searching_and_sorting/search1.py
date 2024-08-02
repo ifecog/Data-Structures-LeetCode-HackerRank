@@ -12,19 +12,20 @@ def binary_search(list, n):
     
     while lb <= ub:
         print('step', step, ':', str(list[lb:ub+1]))
-        step += 1 # step increment until element is located
+        # Increment step until element is located
+        step += 1
         
-        # et the midpoint
+        # Calculate the midpoint
         mid = (lb + ub) // 2
         
         # Set conditions for search execution
         if n == list[mid]:
             return mid
         else:
-            if n < list[mid]:
-                ub = mid - 1
-            else:
+            if n > list[mid]:
                 lb = mid + 1
+            else:
+                ub = mid
                 
     return -1
 
