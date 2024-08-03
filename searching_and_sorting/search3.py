@@ -6,51 +6,33 @@ def kth_largest(matrix, k):
         k (int): kth largest value
     """
     
-    # solution 1
-    
-    # tmp = []
+    # Use sorting approach
+    # temp = []
     # for i in matrix:
-    #     tmp.extend(i)
-    # tmp.sort()
+    #     temp.extend(i)
+    # temp.sort()
     
-    # return tmp[-k]
+    # return temp[-k]  
     
-    
-    # solution 2
-    
-    # initializr pointers to the start and end of the 2-D matrix
+    # Use binary search approach
+    # Initialize the boundaries
+    n = len(matrix)
     low, high = matrix[0][0], matrix[-1][-1]
     
-    # define a function to count elements greater than or equal to a given target
-    def count_greater_equal(array, target):
-        n = len(array)
-        row, col = 0, n - 1
-        count = 0
-        
-        while row < n and col >= 0:
-            if matrix[row][col] >= target:
-                count += n - row
-                col -= 1
-            else:
-                row += 1
-        
-        return count
-    
-    # implement binary search anf the count greater than or equal function to locate element
     while low < high:
         mid = (low + high) // 2
         
-        count = count_greater_equal(matrix, mid)
+        count = sum(1 for i in range(n) for j in range(n) if matrix[i][j] > mid )
         
         if k > count:
             high = mid
         else:
             low = mid + 1
     
-    return low - 1        
+    return mid
           
 
-# example
+# Example usage
 matrix = [
     [1, 5, 9],
     [10, 11, 13],
