@@ -13,22 +13,6 @@ def min_available_duration(slots1, slots2, duration):
         duration (int): set duration
     """
     
-    """
-    To solve this problem, here is my proposed solution:
-    
-    1. sort the time slots based on their starting time
-    
-    2. iterate through the pair of time slots using distinct initialized pointers for each
-    
-    3. find the overlapping interval
-    
-    4. return the time slot of the overlapping interval is greater then or equal to the duration
-    
-    5. move the ponters to the next time slot with an earlier end time
-    
-    6. if there are no overlapping intervals, return an empty list
-    """
-    
     slots1.sort()
     slots2.sort()
     
