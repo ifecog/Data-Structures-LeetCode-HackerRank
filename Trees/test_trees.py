@@ -5,76 +5,76 @@ class TreeNode:
         self.right = right
         
         
-# 1. Right Side View of a Binary Tree
-def right_side_view(root):
-    result = []
-    if not root:
-        return []
+# # 1. Right Side View of a Binary Tree
+# def right_side_view(root):
+#     result = []
     
-    # Initialize a queue for traversal
-    queue = [root]
-    
-    while queue:
-        level_length = len(queue)
-        
-        for i in range(level_length):
-            node = queue.pop(0)
-            
-            # If this is the last element from the left in the current level, add its value to the result
-            if i == level_length - 1:
-                result.append(node.val)
-                
-            # Add the left and right children to the queue
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
-    
-    return result
-    
-
-# Example usage
-# root = [1,2,3,null,5,null,4]
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(3)
-root.left.right = TreeNode(5)
-root.right.right = TreeNode(4)
-print(right_side_view(root))
-
-
-# # 2. Lowest Common Ancestor
-# def lowest_common_ancestor(root, p, q):
 #     if not root:
-#         return None
+#         return []
     
-#     # If both node values have values lesser than the root node, move the root node to the left
-#     if p.val < root.val and q.val < root.val:
-#         return lowest_common_ancestor(root.left, p, q)
+#     queue = [root]
     
-#     # If both node values have values greater than the root node, move the root node to the right
-#     if p.val > root.val and q.val > root.val:
-#         return lowest_common_ancestor(root.right, p, q)
+#     while queue:
+#         level_length = len(queue)
+        
+#         for i in range(level_length):
+#             node = queue.pop(0)
+            
+#             # If this is the last element in the queue, append it to the result
+#             if i == level_length - 1:
+#                 result.append(node.val)
+            
+#             # Add the left and right chldren to the queue
+#             if node.left:
+#                 queue.append(node.left)
+#             if node.right:
+#                 queue.append(node.right)
     
-#     return root
+#     return result
 
 
-# # Example usage:
-# root = TreeNode(6)
+# # Example usage
+# # root = [1,2,3,null,5,null,4]
+# root = TreeNode(1)
 # root.left = TreeNode(2)
-# root.right = TreeNode(8)
-# root.left.left = TreeNode(0)
-# root.left.right = TreeNode(4)
-# root.right.left = TreeNode(7)
-# root.right.right = TreeNode(9)
-# root.left.right.left = TreeNode(3)
-# root.left.right.right = TreeNode(5)
+# root.right = TreeNode(3)
+# root.left.right = TreeNode(5)
+# root.right.right = TreeNode(4)
+# print(right_side_view(root))
 
-# p = root.left.right.left
-# q = root.left.right.right
 
-# result = lowest_common_ancestor(root, p, q)
-# print(result.val)  # Output: 4
+# 2. Lowest Common Ancestor
+def lowest_common_ancestor(root, p, q):
+    if not root:
+        return None
+    
+    # If both nodes have values lesser than the root node, move the root node to the left
+    if p.val < root.val and q.val < root.val:
+        return lowest_common_ancestor(root.left, p, q)
+    
+    # If both nodes have values greater than the root node, move the root node to the right
+    if p.val > root.val and q.val > root.val:
+        return lowest_common_ancestor(root.right, p, q)
+    
+    return root
+
+
+# Example usage:
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+root.left.right.left = TreeNode(3)
+root.left.right.right = TreeNode(5)
+
+p = root.left.right.left
+q = root.left.right.right
+
+result = lowest_common_ancestor(root, p, q)
+print(result.val)  # Output: 4
 
 
 # # 3. Kth smallest vallue in a binary search tree

@@ -19,11 +19,14 @@ def lowest_common_ancestor(root, p, q):
         _type_: _description_
     """
     
+    if not root:
+        return None
+    
     # If both nodes have values lesser than the root node, move the root node to the left
     if p.val < root.val and q.val < root.val:
         return lowest_common_ancestor(root.left, p, q)
-    
-    # If both nodes have values greater than the root node, move the root node to the right
+        
+    # If both nodes have values grater than the root node, move the root node to the right
     if p.val > root.val and q.val > root.val:
         return lowest_common_ancestor(root.right, p, q)
     

@@ -1,17 +1,17 @@
 def solve_sudoku(board):
-    # Helper function to check of the board is valid
+    # Helper function to check board validity
     def is_valid(board, r, c, num):
         # Check rows
         for i in range(9):
             if board[r][i] == num:
                 return False
         
-        # Check columns
+        # Check cols
         for i in range(9):
             if board[i][c] == num:
                 return False
             
-        # Check the 3x3 sub-boxes
+        # Check 3x3 sub boxes
         box_r, box_c = (r // 3) * 3, (c // 3) * 3
         for i in range(3):
             for j in range(3):
@@ -20,8 +20,6 @@ def solve_sudoku(board):
         
         return True
     
-    
-    # Helper function to solve sudoku (Replace '.' with numbers)
     def solve(board):
         for r in range(9):
             for c in range(9):
@@ -32,12 +30,12 @@ def solve_sudoku(board):
                             if solve(board):
                                 return True
                             board[r][c] = '.'
-                    
                     return False
         
         return True
     
     solve(board)
+
 
 board = [
     ["5","3",".",".","7",".",".",".","."],
