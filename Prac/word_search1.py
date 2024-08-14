@@ -24,9 +24,10 @@ def exist(board, word):
         for x, y in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
             if dfs(i + x, j + y, k + 1):
                 return True
-        
-        # Restore the current cell's value before returning False
+
+        # Restore the current cell's value
         board[i][j] = temp
+        
         return False
     
     for i in range(len(board)):
