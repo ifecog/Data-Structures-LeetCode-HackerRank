@@ -12,10 +12,10 @@ def is_valid(s):
         k (_type_): _description_
     """
     
-    # Inialize an empty stack to keep track of opening brackets
+    # Initialize an empty stack to keep track of opening brackets
     stack = []
     
-    # Define a mapping dictonary
+    # Define a mapping dictionary
     mapping = {
         ')': '(',
         ']': '[',
@@ -31,7 +31,8 @@ def is_valid(s):
         
         else:
             stack.append(char)
-        
+    
+    # If the stack is empty, it means that all characters have been matched, so, return True
     return not stack
 
 # Example usage:

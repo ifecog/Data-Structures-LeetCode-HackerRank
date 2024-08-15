@@ -1,34 +1,57 @@
-# 10 Valid Parenthesis
-def is_valid(s):
-    # Initialize an empty stack
-    stack = []
-    
-    # Define a mapping dictionary
-    mapping = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
-    }
-    
+# 11. Is Subsequence
+def is_subsequence(s, t):
+    # Initialize a pointer to keep track of the current position in string t
+    t_index = 0
     for char in s:
-        if char in mapping:
-            top_element = stack.pop() if stack else '#'
-            
-            if mapping[char] != top_element:
-                return False
+        # Move the pointer forward until we find a match or reach the end
+        while t_index < len(t) and t[t_index] != char:
+            t_index += 1
         
-        else:
-            stack.append(char)
+        # If we've reached the end of t without winding a match, return False
+        if t_index == len(t):
+            return False
+        
+        # Move the pointer forward to the next character in t
+        t_index += 1
     
-    # If the stack is empty, it means that all characters have been matched, so return True
-    return not stack
-
+    return True
+    
 # Example usage:
-s = "()[]{}"
-print(is_valid(s)) 
+s = "ace"
+t = "abcde"
+print(is_subsequence(s, t))
 
-a = "(]"
-print(is_valid(a))
+# # 10 Valid Parenthesis
+# def is_valid(s):
+#     # Initialize an empty stack to keep track of opening brackets
+#     stack = []
+    
+#     # Define a mapping dictionary
+#     mapping = {
+#         ')': '(',
+#         ']': '[',
+#         '}': '{'
+#     }
+    
+#     for char in s:
+#         if char in mapping:
+#             top_element = stack.pop() if stack else '#'
+            
+#             if mapping[char] != top_element:
+#                 return False
+        
+#         else:
+#             stack.append(char)
+    
+#     # If the stack is empty, it means that all characters have been matched, so return True
+#     return not stack
+
+# # Example usage:
+# s = "()[]{}"
+# print(is_valid(s)) 
+
+# a = "(]"
+# print(is_valid(a))
 
 # # 9. 
 # from collections import Counter
