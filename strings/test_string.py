@@ -2,12 +2,13 @@
 def is_subsequence(s, t):
     # Initialize a pointer to keep track of the current position in string t
     t_index = 0
+    
     for char in s:
-        # Move the pointer forward until we find a match or reach the end
+        # Move the pointer forward in string t until we find a match or reach the end
         while t_index < len(t) and t[t_index] != char:
             t_index += 1
         
-        # If we've reached the end of t without winding a match, return False
+        # If we reach the end of string t without finding a match, return False
         if t_index == len(t):
             return False
         
@@ -15,6 +16,7 @@ def is_subsequence(s, t):
         t_index += 1
     
     return True
+    
     
 # Example usage:
 s = "ace"

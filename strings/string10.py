@@ -21,7 +21,7 @@ def is_subsequence(s, t):
         if t_index == len(t):
             return False
         
-        # Move ths pointer forward to the next character in t
+        # Move the pointer forward to the next character in t
         t_index += 1
     
     return True

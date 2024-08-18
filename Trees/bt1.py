@@ -21,13 +21,15 @@ def right_side_view(root):
     if not root:
         return []
     
-    queue = [root]
+    # queue = [root]
+    queue = deque([root])
     
     while queue:
         level_length = len(queue)
         
         for i in range(level_length):
-            node = queue.pop(0)
+            node = queue.popleft()
+            # node = queue.pop(0)
             
             # If this is the last node in the current level, add it to the result
             if i == level_length - 1:
