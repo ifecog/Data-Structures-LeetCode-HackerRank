@@ -1,5 +1,5 @@
 def length_of_longest_substring(s):
-    # This is solved using the slidign window approach and the set data structure
+    # This is solved using the sliding window approach and the set data structure
     char_set = set()
     left = 0
     max_length = 0

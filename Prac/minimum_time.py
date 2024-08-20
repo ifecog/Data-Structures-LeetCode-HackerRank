@@ -26,7 +26,7 @@ def minimum_time(time, totalTrips):
     # Initialize the right pointer the minimum time multiplied by the total trips. This is the worst case scenario where the fastest bus completes all trips
     right = min(time) * totalTrips
     
-    # Helper function to determine if it is possible to complete the required number of trups within max_time
+    # Helper function to determine if it is possible to complete the required number of trips within max_time
     def can_complete_trips(max_time):
         total_trips = 0
         for t in time:

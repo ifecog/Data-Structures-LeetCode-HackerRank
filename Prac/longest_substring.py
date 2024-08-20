@@ -37,14 +37,12 @@ def length_of_longest_substring(s):
     max_length = 0
     
     for right in range(len(s)):
-        # If the current char is already in the dict, move left pointer one place to the right
+        # If character is already in the index map, move the left pointer to the right
         if s[right] in char_index_map and char_index_map[s[right]] >= left:
             left = char_index_map[s[right]] + 1
-        
-        # Add the current char to the dict
+            
         char_index_map[s[right]] = right
         
-        # Update the maximum length
         max_length = max(max_length, right - left + 1)
     
     return max_length
@@ -52,3 +50,4 @@ def length_of_longest_substring(s):
 # Example usage
 s = "abcabcbb"
 print(length_of_longest_substring(s))
+

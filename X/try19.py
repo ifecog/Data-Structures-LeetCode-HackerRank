@@ -1,10 +1,10 @@
 def minimum_time(time, totalTrips):
-    # This is solved using binary search
+    # This is solved using the binary search approach
     left = 1
-    # Set the right pointer to the maximum time needed for the rastest bus to complete all trips
+    # Set the right pointer to the minumum time multiplied by the total trips. This is the worst case scenario where the fasrest bus completed all trips
     right = min(time) * totalTrips
     
-    # Define a helper function to determine if it is possible to complete the required number of trips within max_time
+    # Helper function to determine if it is possible to complete the required number of trips within a max_time
     def can_complete_trips(max_time):
         total_trips = 0
         for t in time:
@@ -12,15 +12,18 @@ def minimum_time(time, totalTrips):
         
         return total_trips >= totalTrips
     
-    # Binary search
+    # Implement binary search algorithm
     while left < right:
         mid = (left + right) // 2
         
         if can_complete_trips(mid):
+            # If true, search the lower half
             right = mid
         else:
+            # Search the upper half
             left = mid + 1
     
+    # When left meets right, we have found the minimum timed
     return left
     
     

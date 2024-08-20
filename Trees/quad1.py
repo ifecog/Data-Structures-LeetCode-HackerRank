@@ -20,7 +20,7 @@ def construct(grid):
         return True, val
     
     
-    # Recursice function to construct the Quad-Tree
+    # Recursive function to construct the Quad-Tree
     def construct_recursive(x, y, length):
         uniform, val = is_uniform(x, y, length)
         if uniform:
