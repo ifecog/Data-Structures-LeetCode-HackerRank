@@ -1,28 +1,45 @@
 import json, re
 
 
-# Ride Fare Adjustment
-def adjust_ride_fare(rides):
-    adjusted_rides = []
+# Uber Count
+def easy_count_uber(coordinates):
+    # Initialize an empty set to store unique markers
+    markers = set()
     
-    for ride in rides:
-        if ride['distance'] < 1:
-            ride['fare'] -= ride['surcharge']
-            ride['surcharge'] = 0
-        
-        adjusted_rides.append(ride)
+    for left, right in coordinates:
+        for marker in range(left, right + 1):
+            markers.add(marker)
     
-    return adjusted_rides
+    return len(markers)
 
 # Example usage:
-rides = [
-    {"id": "1", "distance": 0.5, "surcharge": 5, "fare": 20},
-    {"id": "2", "distance": 2.3, "surcharge": 5, "fare": 25},
-    {"id": "3", "distance": 0.8, "surcharge": 5, "fare": 15}
-]
+coordinates = [[4, 7], [-1, 5], [3, 6]]
+result = easy_count_uber(coordinates)
+print(result)
 
-adjusted_rides = adjust_ride_fare(rides)
-print(adjusted_rides)
+
+# # Ride Fare Adjustment
+# def adjust_ride_fare(rides):
+#     adjusted_rides = []
+    
+#     for ride in rides:
+#         if ride['distance'] < 1:
+#             ride['fare'] -= ride['surcharge']
+#             ride['surcharge'] = 0
+        
+#         adjusted_rides.append(ride)
+    
+#     return adjusted_rides
+
+# # Example usage:
+# rides = [
+#     {"id": "1", "distance": 0.5, "surcharge": 5, "fare": 20},
+#     {"id": "2", "distance": 2.3, "surcharge": 5, "fare": 25},
+#     {"id": "3", "distance": 0.8, "surcharge": 5, "fare": 15}
+# ]
+
+# adjusted_rides = adjust_ride_fare(rides)
+# print(adjusted_rides)
 
 
 # # Corrected Number of Bedrooms
