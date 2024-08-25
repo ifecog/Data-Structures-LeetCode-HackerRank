@@ -5,16 +5,24 @@ def longest_valid_parenthesis(s):
         s (string): a string of characters '(' and ')'
     """
     
-    # Initialize a stack with -1 to handle cases where the string start with a closing parenthesis ')'
+    # Initialize a stack with -1 to handle cases where the string starts with a closing parenghesis ')'
     stack = [-1]
     max_length = 0
     
     for i, char in enumerate(s):
         if char == '(':
+            stack.append(i)
+        else:
+            stack.pop()
             
+            if stack:
+                max_length = max(max_length, i - stack[-1])   
+            else:
+                stack.append(i) 
     
-    return max_length
-
+    return max_length   
+    
+    
 # Example usage:
 s = "(()())"
 print(longest_valid_parenthesis(s)) 
