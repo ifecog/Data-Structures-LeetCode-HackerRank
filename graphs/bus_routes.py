@@ -22,43 +22,35 @@ def num_buses_to_destination(routes, source, target):
     if source == target:
         return 0
     
-    # 1. Build the graph
+    # 1. Build the graphh
     
-    # Initialize a set to store the stops on the routes using a dictionary stop_to_routes
+    # Initialize a set tp store the stops on the routes using a dictionary stop_to_routes
     stop_to_routes = defaultdict(set)
     
     for i, route in enumerate(routes):
         for stop in route:
             stop_to_routes[stop].add(i)
             
-    # 2. BFS
+    # 2. BFS. 
     
-    # Initialize a set to store the visited stops and a queue for BFS traversal
-    visited_stops = set([source])
+    # Initialize a queue for traversal and a set to keep track of visited stops
     queue = deque([(source, 0)])
+    visited_stops = set([source])
     
     while queue:
-        # Get the current stop
         current_stop, buses_taken = queue.popleft()
         
         if current_stop == target:
             return buses_taken
         
-        # For each bus passing through the current stop, we iterate over all stops on that route. If there is a bus stop (next stop) that has not been visited, we append it to the queue while also incrementing the buses taken by 1. Also, we add it to the visited stops.
-        
-        # We create a copy of the stop_to_routes for the purpose of iteration. This is because making changes to a set during iteration in Python would result in a runtime error.
-        
-        # current_stop_to_routes = stop_to_routes[current_stop].copy()        
-        # for route_index in current_stop_to_routes:
-        
+        # For every bus passing through the current stop, we iterate over all the stops on that route. If there is a bus stop that has not been visited, we append it to the queue while also incrementing the buses taken.
         for route_index in list(stop_to_routes[current_stop]):
             for next_stop in routes[route_index]:
                 if next_stop not in visited_stops:
                     queue.append((next_stop, buses_taken + 1))
-                    visited_stops.add(next_stop)
+                    visited_stops.add((next_stop))
             
             # The current route index is removed to avoid revisiting
-            stop_to_routes[current_stop].remove(route_index)
     
     return -1
 
@@ -66,9 +58,4 @@ def num_buses_to_destination(routes, source, target):
 routes1 = [[1,2,7],[3,6,7]]
 source1 = 1
 target1 = 6
-print(num_buses_to_destination(routes1, source1, target1))  # Output: 2
-
-routes2 = [[7,12],[4,5,15],[6],[15,19],[9,12,13]]
-source2 = 15
-target2 = 12
-print(num_buses_to_destination(routes2, source2, target2))  # Output: -1
+print(num_buses_to_destination(routes1, source1, target1))

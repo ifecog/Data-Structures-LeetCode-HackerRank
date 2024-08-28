@@ -10,6 +10,16 @@ def is_within_board(x, y, N):
 
 
 def min_knight_moves(N, start, end):
+    """Given a N x N chessboard, find the shortest hops needed by a Knight to reach from (x1, y1) to (x2, y2) on chessboard
+
+    Args:
+        N (int): Size of the chessboard
+        start (tuple): Starting position of the knight
+        end (tuple): ending position of the knight
+
+    Returns:
+        _type_: _description_
+    """
     x1, y1 = start
     x2, y2 = end
     
@@ -23,7 +33,7 @@ def min_knight_moves(N, start, end):
     while queue:
         x, y, hops = queue.popleft()
         
-        # Explore all possible moves
+        # Explore all possible knight moves
         for dx, dy in knight_moves:
             new_x, new_y = x + dx, y + dy
             
@@ -31,9 +41,10 @@ def min_knight_moves(N, start, end):
                 return hops + 1
             
             if is_within_board(new_x, new_y, N) and (new_x, new_y) not in visited_positions:
-                visited_positions.add((new_x, new_y))
                 queue.append((new_x, new_y, hops + 1))
+                visited_positions.add((new_x, new_y))
     
+    # If the target is unreachable (which theoretically shouldn't happen on a chess board)
     return -1
 
 
