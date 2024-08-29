@@ -1,6 +1,6 @@
 # Longest Valid Parenthesis
 def longest_valid_parenthesis(s):
-    # Initialize a stack with -1 to handle cases where the string starts with a closing parenthesis ')'
+    # Initialize a stack with -1 to handle the case where the string starts with a closing parenthesis ')'
     stack = [-1]
     max_length = 0
     
@@ -22,13 +22,12 @@ s = "(()())"
 print(longest_valid_parenthesis(s)) 
 
 
-
 # # Valid Parenthesis
 # def is_valid(s):
-#     # Initialize an empty stack to keep track of opening brackets
+#     # Initiate an empty stack to keep track of opening brackets
 #     stack = []
     
-#     # DEfine a mapping dictionary for the parenthesis
+#     # Define a mapping dictionary with closing brackets as keys and opening brackets as values
 #     mapping = {
 #         ')': '(',
 #         ']': '[',
@@ -44,11 +43,8 @@ print(longest_valid_parenthesis(s))
         
 #         else:
 #             stack.append(char)
-    
-#     # If the stack is empty, it means that all the elements ave been matched
-#     return not stack
 
 
 # # Example usage:
 # s = "()[]{}"
-# print(is_valid(s)) 
+# print(is_valid(s))  

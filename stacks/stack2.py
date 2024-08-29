@@ -5,7 +5,7 @@ def longest_valid_parenthesis(s):
         s (string): a string of characters '(' and ')'
     """
     
-    # Initialize a stack with -1 to handle cases where the string starts with a closing parenghesis ')'
+    # Initialize a stack with -1 to handle the case where the string starts with a closing parenthesis ')'
     stack = [-1]
     max_length = 0
     
