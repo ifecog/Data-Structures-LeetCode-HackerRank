@@ -5,6 +5,7 @@ def closest_palindrome(n):
         n (str): a string of characters
     """
     
+    # Convert n to int for the purpose of incrementing
     n = int(n)
     
     def is_palindrome(s):

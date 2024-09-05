@@ -20,7 +20,7 @@ def find_anagrams(s, p):
     # Count the occurence of characters in p
     p_counter = Counter(p)
     
-    # Initialize the sliding window counter for the fordt window
+    # Initialize the counter for the starting window
     window_counter = Counter(s[:len_p])
     
     # Check if the first window is an anagram
@@ -44,8 +44,7 @@ def find_anagrams(s, p):
     return result
 
 
-
-# example test
+# Example usage
 s = "cbaebabacdcab"
 p = "abc"
 result = find_anagrams(s, p)
