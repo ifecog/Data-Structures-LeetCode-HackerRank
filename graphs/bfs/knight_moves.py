@@ -20,6 +20,9 @@ def min_knight_moves(N, start, end):
     Returns:
         _type_: _description_
     """
+    
+    # This is solved using the Breadth-First-Search (BFS) approach
+    
     x1, y1 = start
     x2, y2 = end
     

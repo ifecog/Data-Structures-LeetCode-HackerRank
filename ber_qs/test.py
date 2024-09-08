@@ -7,6 +7,7 @@ def easy_count_uber(coordinates):
     markers = set()
     
     for left, right in coordinates:
+        # Add each marker in the range (left, right) to the set (duplicates are automatically eliminated)
         for marker in range(left, right + 1):
             markers.add(marker)
     
@@ -15,7 +16,7 @@ def easy_count_uber(coordinates):
 # Example usage:
 coordinates = [[4, 7], [-1, 5], [3, 6]]
 result = easy_count_uber(coordinates)
-print(result)
+print(result)        
 
 
 # # Ride Fare Adjustment
