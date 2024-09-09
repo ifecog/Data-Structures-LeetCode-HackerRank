@@ -1,7 +1,7 @@
 from collections import deque
 
+# 2. Shortest Bridge
 
-# Directions for moving in the matrix: right, left, up, down
 directions = [
     (0, 1), (0, -1), (1, 0), (-1, 0)
 ]
@@ -10,11 +10,10 @@ def is_valid(x, y, m, n):
     return 0 <= x < m and 0 <= y < n
 
 
-# Perform BFS/DFS to find an island an mark all its cells
 def find_island(grid, visited, x, y, island_cells):
-    queue = deque([(x, y)])
     visited[x][y] = True
     island_cells.append((x, y))
+    queue = deque([(x, y)])
     
     while queue:
         cx, cy = queue.popleft()
@@ -27,28 +26,14 @@ def find_island(grid, visited, x, y, island_cells):
                 island_cells.append((nx, ny))
                 queue.append((nx, ny))
                 
-                
-def min_flips_to_connect_islands(grid):
-    """You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
 
-    An island is a 4-directionally connected group of 1's not connected to any other 1's. There are exactly two islands in grid.
-
-    You may change 0's to 1's to connect the two islands to form one island.
-
-    Return the smallest number of 0's you must flip to connect the two islands.
-
-    Args:
-        grid (int): N X N Matrix
-
-    Returns:
-        int:  Smallest number of 0's you must flip to connect the two islands.
-    """
+def shortest_bridge(grid):
     m, n = len(grid), len(grid[0])
     visited = [[False] * n for _ in range(m)]
     
     island1 = []
     island2 = []
-    found_first_island = False 
+    found_first_island = False
     
     # 1. Find and mark the 2 islands
     for i in range(m):
@@ -62,10 +47,10 @@ def min_flips_to_connect_islands(grid):
                     # Mark all cells of the second island
                     find_island(grid, visited, i, j, island2)
                     break
-                    
+        
         if island2:
             break
-    
+        
     # 2. Multi-source BFS from all cells in the first island
     queue = deque([(x, y, 0) for x, y in island1])
     visited = [[False] * n for _ in range(m)]
@@ -75,7 +60,8 @@ def min_flips_to_connect_islands(grid):
         
     while queue:
         x, y, dist = queue.popleft()
-
+        
+        
         # If we've reached any cell in the second island, return the distance
         if (x, y) in island2:
             return dist - 1
@@ -84,11 +70,10 @@ def min_flips_to_connect_islands(grid):
             nx, ny = x + dx, y + dy
             
             if is_valid(nx, ny, m, n) and not visited[nx][ny]:
-                visited[nx][ny] = True
                 queue.append((nx, ny, dist + 1))
-                
+                visited[nx][ny] = True
+    
     return -1
-
 
 # Example usage
 grid = [
@@ -98,4 +83,4 @@ grid = [
     [0, 0, 0, 0, 0],
 ]
 
-print(min_flips_to_connect_islands(grid))
+print(shortest_bridge(grid))
