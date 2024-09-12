@@ -5,10 +5,12 @@ knight_moves = [
     (1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)
 ]
 
+# Function to check of the coordinates are within the boundary
 def is_within_board(x, y, N):
     return 0 <= x < N and 0 <= y < N
 
 
+# Main function to find the minimum knight moves
 def min_knight_moves(N, start, end):
     """Given a N x N chessboard, find the shortest hops needed by a Knight to reach from (x1, y1) to (x2, y2) on chessboard
 
@@ -43,6 +45,7 @@ def min_knight_moves(N, start, end):
             if (new_x, new_y) == (x2, y2):
                 return hops + 1
             
+            # If the cell is within the boundary and unvisited
             if is_within_board(new_x, new_y, N) and (new_x, new_y) not in visited_positions:
                 queue.append((new_x, new_y, hops + 1))
                 visited_positions.add((new_x, new_y))

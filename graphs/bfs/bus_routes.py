@@ -51,6 +51,7 @@ def num_buses_to_destination(routes, source, target):
                     visited_stops.add((next_stop))
             
             # The current route index is removed to avoid revisiting
+            stop_to_routes[current_stop].remove(route_index)
     
     return -1
 

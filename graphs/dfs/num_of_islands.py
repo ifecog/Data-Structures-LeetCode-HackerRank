@@ -1,4 +1,15 @@
 def num_islands(grid):
+    """Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+    An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+    Args:
+        grid (string): A map of '0s' and '1s'
+
+    Returns:
+        int: The numebr of islands
+    """
+    
     island_count = 0
     
     def dfs(r, c):

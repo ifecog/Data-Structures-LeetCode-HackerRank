@@ -20,6 +20,7 @@ def find_island(grid, visited, x, y, island_cells):
     while queue:
         cx, cy = queue.popleft()
         
+        # Explore all 4 directions
         for dx, dy in directions:
             nx, ny = cx + dx, cy + dy
             
@@ -29,7 +30,8 @@ def find_island(grid, visited, x, y, island_cells):
                 island_cells.append((nx, ny))
                 queue.append((nx, ny))
                 
-                
+
+# Main function to find the shortest bridge: minimum flips of 0s and 1s 
 def min_flips_to_connect_islands(grid):
     """You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
 
@@ -58,12 +60,14 @@ def min_flips_to_connect_islands(grid):
     # 1. Find and mark the 2 islands
     for i in range(m):
         for j in range(n):
+            # If the current grid is an island and unvisited
             if grid[i][j] == 1 and not visited[i][j]:
                 if not found_first_island:
                     # Mark all cells of the first island
                     find_island(grid, visited, i, j, island1)
                     found_first_island = True
                 else:
+                    # If the first island has already been found, this must be the second island
                     # Mark all cells of the second island
                     find_island(grid, visited, i, j, island2)
                     break

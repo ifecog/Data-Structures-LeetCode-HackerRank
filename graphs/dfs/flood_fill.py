@@ -1,4 +1,19 @@
 def flood_fill(image, sr, sc, color):
+    """An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.
+
+    You are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc].
+
+    To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with color.
+
+    Return the modified image after performing the flood fill.
+
+    Args:
+        image (array): an m x n integer grid
+        sr (int): starting pixel row
+        sc (int): starting pixel column
+        color (int): replaced color
+    """
+
     # Get the original color of the starting image
     original_color = image[sr][sc]
     
@@ -10,7 +25,7 @@ def flood_fill(image, sr, sc, color):
         if r < 0 or c < 0 or r >= len(image) or c >= len(image[0]):
             return
         
-        # Check if the color of the current pixel is the same asthe original color and replace with the new color
+        # Check if the color of the current pixel is the same as the original color and replace with the new color
         if image[r][c] == original_color:
             image[r][c] = color
             
