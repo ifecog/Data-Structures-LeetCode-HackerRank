@@ -142,42 +142,42 @@ from collections import defaultdict, deque
 # print(min_knight_moves(N, start, end))
 
 
-# 1. Bus Routes
-def num_buses_to_destination(routes, source, target):
-    if source == target:
-        return 0
+# # 1. Bus Routes
+# def num_buses_to_destination(routes, source, target):
+#     if source == target:
+#         return 0
     
-    # Build the graph stop_to_routes
-    stop_to_routes = defaultdict(set)
+#     # Build the graph stop_to_routes
+#     stop_to_routes = defaultdict(set)
     
-    for i, route in enumerate(routes):
-        for stop in route:
-            stop_to_routes[stop].add(i)
+#     for i, route in enumerate(routes):
+#         for stop in route:
+#             stop_to_routes[stop].add(i)
             
-    # BFS
-    visited_stops = set([source])
-    queue = deque([(source, 0)])
+#     # BFS
+#     visited_stops = set([source])
+#     queue = deque([(source, 0)])
     
-    while queue:
-        current_stop, buses_taken = queue.popleft()
+#     while queue:
+#         current_stop, buses_taken = queue.popleft()
         
-        if current_stop == target:
-            return buses_taken
+#         if current_stop == target:
+#             return buses_taken
         
-        # For every bus passing through the current stop, we iterate over all te stops on that route. If there is a bus stop (next stop) that has not been visited, we add it to the queue.
+#         # For every bus passing through the current stop, we iterate over all te stops on that route. If there is a bus stop (next stop) that has not been visited, we add it to the queue.
         
-        for route_index in list(stop_to_routes[current_stop]):
-            for next_stop in routes[route_index]:
-                if next_stop not in visited_stops:
-                    queue.append((next_stop, buses_taken + 1))
-                    visited_stops.add((next_stop))
+#         for route_index in list(stop_to_routes[current_stop]):
+#             for next_stop in routes[route_index]:
+#                 if next_stop not in visited_stops:
+#                     queue.append((next_stop, buses_taken + 1))
+#                     visited_stops.add((next_stop))
             
-            stop_to_routes[current_stop].remove(route_index)
+#             stop_to_routes[current_stop].remove(route_index)
     
-    return -1
+#     return -1
 
-# Example usage:
-routes1 = [[1,2,7],[3,6,7]]
-source1 = 1
-target1 = 6
-print(num_buses_to_destination(routes1, source1, target1))
+# # Example usage:
+# routes1 = [[1,2,7],[3,6,7]]
+# source1 = 1
+# target1 = 6
+# print(num_buses_to_destination(routes1, source1, target1))

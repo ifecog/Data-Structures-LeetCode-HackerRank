@@ -9,17 +9,6 @@ def minimum_time(time, totalTrips):
         time (array<int>): an array of integers representing time
         total_trips (int): least total trips completed
     """
-    """
-    Solution:
-    
-    Initialize left to 1 and right to the minimum time taken by any bus multiplied by totalTrips. This represents the range of possible minimum times required.
-    
-    Define a helper function can_complete_trips(max_time) that checks whether it's possible to complete totalTrips trips with the given maximum time max_time. It iterates through each bus's time and calculates how many trips can be completed within max_time.
-
-    Perform binary search to find the minimum time required to complete at least totalTrips trips. At each step, calculate the midpoint mid of the range and check if it's possible to complete totalTrips trips within mid time. Adjust the range (left or right) accordingly.
-
-    Once the binary search terminates (left is equal to right), return left, which represents the minimum time required to complete at least totalTrips trips.
-    """
     # This is solved using binary search approach
     
     # Set the left pointer to the minimum possible time which is 1 unit

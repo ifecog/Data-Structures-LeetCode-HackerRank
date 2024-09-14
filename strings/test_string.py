@@ -1,27 +1,58 @@
-# 11. Is Subsequence
-def is_subsequence(s, t):
-    # Initialize a pointer to keep track of the current position in string t
-    t_index = 0
+from collections import deque
+
+# 12. Letter Combination
+def letter_combinations(digits):
+    if not digits:
+        return []
     
-    for char in s:
-        # Move the pointer forward in string t until we find a match or reach the end
-        while t_index < len(t) and t[t_index] != char:
-            t_index += 1
+    phone_map = {
+        '2': 'abc',
+        '3': 'def',
+        '4': 'ghi',
+        '5': 'jkl',
+        '6': 'mno',
+        '7': 'pqrs',
+        '8': 'tuv',
+        '9': 'wxyz'
+    }
+       
+    queue = deque([''])
+    for digit in digits:
+        for _ in range(len(queue)):
+            combination = queue.popleft()
+            for letter in phone_map[digit]:
+                queue.append(combination + letter)
+    
+    return list(queue)
+
+# Example usage
+number = '56'
+print(letter_combinations(number))
+
+# # 11. Is Subsequence
+# def is_subsequence(s, t):
+#     # Initialize a pointer to keep track of the current position in string t
+#     t_index = 0
+    
+#     for char in s:
+#         # Move the pointer forward in string t until we find a match or reach the end
+#         while t_index < len(t) and t[t_index] != char:
+#             t_index += 1
         
-        # If we reach the end of string t without finding a match, return False
-        if t_index == len(t):
-            return False
+#         # If we reach the end of string t without finding a match, return False
+#         if t_index == len(t):
+#             return False
         
-        # Move the pointer forward to the next character in t
-        t_index += 1
+#         # Move the pointer forward to the next character in t
+#         t_index += 1
     
-    return True
+#     return True
     
     
-# Example usage:
-s = "ace"
-t = "abcde"
-print(is_subsequence(s, t))
+# # Example usage:
+# s = "ace"
+# t = "abcde"
+# print(is_subsequence(s, t))
 
 # # 10 Valid Parenthesis
 # def is_valid(s):
