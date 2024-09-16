@@ -5,7 +5,7 @@ directions = [
 def exist(board, word):
     m, n = len(board), len(board[0])
     
-    # DFS Function to find works in the board
+    # DFS Function to find words in the board
     def dfs(i, j, k):
         # If we have matched all characters in the word, return True
         if k == len(word):
@@ -24,7 +24,7 @@ def exist(board, word):
                 return True
             
         # Restore the current cell's value
-        board[i][j] = True
+        board[i][j] = temp
         
         return False
     

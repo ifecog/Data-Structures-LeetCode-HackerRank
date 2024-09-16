@@ -1,5 +1,51 @@
 from collections import defaultdict, deque
 
+# 4. Course Schedule II
+def find_order(num_courses, prerequisites):
+    # Build the graph and initiate an in-degree array
+    
+    # 'adj_list' will store the graph as an an adjacency list
+    adj_list = defaultdict(list)
+    
+    # 'in_degree' array stores how many prerequisites each course has
+    in_degree = [0] * num_courses
+    
+    for course, pre in prerequisites:
+        adj_list[pre].append(course)
+        in_degree[course] += 1
+        
+    # Initialize a queue with all courses having in-degree 0
+    queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
+    
+    # List to store the final course ordering
+    order = []
+    
+    while queue:
+        course = queue.popleft()
+        order.append(course)
+        
+        # Process each neighbor and reduce their in_degree
+        for neighbor in adj_list[course]:
+            in_degree[neighbor] -= 1
+            
+            # If the dependent course now has no prerequisite, add it to the queue
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+                
+    # If all the courses have been processed, return the order list, else return an empty list
+    if len(order) == num_courses:
+        return order
+    else:
+        return []
+            
+
+# Example usage
+numCourses = 2
+prerequisites = [[1, 0]]
+print(find_order(numCourses, prerequisites))  # Output: [0, 1]       
+    
+    
+
 # # 3. Shortest Bridge
 
 # # Directions for moving in the matrix: right, left, down, up
