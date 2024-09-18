@@ -35,11 +35,11 @@ def find_order(num_courses, prerequisites):
         course = queue.popleft()
         order.append(course)
         
-        # Process each neighbor and reduce thrie in_degree
+        # Process each neighbor and reduce the in_degree
         for neighbor in adj_list[course]:
             in_degree[neighbor] -= 1
             
-            # If the dependent course (neighbor) has n prerequisite, add it to the queue
+            # If the dependent course (neighbor) has no prerequisite, add it to the queue
             if in_degree[neighbor] == 0:
                 queue.append(neighbor)
                 

@@ -1,49 +1,42 @@
 from collections import defaultdict, deque
 
-# 4. Course Schedule II
+# 4. Course Schedule
 def find_order(num_courses, prerequisites):
-    # Build the graph and initiate an in-degree array
+    # This is solved using Kahn's algorithm
     
-    # 'adj_list' will store the graph as an an adjacency list
+    # 1. Build the graph
+    # Store the graph as an adjacendy list
     adj_list = defaultdict(list)
     
-    # 'in_degree' array stores how many prerequisites each course has
+    # Initiate an in_degree to store how many prerequisites each course has
     in_degree = [0] * num_courses
     
     for course, pre in prerequisites:
         adj_list[pre].append(course)
         in_degree[course] += 1
         
-    # Initialize a queue with all courses having in-degree 0
+    # Initialize a queue with all courses having an in_degree of 0 (meaning no prerequisites)
     queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
     
-    # List to store the final course ordering
+    # Empty list to store the final course order
     order = []
     
     while queue:
         course = queue.popleft()
         order.append(course)
         
-        # Process each neighbor and reduce their in_degree
+        # Process each neighbor and reduce the in_degree
         for neighbor in adj_list[course]:
             in_degree[neighbor] -= 1
             
-            # If the dependent course now has no prerequisite, add it to the queue
+            # If the dependent course (neighbor) has no prerequisite, add it to the queue
             if in_degree[neighbor] == 0:
                 queue.append(neighbor)
-                
-    # If all the courses have been processed, return the order list, else return an empty list
-    if len(order) == num_courses:
-        return order
-    else:
-        return []
-            
-
-# Example usage
-numCourses = 2
-prerequisites = [[1, 0]]
-print(find_order(numCourses, prerequisites))  # Output: [0, 1]       
     
+    # If all courses have been processed, return the order list else, return an empty list
+    return order if len(order) == num_courses else []
+        
+
     
 
 # # 3. Shortest Bridge
