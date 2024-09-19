@@ -17,23 +17,23 @@ def schedule_course(courses):
     # Sort the courses by their last day
     courses.sort(key=lambda i: i[1])
     
-    # Max heap to store the duration of the courses we've taken
+    # Max heap to store the duration of courses taken
     max_heap = []
     current_time = 0
     
     for duration, last_day in courses:
-        # Add the course to the heap
+        # Add the durations to the heap
+        # -ve duration is pushed because Python, by default, applies minimum heap
         heapq.heappush(max_heap, -duration)
         current_time += duration
         
         if current_time > last_day:
-            # Remove the longest duration course (which is at the root of the heapq)
+            # Remove the longest duration (which is at the start of the heap)
             longest_duration = -heapq.heappop(max_heap)
             current_time -= longest_duration
             
-    # The number of courses in the heap is the answer
     return len(max_heap)
-
+    
 
 # Test the example case
 courses = [[5,5], [4,6], [2,6]]

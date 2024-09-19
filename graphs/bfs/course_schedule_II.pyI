@@ -18,7 +18,7 @@ def find_order(num_courses, prerequisites):
     # Store the graph as an adjacency list
     adj_list = defaultdict(list)
     
-    # Initiate an in_degree array to store hpw many prerequisites each course has
+    # In degree array to store how many prerequisites each course has
     in_degree = [0] * num_courses
     
     for course, pre in prerequisites:
