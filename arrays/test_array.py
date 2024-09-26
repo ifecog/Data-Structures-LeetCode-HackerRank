@@ -1,22 +1,45 @@
-# 11. First no-repeating element
-def first_non_repeating(nums):
-    freq = {}
-    
-    for num in nums:
-        if num in freq:
-            freq[num] += 1
-        else:
-            freq[num] = 1
-    
-    for num in nums:
-        if freq[num] == 1:
-            return num
-    
-    return None
+def product_of_elements(nums):
+    n = len(nums)
+    left_products, right_products = [1] * n, [1] * n
+
+    # Left product
+    left_product = 1
+    for i in range(1, n):
+        left_product *= nums[i - 1]
+        left_products[i] = left_product
+        
+    # Right product
+    right_product = 1
+    for i in range(n - 2, -1, -1):
+        right_product *= nums[i + 1]
+        right_products[i] = right_product
+
+    return [left_products[i] * right_products[i] for i in range(n)]   
 
 # Example usage
-arr = [9, 4, 6, 8, 8, 2, 5, 8, 4, 6, 9]
-print(first_non_repeating(arr)) 
+array = [2, 4, 6, 8, 10]
+result = product_of_elements(array)
+print(result) 
+
+# 11. First no-repeating element
+# def first_non_repeating(nums):
+#     freq = {}
+    
+#     for num in nums:
+#         if num in freq:
+#             freq[num] += 1
+#         else:
+#             freq[num] = 1
+    
+#     for num in nums:
+#         if freq[num] == 1:
+#             return num
+    
+#     return None
+
+# # Example usage
+# arr = [9, 4, 6, 8, 8, 2, 5, 8, 4, 6, 9]
+# print(first_non_repeating(arr)) 
 
 
 # # 10. 
