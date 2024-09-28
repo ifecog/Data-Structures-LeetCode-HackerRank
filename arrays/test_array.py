@@ -1,20 +1,21 @@
 def product_of_elements(nums):
     n = len(nums)
     left_products, right_products = [1] * n, [1] * n
-
-    # Left product
+    
+    # 1. Left product
     left_product = 1
     for i in range(1, n):
         left_product *= nums[i - 1]
         left_products[i] = left_product
         
-    # Right product
+    # 2. Right product
     right_product = 1
     for i in range(n - 2, -1, -1):
         right_product *= nums[i + 1]
         right_products[i] = right_product
-
-    return [left_products[i] * right_products[i] for i in range(n)]   
+    
+    return [left_products[i] * right_products[i] for i in range(n)]
+      
 
 # Example usage
 array = [2, 4, 6, 8, 10]
