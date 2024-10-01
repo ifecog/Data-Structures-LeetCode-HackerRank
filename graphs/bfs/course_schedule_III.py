@@ -28,7 +28,7 @@ def schedule_course(courses):
         current_time += duration
         
         if current_time > last_day:
-            # Remove the longest duration (which is at the start of the heap)
+            # Remove the longest duration (which is at the root of the heap)
             longest_duration = -heapq.heappop(max_heap)
             current_time -= longest_duration
             
