@@ -1,9 +1,4 @@
-# Example usage:
-binaryMatrix = [
-    [0, 0, 0, 1],
-    [0, 0, 1, 1],
-    [0, 1, 1, 1],
-    [0, 0, 0, 0]
-]
-
-print(leftmost_column_with_one(binaryMatrix)) 
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+Example 2:

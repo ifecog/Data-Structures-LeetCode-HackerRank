@@ -1,84 +1,81 @@
 from collections import defaultdict, deque
 import heapq
-
-# # 5. Course Schedule (Heap)
-# def schedule_course(courses):
-#     # Sort the courses by their last day
-#     courses.sort(key=lambda i: i[1])
+  
+# 5. Course Schedule III
+def schedule_course(courses):
+    # sort the courses by their last day
+    courses.sort(key=lambda i: i[1])
     
-#     # Max heap to store the duration of the courses we've taken
-#     max_heap = []
-#     current_time = 0
+    # Max heap to store the duration of the courses taken
+    max_heap = []
+    current_time = 0
     
-#     for duration, last_day in courses:
-#         # Add the durations to the heap
-#         heapq.heappush(max_heap, -duration) # -ve because Python automatically uses min heap
-#         current_time += duration
+    for duration, last_day in courses:
+        # Add the durations to the heap
+        # -ve duration value are pushed because by default, pythonuses minimum heap
+        heapq.heappush(max_heap, -duration)
+        current_time += duration
         
-#         if current_time > last_day:
-#             # Remove the longest duration course (which is at the root of the heap)
-#             longest_duration = -heapq.heappop(max_heap)
-#             current_time -= longest_duration
-            
-#     # The number of courses in the heap is the answer
-#     return len(max_heap)
+        if current_time > last_day:
+            # Remove the longest duration (which is at the root of the heap)
+            longest_duration = -heapq.heappop(max_heap)
+            current_time -= longest_duration
     
-#     # time, count = 0, 0
+    return len(max_heap)
     
-#     # for duration, last_day in courses:
-#     #     if time + duration <= last_day:
-#     #         time += duration
-#     #         count += 1
+
+# Test the example case
+courses = [[5,5], [4,6], [2,6]]
+print(schedule_course(courses))
     
-#     # return count
+    # time, count = 0, 0
+    # for duration, last_day in courses:
+    #     if time + duration <= last_day:
+    #         time += duration
+    #         count += 1
+    
+    # return count
 
-# # Test the example case
-# courses = [[5,5], [4,6], [2,6]]
-# print(schedule_course(courses))
-
-
-
-# # 4. Course Schedule
+  
+  
+# # 4. Course Schedule II
 # def find_order(num_courses, prerequisites):
-#     # This is solved using Kahn's algorithm
+#     # This is solved using Kahnn's Algorithm
+#     # 1. Build the Graph
     
-#     # 1. Build the graph
-#     # Store the graph as an adjacendy list
+#     # Store the graph as an adjacency list
 #     adj_list = defaultdict(list)
     
-#     # Initiate an in_degree to store how many prerequisites each course has
+#     # In degree array to store how many prerequisites each course has
 #     in_degree = [0] * num_courses
     
 #     for course, pre in prerequisites:
 #         adj_list[pre].append(course)
 #         in_degree[course] += 1
         
-#     # Initialize a queue with all courses having an in_degree of 0 (meaning no prerequisites)
+#     # Initialize a queue with all courses having an in_degree of 0 (no prerequisites)
 #     queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
     
-#     # Empty list to store the final course order
+#     # Initialize an empty list to store the final course ordering
 #     order = []
     
 #     while queue:
 #         course = queue.popleft()
 #         order.append(course)
         
-#         # Process each neighbor and reduce the in_degree
-#         for neighbor in adj_list[course]:
+#         # Process each neighbor and reduce the in degree
+#         for neighbor in adj_list(course):
 #             in_degree[neighbor] -= 1
             
-#             # If the dependent course (neighbor) has no prerequisite, add it to the queue
+#             # If the dependent course (neighbor) has no prerequisites, add it to the queue
 #             if in_degree[neighbor] == 0:
 #                 queue.append(neighbor)
     
-#     # If all courses have been processed, return the order list else, return an empty list
+#     # If all the courses have been processed, return the order list, else return an emptylis 
 #     return order if len(order) == num_courses else []
-        
+            
 
-#  # Example usage
-# numCourses = 2
-# prerequisites = [[1, 0]]
-# print(find_order(numCourses, prerequisites))  # Output: [0, 1]   
+
 
 # # 3. Shortest Bridge
 

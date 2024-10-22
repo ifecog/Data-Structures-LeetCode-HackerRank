@@ -1,6 +1,17 @@
 from collections import Counter
 
 def topK_frequent(words, k):
+    """Given an array of strings words and an integer k, return the k most frequent strings.
+
+    Return the answer sorted by the frequency from highest to lowest. Sort the words with the same frequency by their lexicographical order.
+
+    Args:
+        words (list): A list of strings
+        k (int): a given integer
+
+    Returns:
+        list: List of the most frequent words
+    """
     # Count the frequency of each word in the list
     count = Counter(words)
     print(count)
