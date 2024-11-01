@@ -24,7 +24,7 @@ def num_buses_to_destination(routes, source, target):
     
     # 1. Build the graphh
     
-    # Initialize a set tp store the stops on the routes using a dictionary stop_to_routes
+    # Initialize a set to store the stops on the routes using a dictionary stop_to_routes
     stop_to_routes = defaultdict(set)
     
     for i, route in enumerate(routes):

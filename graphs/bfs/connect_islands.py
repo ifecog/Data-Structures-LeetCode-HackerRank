@@ -26,7 +26,7 @@ def find_island(grid, visited, x, y, island_cells):
             
             # If the current cell is within the boundary, unvisited, and is an Island, add it to the queue
             if is_valid(nx, ny, len(grid), len(grid[0])) and not visited[nx][ny] and grid[nx][ny] == 1:
-                visited[nx][ny] = 1
+                visited[nx][ny] = True
                 island_cells.append((nx, ny))
                 queue.append((nx, ny))
                 
