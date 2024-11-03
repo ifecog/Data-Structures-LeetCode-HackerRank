@@ -1,26 +1,90 @@
-def product_of_elements(nums):
-    n = len(nums)
-    left_products, right_products = [1] * n, [1] * n
+# Maximum sum of Array
+def max_sum(arr):
+    n = len(arr)
     
-    # 1. Left product
-    left_product = 1
-    for i in range(1, n):
-        left_product *= nums[i - 1]
-        left_products[i] = left_product
+    # 1. Calculate the initial sum and the total sum of the array
+    s0, total_sum = 0, 0
+    
+    for i in range(n):
+        s0 += i * arr[i]
+        total_sum += arr[i]
         
-    # 2. Right product
-    right_product = 1
-    for i in range(n - 2, -1, -1):
-        right_product *= nums[i + 1]
-        right_products[i] = right_product
+    # Initialize the maximum sum as s0
+    max_sum_val = s0
     
-    return [left_products[i] * right_products[i] for i in range(n)]
+    # 2. Use the recurrene relation to calculate sums for each rotation
+    current_sum = s0
+    for i in range(1, n):
+        current_sum = current_sum + total_sum - (n * arr[n - 1])
+        
+        max_sum_val = max(max_sum_val, current_sum)
+    
+    return max_sum_val
+
+# Example usage:
+arr = [8, 3, 1, 2]
+print(max_sum(arr))
+
+# # Trapping Rain Water
+# def trap(height):
+#     if not height:
+#         return 0
+    
+#     left, right = 0, len(height) - 1
+#     left_max, right_max = height[left], height[right]
+    
+#     water_trapped = 0
+    
+#     while left < right:
+#         # If left_max < right_max, move the left pointer one place to the right
+#         if left_max < right_max:
+#             left += 1
+            
+#             # Update left_max
+#             left_max = max(left_max, height[left])
+            
+#             # Calculate trapped water at the current left position
+#             water_trapped += left_max - height[left]
+            
+#         else:
+#             # Process from the right
+#             right -= 1
+            
+#             # Update right_max
+#             right_max = max(right_max, height[right])
+            
+#             water_trapped += right_max - height[right]
+            
+#     return water_trapped
+
+# # Example usage
+# length = [0,1,0,2,1,0,1,3,2,1,2,1]
+# print(trap(length))
+
+
+# def product_of_elements(nums):
+#     n = len(nums)
+#     left_products, right_products = [1] * n, [1] * n
+    
+#     # 1. Left product
+#     left_product = 1
+#     for i in range(1, n):
+#         left_product *= nums[i - 1]
+#         left_products[i] = left_product
+        
+#     # 2. Right product
+#     right_product = 1
+#     for i in range(n - 2, -1, -1):
+#         right_product *= nums[i + 1]
+#         right_products[i] = right_product
+    
+#     return [left_products[i] * right_products[i] for i in range(n)]
       
 
-# Example usage
-array = [2, 4, 6, 8, 10]
-result = product_of_elements(array)
-print(result) 
+# # Example usage
+# array = [2, 4, 6, 8, 10]
+# result = product_of_elements(array)
+# print(result) 
 
 # 11. First no-repeating element
 # def first_non_repeating(nums):
