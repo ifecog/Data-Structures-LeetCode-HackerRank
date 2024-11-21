@@ -79,20 +79,3 @@
 # print(rob(nums))
 
 
-# House robber 1
-def rob(nums):
-    if not nums:
-        return 0
-    
-    elif len(nums) == 1:
-        return nums[0]
-    elif len(nums) == 2:
-        return max(nums[0], nums[1])
-    
-    # Initialize 2 variables to store the maximum amount up to the last 2 houses
-    prev2 = nums[0]
-
-
-# Example usage:
-nums = [1, 2, 3, 1]
-print(rob(nums))
