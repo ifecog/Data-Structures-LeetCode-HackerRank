@@ -15,7 +15,7 @@ def merge_arrays(nums1, m, nums2, n):
             p2 -= 1
         p_merged -= 1
         
-    # if there are remaining elements in nums2, copy to nums1
+    # If there are remaining elements in nums2, copy to nums1
     nums1[:p2 + 1] = nums2[:p2 + 1]
     
     return nums1

@@ -10,7 +10,7 @@ def two_sum(nums, target):
         target (int): the target integer
     """
    
-    # initialize an empty dictionary to store the index of numbers
+    # Initialize an empty dictionary to store the index of numbers
     nums_indices = {}
     
     # use enumerate to loop through nums to get index and num

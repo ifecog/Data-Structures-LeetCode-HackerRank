@@ -6,21 +6,20 @@ def min_subarray_length(nums, target):
         target (int): target
     """
     
-    # initialize variables
+    # Initialize variables
     min_length = len(nums) + 1
     current_sum, left = 0, 0
     
-    # iterate through the array using the sliding window approach
     for right, num in enumerate(nums):
-        # add the current element to the sum
+        # Add the current element to the sum
         current_sum += num
         
-        # check if the current sum is greater than or equal to the target
+        # Check if the current sum is greater than or equal to the target
         while current_sum >= target:
-            # update the minimum length
+            # Update the minimum length
             min_length = min(min_length, right - left + 1)
             
-            # remove the leftmost element from the sum and move the left pointer
+            # Remove the leftmost element from the sum and move the left pointer
             current_sum -= nums[left]
             left += 1
             

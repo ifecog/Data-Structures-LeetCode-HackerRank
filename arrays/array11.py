@@ -9,7 +9,7 @@ def first_non_repeating(nums):
         first non-repeating element in the array
     """
     
-    # This is sloved by storing the frequency of the numbers in a dict
+    # This is solved by storing the frequency of the numbers in a dict
     freq = {}
             
     for num in nums:
@@ -23,7 +23,7 @@ def first_non_repeating(nums):
     return None
 
         
-# test
+# Example usage
 arr = [9, 4, 6, 8, 8, 2, 5, 8, 4, 6, 9]
 print(first_non_repeating(arr)) 
 
