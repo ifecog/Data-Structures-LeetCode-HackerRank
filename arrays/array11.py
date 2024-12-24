@@ -11,16 +11,15 @@ def first_non_repeating(nums):
     
     # This is solved by storing the frequency of the numbers in a dict
     freq = {}
-            
+    
     for num in nums:
         freq[num] = freq.get(num, 0) + 1
     
-    for index, num in enumerate(nums):
+    for i, num in enumerate(nums):
         if freq[num] == 1:
-            return index    # return the index 
-            # return num    # return the element 
+            return num
     
-    return None
+    return -1
 
         
 # Example usage

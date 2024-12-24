@@ -2,28 +2,33 @@
 def max_sum(arr):
     n = len(arr)
     
-    # 1. Calculate the initial sum and the total sum of the array
+    # 1. Initiate and Calcuate the initial sum and the total sum of the array
     s0, total_sum = 0, 0
     
     for i in range(n):
         s0 += i * arr[i]
         total_sum += arr[i]
-        
-    # Initialize the maximum sum as s0
+    
+    # Initialize the maximum sum value as s0
     max_sum_val = s0
     
-    # 2. Use the recurrene relation to calculate sums for each rotation
+    # Use the recurrence relation to calculate sums for each rotation
     current_sum = s0
     for i in range(1, n):
         current_sum = current_sum + total_sum - (n * arr[n - 1])
-        
         max_sum_val = max(max_sum_val, current_sum)
-    
+        
     return max_sum_val
 
 # Example usage:
 arr = [8, 3, 1, 2]
 print(max_sum(arr))
+    
+
+
+# # Example usage:
+# arr = [8, 3, 1, 2]
+# print(max_sum(arr))
 
 # # Trapping Rain Water
 # def trap(height):
@@ -165,19 +170,16 @@ print(max_sum(arr))
 # # 8. Minimum Size Subarray Sum
 # def min_subarray_length(nums, target):
 #     min_length = len(nums) + 1
-#     current_sum = 0
 #     left = 0
+#     current_sum = 0
     
-#     # Iterate through the array using the sliding windo approach
 #     for right, num in enumerate(nums):
-#         # Add current element 'num' to current_sum
 #         current_sum += num
         
 #         while current_sum >= target:
-#             # Update min_length
 #             min_length = min(min_length, right - left + 1)
             
-#             # Remove the meftmost element and move the left pointer to the right
+#             # Shrink the array from the left
 #             current_sum -= nums[left]
 #             left += 1
     
@@ -193,21 +195,22 @@ print(max_sum(arr))
 
 # # 7. Two Sum
 # def two_sum(nums, target):
-#     hashmap = {}
+#     num_indices = {}
     
 #     for i, num in enumerate(nums):
 #         complement = target - num
         
-#         if complement in hashmap:
-#             return [hashmap[complement], i]
-        
-#         hashmap[num] = i
+#         if complement in num_indices:
+#             return [num_indices[complement], i]
     
+#         num_indices[num] = i
+        
 #     return []
+    
 
 # # Example usage:
 # nums = [2, 4, 6, 7, 1]
-# target = 9
+# target = 90
 # result = two_sum(nums, target)
 # print(result)
 
@@ -306,8 +309,8 @@ print(max_sum(arr))
 #     for i in range(len(nums)):
 #         if nums[i] != 0:
 #             nums[zero_index], nums[i] = nums[i], nums[zero_index]
-            
 #             zero_index += 1
+    
             
 # array = [0, 2, 5, 0, 4, 0, 2, 2, 6, 0]
 # arrange_zero_and_nonzero_elements(array)

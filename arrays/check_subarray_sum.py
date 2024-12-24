@@ -18,14 +18,14 @@ def check_subarray_sum(nums, k):
         boolean: True if good subarray else False
     """
     
-    # Dictionary to store the remainder of prefix sum divided by k and its index
-    
-    # This handles the case when a subarray from index 0 sums to a multiple of k
+    # Initiate a dict (prefix_mod) to store the remainder of the prefix sums  modulo k and their indices
+    # The key is the raminder and the value is the first index where that remainder was first found
+    # Initiate prefix mod with {0: -1}. This is to handle cases where the subarray starting from index 0 is a multiple of k
     prefix_mod = {0: -1}
     current_sum = 0
     
     for i, num in enumerate(nums):
-        # Update the current sum
+        # Increment current sum
         current_sum += num
         
         if k != 0:
@@ -33,14 +33,14 @@ def check_subarray_sum(nums, k):
             
         # Check if this remainder has been seen before
         if current_sum in prefix_mod:
-            # Check if the subarray length is at least 2
+            # If so, it means that the sum of the elements after the index of its first occurence to the current index is a multiple of k
+            # Check if the length >= 2
             if i - prefix_mod[current_sum] >= 2:
                 return True
-            
+        
         else:
-            # Store the current index for this remainder
             prefix_mod[current_sum] = i
-            
+    
     return False
 
 

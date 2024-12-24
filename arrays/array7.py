@@ -13,7 +13,6 @@ def two_sum(nums, target):
     # Initialize an empty dictionary to store the index of numbers
     nums_indices = {}
     
-    # use enumerate to loop through nums to get index and num
     for i, num in enumerate(nums):
         complement = target - num
         
