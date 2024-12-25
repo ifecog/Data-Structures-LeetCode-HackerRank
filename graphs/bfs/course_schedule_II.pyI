@@ -45,9 +45,7 @@ def find_order(num_courses, prerequisites):
                 
     # If all the courses have been processed, return the order list, else return an empty list
     return order if len(order) == num_courses else []
-    
-    
-    
+       
 # Example usage
 numCourses = 2
 prerequisites = [[1, 0]]

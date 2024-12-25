@@ -1,5 +1,19 @@
 from collections import deque
 
+"""You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
+
+    An island is a 4-directionally connected group of 1's not connected to any other 1's. There are exactly two islands in grid.
+
+    You may change 0's to 1's to connect the two islands to form one island.
+
+    Return the smallest number of 0's you must flip to connect the two islands.
+
+    Args:
+        grid (int): N X N Matrix
+
+    Returns:
+        int:  Smallest number of 0's you must flip to connect the two islands.
+"""
 
 # Directions for moving in the matrix: right, left, up, down
 directions = [
@@ -32,22 +46,7 @@ def find_island(grid, visited, x, y, island_cells):
                 
 
 # Main function to find the shortest bridge: minimum flips of 0s and 1s 
-def min_flips_to_connect_islands(grid):
-    """You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
-
-    An island is a 4-directionally connected group of 1's not connected to any other 1's. There are exactly two islands in grid.
-
-    You may change 0's to 1's to connect the two islands to form one island.
-
-    Return the smallest number of 0's you must flip to connect the two islands.
-
-    Args:
-        grid (int): N X N Matrix
-
-    Returns:
-        int:  Smallest number of 0's you must flip to connect the two islands.
-    """
-    
+def min_flips_to_connect_islands(grid):   
     m, n = len(grid), len(grid[0])
     
     # Visited matrix to keep track of visited cells
@@ -57,15 +56,15 @@ def min_flips_to_connect_islands(grid):
     island1 = []
     island2 = []
     
-    found_first_island = False
+    find_first_island = False
     
-    # 1. Find and mark the first 2 islands
+    # 1. Find and mark the 2 islands
     for i in range(m):
         for j in range(n):
             if grid[i][j] == 1 and not visited[i][j]:
-                if not found_first_island:
+                if not find_first_island:
                     find_island(grid, visited, i, j, island1)
-                    found_first_island = True
+                    find_first_island = True
                 else:
                     find_island(grid, visited, i, j, island2)
                     break

@@ -22,36 +22,39 @@ def num_buses_to_destination(routes, source, target):
     if source == target:
         return 0
     
-    # 1. Build the graphh
+    # Convert each route to a set for lookup
+    routes = [set(route) for route in routes]
     
-    # Initialize a set to store the stops on the routes using a dictionary stop_to_routes
+    # Build the Graph of stop to routes
     stop_to_routes = defaultdict(set)
-    
     for i, route in enumerate(routes):
         for stop in route:
             stop_to_routes[stop].add(i)
-            
-    # 2. BFS. 
     
-    # Initialize a queue for traversal and a set to keep track of visited stops
+    # Kahn's Algorithm (queues for traversal and visited stops and routes)
     queue = deque([(source, 0)])
-    visited_stops = set([source])
+    visited_stops = {source}
+    visited_routes = set()
     
     while queue:
         current_stop, buses_taken = queue.popleft()
-        
         if current_stop == target:
             return buses_taken
         
-        # For every bus passing through the current stop, we iterate over all the stops on that route. If there is a bus stop that has not been visited, we append it to the queue while also incrementing the buses taken.
-        for route_index in list(stop_to_routes[current_stop]):
+        # Check all routes that contain the current stop
+        for route_index in stop_to_routes[current_stop]:
+            if route_index in visited_routes:
+                continue
+            
+            visited_routes.add(route_index)
+            
+            # Add all stops on this route
             for next_stop in routes[route_index]:
                 if next_stop not in visited_stops:
+                    visited_stops.add(next_stop)
                     queue.append((next_stop, buses_taken + 1))
-                    visited_stops.add((next_stop))
-            
-            # The current route index is removed to avoid revisiting
-            stop_to_routes[current_stop].remove(route_index)
+                    
+        
     
     return -1
 

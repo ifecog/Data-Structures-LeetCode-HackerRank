@@ -7,7 +7,8 @@ def subarray_sum(nums, k):
         nums (int): An array of integers
     """
 
-    # Dictionary to store the count of prefix sums
+    # Initiate a dict (prefix_sums) to store the count of prefix sums
+    # Initiate prefix_sums as {0: 1}. This is to handle cases where the sum of a subarray from the beginning equals to k
     prefix_sums = {0: 1}
     current_sum, count = 0, 0
     
@@ -18,6 +19,7 @@ def subarray_sum(nums, k):
         
         # Check if complement is in prefix_sums
         if complement in prefix_sums:
+            # Count the number of times this complement has been found
             count += prefix_sums[complement]
             
         if current_sum in prefix_sums:

@@ -1,7 +1,7 @@
 from collections import deque
 
 # Possible movements for a Knight
-knight_moves = [
+coordinates = [
     (1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)
 ]
 
@@ -25,30 +25,30 @@ def min_knight_moves(N, start, end):
     
     # This is solved using the Breadth-First-Search (BFS) approach
     
-    x1, y1 = start
-    x2, y2 = end
+    (x1, y1) = start
+    (x2, y2) = end
     
     if (x1, y1) == (x2, y2):
         return 0
     
     # Queue for BFS, storing (current_position, hop_count)
     queue = deque([(x1, y1, 0)])
-    visited_positions = set([x1, y1])
+    visited_positions = {x1, y1}
     
     while queue:
         x, y, hops = queue.popleft()
         
         # Explore all possible knight moves
-        for dx, dy in knight_moves:
-            new_x, new_y = x + dx, y + dy
+        for dx, dy in coordinates:
+            nx, ny = x + dx, y + dy
             
-            if (new_x, new_y) == (x2, y2):
+            if (nx, ny) == (x2, y2):
                 return hops + 1
             
-            # If the cell is within the boundary and unvisited
-            if is_within_board(new_x, new_y, N) and (new_x, new_y) not in visited_positions:
-                queue.append((new_x, new_y, hops + 1))
-                visited_positions.add((new_x, new_y))
+            # If the cell is within the boundary and unvisited, add it to thr visited positions
+            if is_within_board(nx, ny, N) and (nx, ny) not in visited_positions:
+                queue.append((nx, ny, hops + 1))
+                visited_positions.add((nx, ny))
     
     # If the target is unreachable (which theoretically shouldn't happen on a chess board)
     return -1

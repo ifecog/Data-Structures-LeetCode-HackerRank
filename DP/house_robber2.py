@@ -37,7 +37,7 @@ def rob(nums):
     elif n == 2:
         return max(nums[0], nums[1])
     
-    # Compute the maximum money in both scenarios (1) Exclude the last ouse (2) Exclude the first house
+    # Compute the maximum money in both scenarios (1) Exclude the last house (2) Exclude the first house
     return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))
 
 

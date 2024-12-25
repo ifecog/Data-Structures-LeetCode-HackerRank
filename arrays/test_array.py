@@ -1,72 +1,99 @@
-# Maximum sum of Array
-def max_sum(arr):
-    n = len(arr)
+# Trapping Rain Water
+def trap(height):
+    if not height:
+        return 0
     
-    # 1. Initiate and Calcuate the initial sum and the total sum of the array
-    s0, total_sum = 0, 0
+    left, right = 0, len(height) - 1
+    left_max, right_max = height[left], height[right]
+    water_trapped = 0
     
-    for i in range(n):
-        s0 += i * arr[i]
-        total_sum += arr[i]
+    while left < right:
+        # If left_max < right_max, move left pointer one place to the right
+        if left_max < right_max:
+            left += 1
+            
+            # Update left max
+            left_max = max(left_max, height[left])
+            
+            # Calculate trapped water in current left position
+            water_trapped += left_max - height[left]
+            
+        else:
+            right -= 1
+            
+            right_max = max(right_max, height[right])
+            
+            water_trapped += right_max - height[right]
     
-    # Initialize the maximum sum value as s0
-    max_sum_val = s0
-    
-    # Use the recurrence relation to calculate sums for each rotation
-    current_sum = s0
-    for i in range(1, n):
-        current_sum = current_sum + total_sum - (n * arr[n - 1])
-        max_sum_val = max(max_sum_val, current_sum)
-        
-    return max_sum_val
+    return water_trapped
 
-# Example usage:
-arr = [8, 3, 1, 2]
-print(max_sum(arr))
+
+# Example usage
+length = [0,1,0,2,1,0,1,3,2,1,2,1]
+print(trap(length))
+
+
+
+# # Subarray Sum
+# def subarray_sum(nums, k):
+#     # Dict to store the count of prefix sums
+#     prefix_sums = {0: 1}
+#     current_sum, count = 0, 0
+    
+#     for num in nums:
+#         current_sum += num
+        
+#         # Find the complement needed to make a subarray sum equal to k
+#         complement = current_sum - k
+        
+#         # Check if complement is in prefix sum
+#         if complement in prefix_sums:
+#             # Count the number of times this complement has been found
+#             count += prefix_sums[complement]
+            
+#         # Update the prefix sum with the current cumulative sum
+#         if current_sum in prefix_sums:
+#             prefix_sums[current_sum] += 1
+#         else:
+#             prefix_sums[current_sum] = 1
+    
+#     return count
+# nums = [1,1,1]
+# k = 2
+# print(subarray_sum(nums, k))
+
+# # Maximum sum of Array
+# def max_sum(arr):
+#     n = len(arr)
+    
+#     # 1. Initiate and Calcuate the initial sum and the total sum of the array
+#     s0, total_sum = 0, 0
+    
+#     for i in range(n):
+#         s0 += i * arr[i]
+#         total_sum += arr[i]
+    
+#     # Initialize the maximum sum value as s0
+#     max_sum_val = s0
+    
+#     # Use the recurrence relation to calculate sums for each rotation
+#     current_sum = s0
+#     for i in range(1, n):
+#         current_sum = current_sum + total_sum - (n * arr[n - 1])
+#         max_sum_val = max(max_sum_val, current_sum)
+        
+#     return max_sum_val
+
+# # Example usage:
+# arr = [8, 3, 1, 2]
+# print(max_sum(arr))
     
 
 
 # # Example usage:
 # arr = [8, 3, 1, 2]
 # print(max_sum(arr))
-
-# # Trapping Rain Water
-# def trap(height):
-#     if not height:
-#         return 0
-    
-#     left, right = 0, len(height) - 1
-#     left_max, right_max = height[left], height[right]
-    
-#     water_trapped = 0
-    
-#     while left < right:
-#         # If left_max < right_max, move the left pointer one place to the right
-#         if left_max < right_max:
-#             left += 1
-            
-#             # Update left_max
-#             left_max = max(left_max, height[left])
-            
-#             # Calculate trapped water at the current left position
-#             water_trapped += left_max - height[left]
-            
-#         else:
-#             # Process from the right
-#             right -= 1
-            
-#             # Update right_max
-#             right_max = max(right_max, height[right])
-            
-#             water_trapped += right_max - height[right]
-            
-#     return water_trapped
-
-# # Example usage
-# length = [0,1,0,2,1,0,1,3,2,1,2,1]
-# print(trap(length))
-
-   
+  
 
 # # Example usage
 # array = [2, 4, 6, 8, 10]
