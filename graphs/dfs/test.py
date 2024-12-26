@@ -1,70 +1,40 @@
-# 2. Flood Fill
-def flood_fill(image, sr, sc, color):
-    original_color = image[sr][sc]
-    
-    # If the original color is the same as the color to be changed to, return the original image grid
-    if original_color == color:
-        return image
-    
-    def dfs(r, c):
-        if r < 0 or c < 0 or r >= len(image) or c >= len(image[0]):
-            return
+# Calculate Equation
+from collections import defaultdict
+
+def calc_equation(equations, values, queries):
+    # Build the graph
+    graph = defaultdict(dict)
+    for (a, b), value in zip(equations, values):
+        graph[a][b] = value
+        graph[b][a] = 1/value
         
-        # If the image of the current pixel is the same as the original color, replace it with the new color
-        if image[r][c] == original_color:
-            image[r][c] = color
+    def dfs(start, end, visited):
+        if start not in graph or end not in graph:
+            return -1.0
+        
+        if start == end:
+            return 1.0
+        
+        # Mark the start node as visited
+        visited.add(start)
+        
+        # Explore all neighbors of the start node
+        for neighbor in graph[start]:
+            if neighbor in visited:
+                continue
             
-            # Recurcively explore neighboring pixels
-            dfs(r + 1, c)
-            dfs(r - 1, c)
-            dfs(r, c + 1)
-            dfs(r, c - 1)
+            # Recursively explore the neighbor node
+            temp = dfs(neighbor, end, visited)
+            if temp != -1.0:
+                return temp * graph[start][neighbor]
+        
+        return -1.0
     
-    # Start DFS from the starting pixel
-    dfs(sr, sc)
+    return [dfs(c, d, set()) if c in graph and d in graph else -1.0 for c, d in queries]
     
-    return image
-    
-     
 # Example usage
-image = [[1,1,1],[1,1,0],[1,0,1]]
-sr = 1
-sc = 1
-color = 2
+equations = [["a","b"],["b","c"]]
+values = [2.0,3.0]
+queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
 
-print(flood_fill(image, sr, sc, color))   
-
-
-# # 1. Number of Islands
-# def num_islands(grid):
-#     island_count = 0
-    
-#     def dfs(r, c):
-#         if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == '0':
-#             return 
-        
-#         grid[r][c] = '0'
-        
-#         dfs(r + 1, c)
-#         dfs(r - 1, c)
-#         dfs(r, c + 1)
-#         dfs(r, c - 1)
-        
-#     for i in range(len(grid)):
-#         for j in range(len(grid[0])):
-#             if grid[i][j] == '1':
-#                 island_count += 1
-                
-#                 # Recursively explore neighboring cells
-#                 dfs(i, j)
-    
-#     return island_count
-
-# # Example usage:
-# grid = [
-#     ["1","1","0","0","0"],
-#     ["1","1","0","0","0"],
-#     ["0","0","1","0","0"],
-#     ["0","0","0","1","1"]
-# ]
-# print(num_islands(grid))
+print(calc_equation(equations, values, queries))
