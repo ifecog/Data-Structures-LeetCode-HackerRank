@@ -15,8 +15,7 @@ def reverse_list(head):
     
     while current is not None:
         # Store the next node temporatily
-        next_node = current.next
-        
+        next_node = current.next        
         # Reverse the pointer direction
         current.next = prev
         

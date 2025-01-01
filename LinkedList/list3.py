@@ -21,3 +21,4 @@ def merge_lists(list1, list2):
     current.next = list1 if list1 is not None else list2
     
     return dummy.next
+

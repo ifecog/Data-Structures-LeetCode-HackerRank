@@ -23,3 +23,28 @@ def middle_node(head):
     
     return slow
 
+
+def has_cycle(head):
+    slow = head
+    fast = head
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+        if slow == fast:
+            return True
+    
+    return False
+
+
+list = ListNode()
+list.head = ListNode(1)
+list.head.next = ListNode(2)
+list.head.next.next = ListNode(3)
+list.head.next.next.next = ListNode(4)
+list.head.next.next.next.next = ListNode(5)
+list.head.next.next.next.next.next = ListNode(6)
+           
+print(middle_node(list.head).val)
+print(has_cycle(list.head))
