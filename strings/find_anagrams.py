@@ -1,6 +1,5 @@
 from collections import Counter
 
-
 def find_anagrams(s, p):
     """given 2 strings s and p, return an array of all the start indices of p's anagrams in s
 
@@ -37,7 +36,7 @@ def find_anagrams(s, p):
         else:
             window_counter[s[i - len_p]] -= 1
             
-        # check if current window is an anagram
+        # Check if current window is an anagram
         if window_counter == p_counter:
             result.append(i - len_p + 1)
             

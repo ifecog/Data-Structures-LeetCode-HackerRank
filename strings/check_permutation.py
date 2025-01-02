@@ -1,6 +1,5 @@
 from collections import Counter
 
-
 def check_permutation(s1, s2):
     """Given 2 strings s1 and s2, return true of s2 contains a permutation of s1, or False otherwise.
     In other words, return true if one of s1's permutations is the substring of s2.

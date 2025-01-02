@@ -14,7 +14,7 @@ def reverse_string(s):
         right -= 1
         
 
-# example test
+# Example usage
 test_string = ['a', 'y', 'o', 'm', 'i', 'd', 'e']
 reverse_string(test_string)
 print(test_string)

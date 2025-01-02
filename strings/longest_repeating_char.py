@@ -19,7 +19,7 @@ def longest_repeating_character_replacement(s, k):
         # Update the maximum count to the highest count of any character in the window
         max_count = max(max_count, char_count[s[right]])
         
-        # If the number of characters that need to be replaced is more than k, shrink the cwindow from the left
+        # If the number of characters that need to be replaced is more than k, shrink the window from the left
         if right - left + 1 - max_count > k:
             char_count[s[left]] -= 1
             left += 1

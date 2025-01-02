@@ -22,7 +22,8 @@ Given a roman numeral, convert it to an integer.
         s (string): a string representing a roman numeral
     """
     
-    # initialize a dict to map roman numerals to their respective integer values
+    n = len(s)
+    # Initialize a dict to map roman numerals to their respective integer values
     roman_map = {
         'I': 1,
         'V': 5,
@@ -36,7 +37,7 @@ Given a roman numeral, convert it to an integer.
     total = 0
     
     for i in range(len(s)):
-        if i < len(s) - 1 and roman_map[s[i]] < roman_map[s[i + 1]]:
+        if i < n - 1 and roman_map[s[i]] < roman_map[s[i + 1]]:
             total -= roman_map[s[i]]
         else:
             total += roman_map[s[i]]
@@ -44,6 +45,6 @@ Given a roman numeral, convert it to an integer.
     return total
 
 # Example usage:
-roman_numeral = "CDII"
+roman_numeral = "MCDII"
 result = roman_to_int(roman_numeral)
 print(result)
