@@ -5,25 +5,28 @@ class TreeNode:
         self.right = right
 
 
-# Validity of BST
-def is_valid_BST(root):
-    def validate(node, min_val, max_val):
-        if not node:
-            return True
+
+
+
+# # Validity of BST
+# def is_valid_BST(root):
+#     def validate(node, min_val, max_val):
+#         if not node:
+#             return True
         
-        if node.val <= min_val or node.val >= max_val:
-            return False
+#         if node.val <= min_val or node.val >= max_val:
+#             return False
         
-        return validate(node.left, min_val, node.val) and validate(node.right, node.val, max_val)
+#         return validate(node.left, min_val, node.val) and validate(node.right, node.val, max_val)
     
-    return validate(root, float('-inf'), float('inf'))
+#     return validate(root, float('-inf'), float('inf'))
 
-# Example Usage:
-root = TreeNode(2)
-root.left = TreeNode(1)
-root.right = TreeNode(3)
+# # Example Usage:
+# root = TreeNode(2)
+# root.left = TreeNode(1)
+# root.right = TreeNode(3)
 
-print(is_valid_BST(root))
+# print(is_valid_BST(root))
 
 
 # # Right Side View of a Binary Tree
