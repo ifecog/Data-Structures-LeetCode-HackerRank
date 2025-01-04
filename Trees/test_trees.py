@@ -3,35 +3,53 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+
+# Validity of BST
+def is_valid_BST(root):
+    def validate(node, min_val, max_val):
+        if not node:
+            return True
         
+        if node.val <= min_val or node.val >= max_val:
+            return False
         
-# # 1. Right Side View of a Binary Tree
+        return validate(node.left, min_val, node.val) and validate(node.right, node.val, max_val)
+    
+    return validate(root, float('-inf'), float('inf'))
+
+# Example Usage:
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+
+print(is_valid_BST(root))
+
+
+# # Right Side View of a Binary Tree
+# from collections import deque
+
 # def right_side_view(root):
 #     result = []
-    
 #     if not root:
-#         return []
+#         return result
     
-#     queue = [root]
-    
+#     queue = deque([root])
 #     while queue:
-#         level_length = len(queue)
+#         level_size = len(queue)
         
-#         for i in range(level_length):
-#             node = queue.pop(0)
+#         for i in range(level_size):
+#             node = queue.popleft()
             
-#             # If this is the last element in the queue, append it to the result
-#             if i == level_length - 1:
+#             if i == level_size - 1:
 #                 result.append(node.val)
             
-#             # Add the left and right chldren to the queue
 #             if node.left:
 #                 queue.append(node.left)
 #             if node.right:
 #                 queue.append(node.right)
-    
-#     return result
 
+#     return result
 
 # # Example usage
 # # root = [1,2,3,null,5,null,4]
@@ -43,43 +61,71 @@ class TreeNode:
 # print(right_side_view(root))
 
 
-# 2. Lowest Common Ancestor
-def lowest_common_ancestor(root, p, q):
-    if not root:
-        return None
+# # Level Order Traversal
+# from collections import deque
+
+# def level_order_traversal(root):
+#     if not root:
+#         return
     
-    # If both nodes have values lesser than the root node, move the root node to the left
-    if p.val < root.val and q.val < root.val:
-        return lowest_common_ancestor(root.left, p, q)
+#     queue = deque([root])
+#     while queue:
+#         level_size = len(queue)
+#         level = []
+#         for _ in range(level_size):
+#             node = queue.popleft()
+#             level.append(node.val)
+            
+#             if node.left:
+#                 queue.append(node.left)
+#             if node.right:
+#                 queue.append(node.right)
+        
+#         print(' '.join(map(str, level)))
     
-    # If both nodes have values greater than the root node, move the root node to the right
-    if p.val > root.val and q.val > root.val:
-        return lowest_common_ancestor(root.right, p, q)
-    
-    return root
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+# root.left.left = TreeNode(4)
+# root.left.right = TreeNode(5)
+# root.right.left = TreeNode(6)
+
+# level_order_traversal(root)
 
 
-# Example usage:
-root = TreeNode(6)
-root.left = TreeNode(2)
-root.right = TreeNode(8)
-root.left.left = TreeNode(0)
-root.left.right = TreeNode(4)
-root.right.left = TreeNode(7)
-root.right.right = TreeNode(9)
-root.left.right.left = TreeNode(3)
-root.left.right.right = TreeNode(5)
+# # Lowest Common Ancestor
+# def lowest_common_ancestor(root, p, q):
+#     if not root:
+#         return
+     
+#     if p.val < root.val and q.val < root.val:
+#         return lowest_common_ancestor(root.left, p, q)
+     
+#     if p.val > root.val and q.val > root.val:
+#         return lowest_common_ancestor(root.right, p, q)        
+     
+#     return root
+ 
+#  # Example usage:
+# root = TreeNode(6)
+# root.left = TreeNode(2)
+# root.right = TreeNode(8)
+# root.left.left = TreeNode(0)
+# root.left.right = TreeNode(4)
+# root.right.left = TreeNode(7)
+# root.right.right = TreeNode(9)
+# root.left.right.left = TreeNode(3)
+# root.left.right.right = TreeNode(5)
 
-p = root.left.right.left
-q = root.left.right.right
+# p = root.left.right.left
+# q = root.left.right.right
 
-result = lowest_common_ancestor(root, p, q)
-print(result.val)  # Output: 4
+# result = lowest_common_ancestor(root, p, q)
+# print(result.val)  # Output: 4
 
-
-# # 3. Kth smallest vallue in a binary search tree
+       
+# # Kth Smallest Element
 # def kth_smallest(root, k):
-#     # Initialize an empty stack to store nodes for traversal
 #     stack = []
     
 #     while stack or root:

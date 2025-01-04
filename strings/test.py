@@ -1,27 +1,58 @@
-# Longest Repeating Character Replacement
-def longest_repeating_character_replacement(s, k):
-    char_freq = {}
-    left, max_count, max_length = 0, 0, 0
+# Letter Combination
+def letter_combinations(digits):
+    if not digits:
+        return []
     
-    for right in range(len(s)):
-        char_freq[s[right]] = char_freq.get(s[right], 0) + 1
-        
-        max_count = max(max_count, char_freq[s[right]])
-        
-        # If the number of characters that needs to be replaced is greater than k, shrink the window from the left
-        if right - left + 1 - max_count > k:
-            char_freq[s[left]] -= 1
-            left += 1
-        
-        max_length = max(max_length, right - left + 1)
+    phone_map = {
+        '2': 'abc',
+        '3': 'def',
+        '4': 'ghi',
+        '5': 'jkl',
+        '6': 'mno',
+        '7': 'pqrs',
+        '8': 'tuv',
+        '9': 'wxyz'
+    }
     
-    return max_length
+    queue = ['']
+    
+    for digit in digits:
+        for _ in range(len(queue)):
+            combination = queue.pop(0)
+            
+            for letter in phone_map[digit]:
+                queue.append(combination + letter)
+    
+    return queue
 
-# Example usage:
-s = "AABABBA"
-k = 1
-result = longest_repeating_character_replacement(s, k)
-print(result)
+# Example usage
+number = '56'
+print(letter_combinations(number))
+
+# # Longest Repeating Character Replacement
+# def longest_repeating_character_replacement(s, k):
+#     char_freq = {}
+#     left, max_count, max_length = 0, 0, 0
+    
+#     for right in range(len(s)):
+#         char_freq[s[right]] = char_freq.get(s[right], 0) + 1
+        
+#         max_count = max(max_count, char_freq[s[right]])
+        
+#         # If the number of characters that needs to be replaced is greater than k, shrink the window from the left
+#         if right - left + 1 - max_count > k:
+#             char_freq[s[left]] -= 1
+#             left += 1
+        
+#         max_length = max(max_length, right - left + 1)
+    
+#     return max_length
+
+# # Example usage:
+# s = "AABABBA"
+# k = 1
+# result = longest_repeating_character_replacement(s, k)
+# print(result)
 
 
 # # Subsequence

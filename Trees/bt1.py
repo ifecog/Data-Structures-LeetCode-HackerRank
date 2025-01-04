@@ -42,31 +42,7 @@ def right_side_view(root):
                 queue.append(node.right)
                 
     return result
-    
-    # if not root:
-    #     return []
-    
-    # result = []
-    # queue = [root]
-    # # queue = deque([root])
-    
-    # while queue:
-    #     level_length = len(queue)
-        
-    #     for i in range(level_length):
-    #         node = queue.pop(0)
-            
-    #         # If it is the last node in the current level, add it to the result
-    #         if i == level_length - 1:
-    #             result.append(node.val)
-            
-    #         # Add the left and right children to the node
-    #         if node.left:
-    #             queue.append(node.left)
-    #         if node.right:
-    #             queue.append(node.right)                 
-            
-    # return result
+
     
 # Example usage
 # root = [1,2,3,null,5,null,4]
