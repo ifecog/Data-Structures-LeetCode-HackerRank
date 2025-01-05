@@ -5,6 +5,33 @@ class TreeNode:
         self.right = right
 
 
+# Min distance between BST nodes
+def min_diff_in_BST(root):
+    min_diff = float('inf')
+    prev = None
+    
+    stack = []
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        
+        root = stack.pop()
+        if prev is not None:
+            min_diff = min(min_diff, root.val - prev)
+        
+        prev = root.val
+        root = root.right
+    
+    return min_diff
+
+# Example usage
+root1 = TreeNode(4)
+root1.left = TreeNode(2)
+root1.right = TreeNode(6)
+root1.left.left = TreeNode(1)
+root1.left.right = TreeNode(3)
+print(min_diff_in_BST(root1))
 
 
 

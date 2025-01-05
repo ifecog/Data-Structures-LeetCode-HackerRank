@@ -4,20 +4,35 @@ class TreeNode:
         self.left = left
         self.right = right
         
-# def in_order_traversal(root):
-#     result = []
+def post_order_traversal(root):
+    result = []
     
-#     def in_order(node):
-#         if not node:
-#             return 
+    def post_order(node):
+        if not node:
+            return 
         
-#         in_order(node.left)
-#         result.append(node.val)
-#         in_order(node.right)
+        post_order(node.left)
+        post_order(node.right)
+        result.append(node.val)
     
-#     in_order(root)
+    post_order(root)
     
-#     return result
+    return result
+
+def in_order_traversal(root):
+    result = []
+    
+    def in_order(node):
+        if not node:
+            return
+        
+        in_order(node.left)
+        result.append(node.val)
+        in_order(node.right)
+    
+    in_order(root)
+    
+    return result
 
 
 def pre_order_traversal(root):
@@ -41,5 +56,6 @@ root = TreeNode(1)
 root.right = TreeNode(2)
 root.right.left = TreeNode(3)
 
-# print(in_order_traversal(root))
+print(in_order_traversal(root))
 print(pre_order_traversal(root))
+print(post_order_traversal(root))
