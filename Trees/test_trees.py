@@ -5,33 +5,112 @@ class TreeNode:
         self.right = right
 
 
-# Min distance between BST nodes
-def min_diff_in_BST(root):
-    min_diff = float('inf')
-    prev = None
+# Second minumum value in a BT
+def find_second_minimum_value(root):
+    if not root:
+        return -1
+    if not root.left and not root.right:
+        return -1
     
-    stack = []
-    while stack or root:
-        while root:
-            stack.append(root)
-            root = root.left
-        
-        root = stack.pop()
-        if prev is not None:
-            min_diff = min(min_diff, root.val - prev)
-        
-        prev = root.val
-        root = root.right
+    left_val = root.left.val
+    right_val = root.right.val
     
-    return min_diff
+    if left_val == root.val:
+        left_val = find_second_minimum_value(root.left)
+    if right_val == root.val:
+        right_val = find_second_minimum_value(root.right)
+        
+    if left_val != -1.0 and right_val != -1.0:
+        return min(left_val, right_val)
+    
+    return max(left_val, right_val)
 
-# Example usage
-root1 = TreeNode(4)
+# Example Usage
+root1 = TreeNode(2)
 root1.left = TreeNode(2)
-root1.right = TreeNode(6)
-root1.left.left = TreeNode(1)
-root1.left.right = TreeNode(3)
-print(min_diff_in_BST(root1))
+root1.right = TreeNode(5)
+root1.right.left = TreeNode(5)
+root1.right.right = TreeNode(7)
+print(find_second_minimum_value(root1))
+
+
+
+# # Find mode in a BST
+# def find_mode(root):
+#     if not root:
+#         return []
+    
+#     prev = None
+#     count = 0
+#     max_count = 0
+#     modes = 0
+    
+#     def in_order(node):
+#         nonlocal prev, count, max_count, modes
+        
+#         if not node:
+#             return
+        
+#         # Left subtree
+#         in_order(node.left)
+        
+#         # Process the current node
+#         if node.val == prev:
+#             count += 1
+#         else:
+#             count = 1
+#         prev = node.val
+        
+#         # Update modes list
+#         if count > max_count:
+#             max_count = count
+#             modes = [node.val]
+#         elif count == max_count:
+#             modes.append(node.val)
+        
+#         # Right subtree
+#         in_order(node.right)
+        
+#     in_order(root)
+    
+#     return modes
+
+# # Example Usage:
+# root = TreeNode(1)
+# root.right = TreeNode(2)
+# root.right.left = TreeNode(2)
+
+# print(find_mode(root))
+
+
+# # Min distance between BST nodes
+# def min_diff_in_BST(root):
+#     min_diff = float('inf')
+#     prev = None
+    
+#     stack = []
+#     while stack or root:
+#         while root:
+#             stack.append(root)
+#             root = root.left
+        
+#         root = stack.pop()
+#         if prev is not None:
+#             min_diff = min(min_diff, root.val - prev)
+        
+#         prev = root.val
+#         root = root.right
+    
+#     return min_diff
+    
+
+# # Example usage
+# root1 = TreeNode(4)
+# root1.left = TreeNode(2)
+# root1.right = TreeNode(6)
+# root1.left.left = TreeNode(1)
+# root1.left.right = TreeNode(3)
+# print(min_diff_in_BST(root1))
 
 
 

@@ -17,9 +17,10 @@ def right_side_view(root):
         list: _description_
     """
     
-    result = []
     if not root:
         return []
+    
+    result = []
     
     # queue = [root]
     queue = deque([root])

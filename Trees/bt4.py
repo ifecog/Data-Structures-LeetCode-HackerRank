@@ -4,6 +4,9 @@ class TreeNode:
         self.left = left
         self.right = right
 
+"""
+Given the root of a complete binary tree, return the number of the nodes in the tree.
+"""
 # def count_nodes(root):
 #     if not root:
 #         return 0
