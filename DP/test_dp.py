@@ -6,7 +6,7 @@ class TreeNode:
         self.right = right
         
 def rob(root):
-    # Initiate a memoization dictionary to store computed values
+    # Memoization dictionary to store computed values
     dp = {}
     
     # Recursive helper function
@@ -16,17 +16,18 @@ def rob(root):
         if node in dp:
             return dp[node]
         
-        # Option 1. Rob this node and skip its children, then rob its grandchildren
-        rob_this = node.val
+        # Option 1: Rob the root node and its grandchildren
+        rob_root = node.val
         if node.left:
-            rob_this += helper(node.left.left) + helper(node.left.right)
+            rob_root += helper(node.left.left) + helper(node.left.right)
         if node.right:
-            rob_this += helper(node.right.left) + helper(node.right.right)
+            rob_root += helper(node.right.left) + helper(node.right.right)
         
-        # Option 2. Skip this node. Rob its shildren
-        not_rob_this = helper(node.left) + helper(node.right)
+        # Option 2: Rob children
+        rob_children = helper(node.left) + helper(node.right)
         
-        dp[node] = max(rob_this, not_rob_this)
+        # Get the maximum
+        dp[node] = max(rob_root, rob_children)
         
         return dp[node]
     

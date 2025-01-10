@@ -23,9 +23,11 @@ def find_second_minimum_value(root):
     if right_val == root.val:
         right_val = find_second_minimum_value(root.right)
         
+    # Return the smaller one if both of them are valid
     if left_val != -1 and right_val != -1:
         return min(left_val, right_val)
     
+    # Return the valid one
     return max(left_val, right_val)
 
 # Example Usage
