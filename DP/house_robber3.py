@@ -21,25 +21,24 @@ def rob(root):
     # Memoization dictionary to store computed values
     dp = {}
     
-    # Recurssive helper function
+    # Recursive helper function
     def helper(node):
         if not node:
             return 0
         if node in dp:
             return dp[node]
         
-        # Option 1: Rob this node then skip the children and rob the grandchildren
-        rob_this = node.val
+        # Option 1: Rob root node, skip children, and rob grandchildren
+        rob_root = node.val
         if node.left:
-            rob_this += helper(node.left.left) + helper(node.left.right)
+            rob_root += helper(node.left.left) + helper(node.left.right)
         if node.right:
-            rob_this += helper(node.right.left) + helper(node.right.right)
+            rob_root += helper(node.right.left) + helper(node.right.right)
             
-        # Option 2: Do not rob this node, just rob its children
-        not_rob_this = helper(node.left) + helper(node.right)
+        # Option 2: Rob children
+        rob_children = helper(node.left) + helper(node.right)
         
-        # Take the maximum of the 2 approaches
-        dp[node] = max(rob_this, not_rob_this)
+        dp[node] = max(rob_root, rob_children)
         
         return dp[node]
     

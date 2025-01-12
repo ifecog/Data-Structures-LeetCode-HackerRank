@@ -1,0 +1,46 @@
+a restaurant ha launched an app for their food delivery. 'n' reviews about various of their menu items have been submitted. Users have submitted a rating out of 5 (1 being the worst and 5 being the best) The manager wants to know the most loved dish in the menu. Find out the dish with the highest rating . Note: if 2 dishes are rated the same, return the dish with the smaller id. n represents the number of reviews. def solution (n, ratings):
+    
+    # Write your code here
+    pass
+
+n = int(input())
+ratings = [list(map(int, input().split())) for i in range(n)]
+
+out_ = solution(n, ratings)
+print (out_)
+ChatGPT
+
+To find the dish with the highest rating while considering the dish's ID in case of a tie, you can use the following Python function:
+
+python
+
+def solution(n, ratings):
+    dish_ratings = {}
+    
+    for review in ratings:
+        dish_id, rating = review[0], review[1]
+        
+        if dish_id not in dish_ratings:
+            dish_ratings[dish_id] = 0
+        
+        dish_ratings[dish_id] += rating
+    
+    max_rating = -1
+    best_dish = None
+    
+    for dish_id, rating_sum in dish_ratings.items():
+        if rating_sum > max_rating or (rating_sum == max_rating and dish_id < best_dish):
+            max_rating = rating_sum
+            best_dish = dish_id
+    
+    return best_dish
+
+# Input
+n = int(input())
+ratings = [list(map(int, input().split())) for i in range(n)]
+
+# Output
+out_ = solution(n, ratings)
+print(out_)
+
+This code will read the input, calculate the total ratings for each dish, and then determine the dish with the highest rating. If there is a tie in ratings, it will select the dish with the smaller ID.

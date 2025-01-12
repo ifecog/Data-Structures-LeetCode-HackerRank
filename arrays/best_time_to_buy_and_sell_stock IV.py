@@ -22,6 +22,7 @@ def max_profit(prices, k):
     
     # DP table: transactions (rows), days (Columns)
     dp = [[0] * n for _ in range(k + 1)]
+    print(dp)
     
     for i in range(1, k + 1):
         max_diff = -prices[0]
