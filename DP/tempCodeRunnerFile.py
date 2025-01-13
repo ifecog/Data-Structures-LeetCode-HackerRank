@@ -1,3 +1,3 @@
 # Example usage
-nums = [2,3,2]
-print(rob(nums))
+prices = [3,3,5,0,0,3,1,4]
+print(max_profit(prices))

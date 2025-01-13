@@ -1,47 +1,132 @@
-# House Robber 3
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-        
-def rob(root):
-    # Memoization dictionary to store computed values
-    dp = {}
+# # Max Profit 4
+# def max_profit(prices, k):
+#     n = len(prices)
+#     if not prices and k == 0:
+#         return 0
     
-    # Recursive helper function
-    def helper(node):
-        if not node:
-            return 0
-        if node in dp:
-            return dp[node]
-        
-        # Option 1: Rob the root node and its grandchildren
-        rob_root = node.val
-        if node.left:
-            rob_root += helper(node.left.left) + helper(node.left.right)
-        if node.right:
-            rob_root += helper(node.right.left) + helper(node.right.right)
-        
-        # Option 2: Rob children
-        rob_children = helper(node.left) + helper(node.right)
-        
-        # Get the maximum
-        dp[node] = max(rob_root, rob_children)
-        
-        return dp[node]
+#     if k >= n:
+#         return sum(max(prices[i + 1] - prices[i], 0) for i in range(n - 1))
     
-    return helper(root)
+#     dp = [[0] * n for _ in range(k + 1)]
+#     for i in range(1, k + 1):
+#         max_diff = -prices[0]
+#         for j in range(1, n):
+#             dp[i][j] = max(dp[i][j - 1], prices[j] + max_diff)
+#             max_diff = max(max_diff, dp[i - 1][j] - prices[j])
+    
+#     return dp[k][n - 1]
 
-# Tree construction for the test
-root = TreeNode(3)
-root.left = TreeNode(4)
-root.right = TreeNode(5)
-root.left.left = TreeNode(1)
-root.left.right = TreeNode(3)
-root.right.right = TreeNode(1)
+# prices = [3,2,6,5,0,3]
+# k = 2
+# print(max_profit(prices, k))
 
-print(rob(root))
+
+# # Max Profit 3
+# def max_profit(prices):
+#     if not prices:
+#         return 0
+    
+#     buy1, sell1 = float('-inf'), 0
+#     buy2, sell2 = float('-inf'), 0
+    
+#     for price in prices:
+#         buy1 = max(buy1, -price)
+#         sell1 = max(sell1, buy1 + price)
+#         buy2 = max(buy2, sell1 - price)
+#         sell2 = max(sell2, buy2 + price)
+        
+#     return sell2
+
+# # Example usage
+# prices = [3,3,5,0,0,3,1,4]
+# print(max_profit(prices))
+
+
+
+# # Max Profit 2
+# def max_profit(prices):
+#     if not prices:
+#         return 0
+    
+#     # profit = 0
+    
+#     # for i in range(1, len(prices)):
+#     #     if prices[i] > prices[i - 1]:
+#     #         profit += prices[i] - prices[i - 1]
+
+#     # return profit
+    
+#     return sum(max(prices[i + 1] - prices[i], 0) for i in range(len(prices) - 1))
+
+# # Example usage
+# prices = [7,1,5,3,6,4]
+# print(max_profit(prices))
+
+
+# # Max Profit 1
+# def max_profit(prices):
+#     if not prices:
+#         return 0
+    
+#     min_price = prices[0]
+#     max_profit = 0
+    
+#     for i in range(1, len(prices)):
+#         min_price = min(min_price, prices[i])
+#         max_profit = max(max_profit, prices[i] - min_price)
+    
+#     return max_profit
+
+# # example test
+# prices_of_wears = [3, 1, 6, 4, 9, 7]
+# result = max_profit(prices_of_wears)
+# print('Maximum Profit:', result) 
+
+
+# # House Robber 3
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+        
+# def rob(root):
+#     # Memoization dictionary to store computed values
+#     dp = {}
+    
+#     # Recursive helper function
+#     def helper(node):
+#         if not node:
+#             return 0
+#         if node in dp:
+#             return dp[node]
+        
+#         # Option 1: Rob the root node and its grandchildren
+#         rob_root = node.val
+#         if node.left:
+#             rob_root += helper(node.left.left) + helper(node.left.right)
+#         if node.right:
+#             rob_root += helper(node.right.left) + helper(node.right.right)
+        
+#         # Option 2: Rob children
+#         rob_children = helper(node.left) + helper(node.right)
+        
+#         # Get the maximum
+#         dp[node] = max(rob_root, rob_children)
+        
+#         return dp[node]
+    
+#     return helper(root)
+
+# # Tree construction for the test
+# root = TreeNode(3)
+# root.left = TreeNode(4)
+# root.right = TreeNode(5)
+# root.left.left = TreeNode(1)
+# root.left.right = TreeNode(3)
+# root.right.right = TreeNode(1)
+
+# print(rob(root))
 
 # # House Robber 2
 # def rob(nums):
