@@ -28,23 +28,33 @@ def solution(src):
         if '_' in word:
             parts = word.split('_')
             
+            if all(c == '_' for c in word):
+                modified_words.append(word)
+                continue
+            
             leading = ''
             trailing = ''
             
-            while parts[0] == '':
+            while parts and parts[0] == '':
                 leading += '_'
                 parts.pop(0)
             
-            while parts[-1] == '':
+            while parts and parts[-1] == '':
                 trailing += '_'
                 parts.pop()
                 
-            if word.istitle():
-                camel_case = parts[0].capitalize() + ''.join(part.capitalize() for part in parts[1:])
+            # if word.istitle():
+            #     camel_case = parts[0].capitalize() + ''.join(part.capitalize() for part in parts[1:])
+            # else:
+            #     camel_case = parts[0].lower() + ''.join(part.capitalize() for part in parts[1:])
+            
+            if not parts:
+                modified_word = word
             else:
                 camel_case = parts[0].lower() + ''.join(part.capitalize() for part in parts[1:])
+                modified_word = leading + camel_case + trailing
             
-            modified_word = leading + camel_case + trailing
+            # modified_word = leading + camel_case + trailing
         
         else:
             modified_word = word

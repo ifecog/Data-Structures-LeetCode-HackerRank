@@ -2,6 +2,14 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+        
+def print_linked_list(head):
+    current = head
+    while current:
+        print(current.val, end=" ")
+        current = current.next
+    print()
+
 
 def reverse_list(head):
     """Given the head of a singly linked list, reverse the list, and return the reversed list.
@@ -25,13 +33,6 @@ def reverse_list(head):
     
     return prev
     
-    
-def print_linked_list(head):
-    current = head
-    while current:
-        print(current.val, end=" ")
-        current = current.next
-    print()
 
 # Create the linked list
 list = ListNode()
