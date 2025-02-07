@@ -1,16 +1,5 @@
 from collections import deque
 
-# Possible movements for a Knight
-coordinates = [
-    (1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)
-]
-
-# Function to check of the coordinates are within the boundary
-def is_within_board(x, y, N):
-    return 0 <= x < N and 0 <= y < N
-
-
-# Main function to find the minimum knight moves
 def min_knight_moves(N, start, end):
     """Given a N x N chessboard, find the shortest hops needed by a Knight to reach from (x1, y1) to (x2, y2) on chessboard
 
@@ -23,7 +12,9 @@ def min_knight_moves(N, start, end):
         _type_: _description_
     """
     
-    # This is solved using the Breadth-First-Search (BFS) approach
+    directions = [
+        (1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)
+    ]
     
     (x1, y1) = start
     (x2, y2) = end
@@ -39,16 +30,17 @@ def min_knight_moves(N, start, end):
         x, y, hops = queue.popleft()
         
         # Explore all possible knight moves
-        for dx, dy in coordinates:
+        for dx, dy in directions:
             nx, ny = x + dx, y + dy
             
             if (nx, ny) == (x2, y2):
                 return hops + 1
             
             # If the cell is within the boundary and unvisited, add it to thr visited positions
-            if is_within_board(nx, ny, N) and (nx, ny) not in visited_positions:
-                queue.append((nx, ny, hops + 1))
+            if (0 <= nx < N and 0 <= ny < N) and (nx, ny) not in visited_positions:
                 visited_positions.add((nx, ny))
+                queue.append((nx, ny, hops + 1))
+
     
     # If the target is unreachable (which theoretically shouldn't happen on a chess board)
     return -1

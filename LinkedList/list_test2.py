@@ -1,15 +1,10 @@
+import math
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
         
-def print_linked_list(head):
-    current = head
-    while current:
-        print(current.val, end=' ')
-        current = current.next
-    print()       
-
 def create_linked_list(values):
     dummy = ListNode(0)
     curr = dummy
@@ -19,37 +14,48 @@ def create_linked_list(values):
     return dummy.next
 
 
-def remove_nodes(head):
-    def reverse_list(head):
-        current = head
-        prev = None
-        while current:
-            next_node = current.next
-            current.next = prev        
-            prev = current
-            current = next_node    
-        return prev
-
-    head = reverse_list(head)
-    
-    max_so_far = float('-inf')
-    dummy = ListNode(0)
+def print_linked_list(head):
     current = head
+    while current:
+        print(current.val, end=' ')
+        current = current.next
+    print()       
+    
+def create_cycle(values, pos):
+    dummy = ListNode(0)
+    curr = dummy
+    cycle_entry = None
+    for i, val in enumerate(values):
+        curr.next = ListNode(val)
+        curr = curr.next
+        if i == pos:
+            cycle_entry = curr
+    if cycle_entry:
+        curr.next = cycle_entry
+    return dummy.next
+
+    
+
+
+
+def reverse_between(head, left, right):
+    if not head or left == right:
+        return head
+    
+    dummy = ListNode(0)
+    dummy.next = head
     prev = dummy
     
-    while current:
-        if current.val >= max_so_far:
-            max_so_far = current.val
-            prev.next = current
-            prev = current
+    # Move prev to the node just before left
+    for _ in range(left - 1):
+        prev = prev.next
         
-        current = current.next
+    # Reverse the sublist from left to right
+    current = prev.next
+    for _ in range(right - left):
+        next_node = current.next
+        current.next = next_node.next
+        next_node.next = prev.next
+        prev.next = next_node
         
-    prev.next = None
-    
-    return reverse_list(dummy.next)
-
-# Test Case
-head = create_linked_list([3, 13, 5, 6, 7, 4, 10, 2])
-new_head = remove_nodes(head)
-print_linked_list(new_head)
+    return dummy.next

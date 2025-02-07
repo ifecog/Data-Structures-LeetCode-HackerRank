@@ -35,7 +35,8 @@ def has_cycle(head):
         if slow == fast:
             return True
     
-    return False
+    else:
+        return False
 
 
 list = ListNode()

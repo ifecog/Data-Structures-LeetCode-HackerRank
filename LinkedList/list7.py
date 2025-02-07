@@ -52,7 +52,6 @@ def detect_cycle(head):
     return slow
 
 
-# Helper function to create a cycle in a linked list
 def create_cycle(values, pos):
     dummy = ListNode(0)
     curr = dummy

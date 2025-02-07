@@ -15,7 +15,7 @@ def is_valid_sudoku(board):
                 return False
             rows[i].add(num)
             
-            # Checl col
+            # Check col
             if num in cols[j]:
                 return False
             cols[j].add(num)

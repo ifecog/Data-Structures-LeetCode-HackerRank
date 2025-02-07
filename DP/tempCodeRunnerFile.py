@@ -1,2 +1,3 @@
-cost = [10, 15, 20]
-print(min_cost_climbing_stairs(cost))
+# Example usage
+nums = [2,3,2]
+print(rob(nums))

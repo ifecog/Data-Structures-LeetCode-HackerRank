@@ -31,7 +31,6 @@ def remove_elements(head, val):
     
     return dummy.next
 
-
 # Test Case
 head = create_linked_list([1, 2, 6, 3, 4, 5, 6])
 val = 6

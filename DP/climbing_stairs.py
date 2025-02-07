@@ -1,12 +1,12 @@
-# def climb_stairs(n):
-#     """
-#     You are climbing a staircase. It takes n steps to reach the top.
+def climb_stairs(n):
+    """
+    You are climbing a staircase. It takes n steps to reach the top.
 
-#     Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+    Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-#     Args:
-#         n (int): the number of steps
-#     """
+    Args:
+        n (int): the number of steps
+    """
     
 #     if n <= 1:
 #         return n
@@ -20,7 +20,6 @@
 
 # print(climb_stairs(5))
 
-def climb_stairs(n):
     if n <= 1:
         return n
     

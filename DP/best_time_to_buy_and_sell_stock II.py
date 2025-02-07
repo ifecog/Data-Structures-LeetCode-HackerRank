@@ -13,15 +13,18 @@ def max_profit(prices):
         int: the maximum profit that can be realized.
     """
     
-    profit = 0
+    n = len(prices)
+    # profit = 0
     
-    for i in range(1, len(prices)):
-        if prices[i] > prices[i - 1]:
-            profit += prices[i] - prices[i - 1]
+    # for i in range(1, n):
+    #     if prices[i] > prices[i - 1]:
+    #         profit += prices[i] - prices[i - 1]
     
-    return profit
+    # return profit
     
     # return sum(max(prices[i + 1] - prices[i], 0) for i in range(len(prices) - 1))
+    
+    return sum(max(prices[i + 1] - prices[i], 0) for i in range(n - 1))
 
 
 # Example usage

@@ -5,7 +5,7 @@ class ListNode:
         
 
 def merge_lists(list1, list2):
-    dummy = ListNode()
+    dummy = ListNode(0)
     current = dummy
     
     while list1 and list2:

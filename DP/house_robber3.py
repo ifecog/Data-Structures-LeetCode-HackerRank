@@ -18,11 +18,8 @@ def rob(root):
         int: Maximum amount of money the thief can rob without alerting the police
     """
     
-    # Memoization dictionary to store computed values
-    dp = {}
-    
-    # Recursive helper function
-    def helper(node):
+    # Recursive helper function with memoization
+    def helper(node, dp={}):
         if not node:
             return 0
         if node in dp:

@@ -66,6 +66,7 @@ def remove_nodes(head):
     # Reverse the list back to the oririnal order
     return reverse_list(dummy.next)
 
+
 # Test Case
 head = create_linked_list([3, 13, 5, 6, 7, 4, 10, 2])
 new_head = remove_nodes(head)

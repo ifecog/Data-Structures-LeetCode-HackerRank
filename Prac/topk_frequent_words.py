@@ -14,7 +14,7 @@ def topK_frequent(words, k):
     """
     # Count the frequency of each word in the list
     count = Counter(words)
-    print(count)
+    print(count.items())
     
     # Sort the words by decreasing frequency and lexicographical order
     # a. The key for sorting is a tuple (-frequency, word)

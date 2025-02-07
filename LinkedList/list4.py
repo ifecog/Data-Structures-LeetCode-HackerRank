@@ -3,6 +3,14 @@ class ListNode:
         self.val = val
         self.next = next
         
+def create_linked_list(values):
+    dummy = ListNode(0)
+    curr = dummy
+    for val in values:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+        
 def print_linked_list(head):
     current = head
     while current:
@@ -41,3 +49,9 @@ def reverse_between(head, left, right):
     
     return dummy.next
         
+        
+# Test case
+head = create_linked_list([1, 2, 3, 4, 5])
+left, right = 2, 4
+new_head = reverse_between(head, left, right)
+print_linked_list(new_head)
