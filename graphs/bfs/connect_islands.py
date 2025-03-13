@@ -1,6 +1,7 @@
 from collections import deque
 
-"""You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
+"""
+    You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
 
     An island is a 4-directionally connected group of 1's not connected to any other 1's. There are exactly two islands in grid.
 
@@ -14,6 +15,84 @@ from collections import deque
     Returns:
         int:  Smallest number of 0's you must flip to connect the two islands.
 """
+
+def shortest_bridge(grid):
+    n = len(grid)
+    directions = [
+        (0, 1), (0, -1), (1, 0), (-1, 0)
+    ]
+    
+    # DFS function to mark all the cells of an island with a unique identifier
+    def dfs(i, j, island):
+        # if i < 0 or j < 0 or i >= n or j >= n or grid[i][j] != 1:
+        #     return
+        
+        if not (0 <= i < n and 0 <= j < n) or grid[i][j] != 1:
+            return
+        
+        grid[i][j] = island
+        
+        for di, dj in directions:
+            dfs(i + di, j + dj, island)
+    
+    # Identify the 2 islands using DFS. Start with 2 since 1 is already in use
+    island = 2
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 1:
+                dfs(i, j, island)
+                island += 1
+    
+    # Use BFS to find the shortest bridge between the 2 islands
+    queue = deque()
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 2:
+                queue.append((i, j, 0))
+    
+    # Perform BFS
+    while queue:
+        x, y, steps = queue.popleft()
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            
+            if 0 <= nx < n and 0 <= ny < n:
+                if grid[nx][ny] == 3:
+                    return steps
+                
+                if grid[nx][ny] == 0:
+                    grid[nx][ny] = 2
+                    queue.append((nx, ny, steps + 1))
+    
+    return -1
+    
+grid = [
+    [1, 1, 0, 0, 0],
+    [1, 0, 0, 0, 1],
+    [0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0],
+]
+
+print(shortest_bridge(grid))
+
+
+# # Example usage
+# grid = [
+#     [1, 1, 0, 0, 0],
+#     [1, 0, 0, 0, 1],
+#     [0, 0, 0, 1, 1],
+#     [0, 0, 0, 0, 0],
+# ]
+
+# print(min_flips_to_connect_islands(grid))
+
+
+
+
+
+
+
+
 
 # # Directions for moving in the matrix: right, left, up, down
 # directions = [
@@ -95,68 +174,3 @@ from collections import deque
     
 #     return -1
 
-def shortest_bridge(grid):
-    n = len(grid)
-    directions = [
-        (0, 1), (0, -1), (1, 0), (-1, 0)
-    ]
-    
-    # DFS function to mark all the cells of an island with a unique identifier
-    def dfs(i, j, island):
-        if i < 0 or j < 0 or i >= n or j >= n or grid[i][j] != 1:
-            return
-        grid[i][j] = island
-        
-        for di, dj in directions:
-            dfs(i + di, j + dj, island)
-    
-    # Identify the 2 islands using DFS. Start with 2 since 1 is already in use
-    island = 2
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == 1:
-                dfs(i, j, island)
-                island += 1
-    
-    # Use BFS to find the whortest bridge between the 2 islands
-    queue = deque()
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == 2:
-                queue.append((i, j, 0))
-    
-    # Perform BFS
-    while queue:
-        x, y, steps = queue.popleft()
-        for dx, dy in directions:
-            nx, ny = x + dx, y + dy
-            
-            if 0 <= nx < n and 0 <= ny < n:
-                if grid[nx][ny] == 3:
-                    return steps
-                
-                if grid[nx][ny] == 0:
-                    grid[nx][ny] = 2
-                    queue.append((nx, ny, steps + 1))
-    
-    return -1
-    
-grid = [
-    [1, 1, 0, 0, 0],
-    [1, 0, 0, 0, 1],
-    [0, 0, 0, 1, 1],
-    [0, 0, 0, 0, 0],
-]
-
-print(shortest_bridge(grid))
-
-
-# # Example usage
-# grid = [
-#     [1, 1, 0, 0, 0],
-#     [1, 0, 0, 0, 1],
-#     [0, 0, 0, 1, 1],
-#     [0, 0, 0, 0, 0],
-# ]
-
-# print(min_flips_to_connect_islands(grid))

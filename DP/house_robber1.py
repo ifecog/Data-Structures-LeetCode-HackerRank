@@ -11,16 +11,18 @@ def rob(nums):
         int: maximum amount of money that can be robbed
     """
     
+    n = len(nums)
+    
     if not nums:
         return 0    
-    if len(nums) == 1:
+    if n == 1:
         return nums[0]
     
     # Initialize 2 variables to store the maximum amount up to the last 2 houses
     prev2 = nums[0]
     prev1 = max(nums[0], nums[1])
     
-    for i in range(2, len(nums)):
+    for i in range(2, n):
         current = max(prev1, prev2 + nums[i])
         prev2 = prev1
         prev1 = current

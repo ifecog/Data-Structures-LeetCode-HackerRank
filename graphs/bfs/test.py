@@ -1,260 +1,227 @@
 from collections import defaultdict, deque
-import heapq
-  
-# 5. Course Schedule III
-def schedule_course(courses):
-    # sort the courses by their last day
-    courses.sort(key=lambda i: i[1])
-    
-    # Max heap to store the duration of the courses taken
-    max_heap = []
-    current_time = 0
-    
-    for duration, last_day in courses:
-        # Add the durations to the heap
-        # -ve duration value are pushed because by default, pythonuses minimum heap
-        heapq.heappush(max_heap, -duration)
-        current_time += duration
-        
-        if current_time > last_day:
-            # Remove the longest duration (which is at the root of the heap)
-            longest_duration = -heapq.heappop(max_heap)
-            current_time -= longest_duration
-    
-    return len(max_heap)
-    
 
-# Test the example case
-courses = [[5,5], [4,6], [2,6]]
-print(schedule_course(courses))
+def alienOrder(words):
+    n = len(words)
     
-    # time, count = 0, 0
-    # for duration, last_day in courses:
-    #     if time + duration <= last_day:
-    #         time += duration
-    #         count += 1
-    
-    # return count
+    graph = defaultdict(set)
+    in_degree = {char: 0 for word in words for char in word}
 
-  
-  
-# # 4. Course Schedule II
-# def find_order(num_courses, prerequisites):
-#     # This is solved using Kahnn's Algorithm
-#     # 1. Build the Graph
-    
-#     # Store the graph as an adjacency list
-#     adj_list = defaultdict(list)
-    
-#     # In degree array to store how many prerequisites each course has
-#     in_degree = [0] * num_courses
-    
-#     for course, pre in prerequisites:
-#         adj_list[pre].append(course)
-#         in_degree[course] += 1
-        
-#     # Initialize a queue with all courses having an in_degree of 0 (no prerequisites)
-#     queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
-    
-#     # Initialize an empty list to store the final course ordering
-#     order = []
-    
-#     while queue:
-#         course = queue.popleft()
-#         order.append(course)
-        
-#         # Process each neighbor and reduce the in degree
-#         for neighbor in adj_list(course):
-#             in_degree[neighbor] -= 1
-            
-#             # If the dependent course (neighbor) has no prerequisites, add it to the queue
-#             if in_degree[neighbor] == 0:
-#                 queue.append(neighbor)
-    
-#     # If all the courses have been processed, return the order list, else return an emptylis 
-#     return order if len(order) == num_courses else []
-            
+    for i in range(n - 1):
+        w1, w2 = words[i], words[i + 1]
+        min_length = min(len(w1), len(w2))
+
+        if len(w1) > len(w2) and w1[:min_length] == w2:
+            return ''
+
+        for j in range(min_length):
+            if w1[j] != w2[j]:
+                if w2[j] not in graph[w1[j]]:
+                    graph[w1[j]].add(w2[j])
+                    in_degree[w2[j]] += 1
+
+                break
+
+    queue = deque([char for char in in_degree if in_degree[char] == 0])
+    order = []
+
+    while queue:
+        char = queue.popleft()
+        order.append(char)
+
+        for neighbor in graph[char]:
+            in_degree[neighbor] -= 1
+
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return ''.join(order) if len(in_degree) == len(order) else ''
+
+# Example usage 
+words = ["wrt", "wrf", "er", "ett", "rftt"]
+print(alienOrder(words))  
 
 
+def find_order(num_courses, prerequisites):
+    pre_to_course = defaultdict(list)
+    in_degree = [0] * num_courses
 
-# # 3. Shortest Bridge
+    for course, pre in prerequisites:
+        pre_to_course[pre].append(course)
+        in_degree[course] += 1
 
-# # Directions for moving in the matrix: right, left, down, up
-# directions = [
-#     (0, 1), (0, -1), (1, 0), (-1, 0)
-# ]
+    queue = deque([i for i in range(num_courses) if in_degree[i] == 0])
+    order = []
 
-# # Function to check of the coordinates are within the boundaries of the matrix
-# def is_valid(x, y, m, n):
-#     return 0 <= x < m and 0 <= y < n
+    while queue:
+        course = queue.popleft()
+        order.append(course)
+
+        for nearest_course in pre_to_course[course]:
+            in_degree[nearest_course] -= 1
+
+            if in_degree[nearest_course] == 0:
+                queue.append(nearest_course)
+
+    return order if len(order) == num_courses else []
+
+# Example usage
+numCourses = 2
+prerequisites = [[1, 0]]
+print(find_order(numCourses, prerequisites))
 
 
-# # BFS function to find and mark all cells of an island
-# def find_island(grid, visited, x, y, island_cells):
-#     visited[x][y] = True
-#     island_cells.append((x, y))
-#     queue = deque([(x, y)])
+def orangesRotting(grid):
+    m, n = len(grid), len(grid[0])
+    directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]
+    fresh_oranges = 0
     
-#     while queue:
-#         # Get the current cell
-#         cx, cy = queue.popleft()
-        
-#         # Check al 4 directions for connected land cells
-#         for dx, dy in directions:
-#             nx, ny = cx + dx, cy + dy
-            
-#             # If the current cell is within the boundary, unvisited, and is land, add it to the island
-#             if is_valid(nx, ny, len(grid), len(grid[0])) and not visited[nx][ny] and grid[nx][ny] == 1:
-#                 visited[nx][ny] = True
-#                 island_cells.append((nx, ny))
-#                 queue.append((nx, ny))
+    queue = deque()
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == 2:
+                queue.append((i, j, 0))
 
+            elif grid[i][j] == 1:
+                fresh_oranges += 1
 
-# # Main function to find the shortest brigde: minimum flips of 0s and 1s to connect 2 islands
-# def shortest_bridge(grid):
-#     m, n = len(grid), len(grid[0])
+    minutes_required = 0
+    while queue:
+        i, j, minutes = queue.popleft()
+        minutes_required = max(minutes_required, minutes)
+
+        for di, dj in directions:
+            ni, nj = i + di, j + dj
+
+            if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == 1:
+                grid[ni][nj] = 2
+                fresh_oranges -= 1
+                queue.append((ni, nj, minutes + 1))
     
-#     # Create a visited matrix to keep track of visited cells
-#     visited = [[False] * n for _ in range(m)]
+    return minutes_required if fresh_oranges == 0 else -1
+
+# Example usage
+grid1 = [
+    [2, 1, 1],
+    [1, 1, 0],
+    [0, 1, 1]
+]
+
+print(orangesRotting(grid1))
+
+
+def findAllRecipes(recipes, ingredients, supplies):
+    ingredients_to_recipes = defaultdict(list)
+    in_degree = {recipe: 0 for recipe in recipes}
+
+    for i, recipe in enumerate(recipes):
+        for ingredient in ingredients[i]:
+            ingredients_to_recipes[ingredient].append(recipe)
+            in_degree[recipe] += 1
+
+    queue = deque(supplies)
+    result = []
+
+    while queue:
+        ingredient = queue.popleft()
+
+        for recipe in ingredients_to_recipes[ingredient]:
+            in_degree[recipe] -= 1
+
+            if in_degree[recipe] == 0:
+                result.append(recipe)
+                queue.append(recipe)
+
+    return result
     
-#     island1 = []
-#     island2 = []
-    
-#     found_first_island = False
-    
-#     # 1. Find and mark the 2 islands
-#     for i in range(m):
-#         for j in range(n):
-#             if grid[i][j] == 1 and not visited[i][j]:
-#                 if not found_first_island:
-#                     # Find the first island
-#                     find_island(grid, visited, i, j, island1)
-#                     found_first_island = True
-#                 else:
-#                     # If the first island has already been found, this must be the 2nd island
-#                     find_island(grid, visited, i, j, island2)
-#                     break
-                
-#         if island2:
-#             break
-        
-#     # 2. Multi-source BFS to find the shortest bridge from all cells in the first island
-#     queue = deque([(x, y, 0) for x, y in island1])
-#     visited = [[False] * n for _ in range(m)]
-    
-#     for x, y, in island1:
-#         visited[x][y] = True
-        
-#     while queue:
-#         x, y, distance = queue.popleft()
-        
-#         # If we've reached an cell in the second island, return the distance
-#         if (x, y) in island2:
-#             return distance - 1
-        
-#         # Explore all 4 directions
-#         for dx, dy in directions:
-#             nx, ny = x + dx, y + dy
-            
-#             # If the new cell is within the bounds and unvisited, add it to the queue
-#             if is_valid(nx, ny, m, n) and not visited[nx][ny]:
-#                 queue.append((nx, ny, distance + 1))
-#                 visited[nx][ny] = True
-    
-#     return -1
+# Example usage
+recipes = ["bread", "sandwich", "burger"]
+ingredients = [["yeast", "flour"], ["bread", "cheese"], ["sandwich", "patty"]]
+supplies = ["yeast", "flour", "cheese", "patty"]
+print("Recipes that can be created:", findAllRecipes(recipes, ingredients, supplies))
+
+def min_knight_moves(N, start, end):
+    (x1, y1) = start
+    (x2, y2) = end
+
+    directions = [(1, -2), (1, 2), (-1, -2), (-1, 2), (2, -1), (2, 1), (-2, -1), (-2, 1)]
+
+    if (x1, y1) == (x2, y2):
+        return 0
+
+    queue = deque([(x1, y1, 0)])
+    visited = {x1, y1}
+
+    while queue:
+        x, y, hops = queue.popleft()
+
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+
+            if (nx, ny) == (x2, y2):
+                return hops + 1
+
+            if 0 <= nx < N and 0 <= ny < N and (nx, ny) not in visited:
+                visited.add((nx, ny))
+                queue.append((nx, ny, hops + 1))
+
+    return -1
+
+# Example usage:
+N = 8  # Chessboard size (8x8)
+start = (0, 0)  # Starting position of the Knight
+end = (7, 7)  # Destination position
+print(min_knight_moves(N, start, end))
 
 
-# grid = [
-#     [1, 1, 0, 0, 0],
-#     [1, 0, 0, 0, 1],
-#     [0, 0, 0, 1, 1],
-#     [0, 0, 0, 0, 0],
-# ]
+def shortest_bridge(grid):
+    n = len(grid)
+    directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]
 
-# print(shortest_bridge(grid))  # Output should be 1
+    def dfs(i, j, island):
+        if not(0 <= i < n and 0 <= j < n) or grid[i][j] != 1:
+            return
 
+        grid[i][j] = island
 
-# # 2. Minimum knight moves
-# directions = [
-#     (1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)
-# ]
+        for di, dj in directions:
+            dfs(i + di, j + dj, island)
 
-# def is_valid(x, y, N):
-#     return 0 <= x < N and 0 <= y < N
+    island = 2
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 1:
+                dfs(i, j, island)
+                island += 1
 
+    queue = deque()
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 2:
+                queue.append((i, j, 0))
 
-# def min_knight_moves(N, start, end):
-#     x1, y1 = start
-#     x2, y2 = end
-    
-#     if (x1, y1) == (x2, y2):
-#         return 0
-    
-#     # BFS
-#     visited_positions = set([x1, y1])
-#     queue = deque([(x1, y1, 0)])
-    
-#     while queue:
-#         x, y, hops = queue.popleft()
-        
-#         # Explore all 8 knoght moves
-#         for dx, dy in directions:
-#             nx, ny = x + dx, y + dy
-            
-#             if (nx, ny) == (x2, y2):
-#                 return hops + 1
-            
-#             # If the cell is within the boundary and unvisited, add it to the queue
-#             if is_valid(nx, ny, N) and (nx, ny) not in visited_positions:
-#                 queue.append((nx, ny, hops + 1))
-#                 visited_positions.add((nx, ny))
-        
-#     return -1
+    while queue:
+        i, j, flips = queue.popleft()
+
+        for di, dj in directions:
+            ni, nj = i + di, j + dj
+
+            if 0 <= ni < n and 0 <= nj < n:
+                if grid[ni][nj] == 3:
+                    return flips
+
+                if grid[ni][nj] == 0:
+                    grid[ni][nj] = 2
+                    queue.append((ni, nj, flips + 1))
+
+    return -1
 
 
-# # Example usage:
-# N = 8  # Chessboard size (8x8)
-# start = (0, 0)  # Starting position of the Knight
-# end = (7, 7)  # Destination position
-# print(min_knight_moves(N, start, end))
+grid = [
+    [1, 1, 0, 0, 0],
+    [1, 0, 0, 0, 1],
+    [0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0],
+]
 
+print(shortest_bridge(grid))
 
-# # 1. Bus Routes
-# def num_buses_to_destination(routes, source, target):
-#     if source == target:
-#         return 0
-    
-#     # Build the graph stop_to_routes
-#     stop_to_routes = defaultdict(set)
-    
-#     for i, route in enumerate(routes):
-#         for stop in route:
-#             stop_to_routes[stop].add(i)
-            
-#     # BFS
-#     visited_stops = set([source])
-#     queue = deque([(source, 0)])
-    
-#     while queue:
-#         current_stop, buses_taken = queue.popleft()
-        
-#         if current_stop == target:
-#             return buses_taken
-        
-#         # For every bus passing through the current stop, we iterate over all te stops on that route. If there is a bus stop (next stop) that has not been visited, we add it to the queue.
-        
-#         for route_index in list(stop_to_routes[current_stop]):
-#             for next_stop in routes[route_index]:
-#                 if next_stop not in visited_stops:
-#                     queue.append((next_stop, buses_taken + 1))
-#                     visited_stops.add((next_stop))
-            
-#             stop_to_routes[current_stop].remove(route_index)
-    
-#     return -1
-
-# # Example usage:
-# routes1 = [[1,2,7],[3,6,7]]
-# source1 = 1
-# target1 = 6
-# print(num_buses_to_destination(routes1, source1, target1))

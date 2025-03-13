@@ -27,6 +27,8 @@ def next_permutation(nums):
         left += 1
         right -= 1
         
+# Time Complexity: O(n)
+# Space Complexity: O(1)
 
 # Example usage
 num_perm = [1, 2, 3, 4]

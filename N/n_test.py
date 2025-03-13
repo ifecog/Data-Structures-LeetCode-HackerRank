@@ -1,5 +1,5 @@
 def kth_smallest(matrix, k):
-    # This is solved using the binaru search approach
+    # This is solved using the binary search approach
     n = len(matrix)
     low, high = matrix[0][0], matrix[-1][-1]
     

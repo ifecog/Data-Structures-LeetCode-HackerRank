@@ -26,6 +26,7 @@ def canTransform(start, result):
         
     return True
 
+# Example usage
 north = "RXXLRXRXL"
 south = "XRLXXRRLX"
 print(canTransform(north, south))

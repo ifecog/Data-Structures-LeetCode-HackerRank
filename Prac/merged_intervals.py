@@ -6,7 +6,7 @@ def merged_intervals(intervals):
     """
     
     # Sort intervals based on the starting point of each interval
-    intervals.sort(key=lambda i: i[0])
+    intervals.sort()
     
     merged = []
     for interval in intervals:

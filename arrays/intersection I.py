@@ -8,12 +8,14 @@ def intersection(nums1, nums2):
     """
     
     # Convert the arrays to set to avoid duplicates
-    set1 = set(nums1)
-    set2 = set(nums2)
+    # set1 = set(nums1)
+    # set2 = set(nums2)
     
-    result = set1.intersection(set2)
+    # result = set1.intersection(set2)
     
-    return list(result)
+    # return list(result)
+
+    return list(set(nums1) & set(nums2))
 
 # Example usage
 nums1 = [4, 9, 5]

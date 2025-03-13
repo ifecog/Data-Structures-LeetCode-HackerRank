@@ -17,6 +17,7 @@ def easy_count_uber(coordinates):
         for marker in range(left, right + 1):
             markers.add(marker)
     
+    print(markers)
     # The number of unique markers is the length of the set
     return len(markers)
 

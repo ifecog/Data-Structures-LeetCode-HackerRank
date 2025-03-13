@@ -16,5 +16,6 @@ def reverse_string(s):
 
 # Example usage
 test_string = ['a', 'y', 'o', 'm', 'i', 'd', 'e']
+print(''.join(test_string))
 reverse_string(test_string)
 print(test_string)

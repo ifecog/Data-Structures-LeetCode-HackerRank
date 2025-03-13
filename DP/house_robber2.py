@@ -12,18 +12,17 @@ def rob(nums):
     
     # Helper function to solve linear house robbing problem
     def rob_linear(houses):
-        if not houses:
-            return 0
+        n = len(houses)
         
-        elif len(houses) == 1:
+        if not houses:
+            return 0        
+        if n == 1:
             return houses[0]
-        elif len(houses) == 2:
-            return max(houses[0], houses[1])
         
         prev2 = houses[0]
         prev1 = max(houses[0], houses[1])
         
-        for i in range(2, len(houses)):
+        for i in range(2, n):
             current = max(prev1, prev2 + houses[i])
             
             prev2 = prev1

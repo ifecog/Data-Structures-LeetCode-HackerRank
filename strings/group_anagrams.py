@@ -17,7 +17,7 @@ def group_anagrams(strs):
         else:
             anagrams[sorted_word] = [word]
     
-    print(anagrams)
+    # print(anagrams)
     return list(anagrams.values())
 
 

@@ -26,8 +26,26 @@ def min_subarray_length(nums, target):
     return min_length if min_length <= len(nums) else 0
 
 
+# def brute_force(nums, target):
+#     n = len(nums)
+#     min_length = n + 1
+    
+#     for i in range(n):
+#         current_sum = 0
+#         for j in range(i, n):
+#             current_sum += nums[i]
+            
+#             if current_sum >= target:
+#                 min_length = min(min_length, j - i + 1)
+#                 break
+    
+#     return min_length if min_length < n else 0
+
+
 # Example usage
 nums = [2, 3, 1, 2, 4, 3]
 target = 7
 result = min_subarray_length(nums, target)
 print(result) 
+
+# Time complexity: O(n), Space complexity O(1)

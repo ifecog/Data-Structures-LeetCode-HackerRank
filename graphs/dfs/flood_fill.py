@@ -13,6 +13,8 @@ def flood_fill(image, sr, sc, color):
         sc (int): starting pixel column
         color (int): replaced color
     """
+    
+    m, n = len(image), len(image[0])
 
     # Get the original color of the starting image
     original_color = image[sr][sc]
@@ -22,7 +24,10 @@ def flood_fill(image, sr, sc, color):
         return image
     
     def dfs(r, c):
-        if r < 0 or c < 0 or r >= len(image) or c >= len(image[0]):
+        # if r < 0 or c < 0 or r >= len(image) or c >= len(image[0]):
+        #     return
+        
+        if not (0 <= r < m and 0 <= c < n):
             return
         
         # Check if the color of the current pixel is the same as the original color and replace with the new color

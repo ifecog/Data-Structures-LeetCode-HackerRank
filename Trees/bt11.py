@@ -47,29 +47,62 @@ def reverse_odd_levels(root):
     
     while queue:
         level_size = len(queue)
-        current_level_nodes = []
+        level_nodes = list(queue)
         
         for _ in range(level_size):
             node = queue.popleft()
-            current_level_nodes.append(node)
             
             if node.left:
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
                 
-    
         if level % 2 == 1:
-            values = [node.val for node in current_level_nodes]
-            reversed_values = values[::-1]
+            left, right = 0, len(level_nodes) - 1
             
-            # Assign reversed values back to the nodes
-            for i, node in enumerate(current_level_nodes):
-                node.val = reversed_values[i]
+            while left < right:
+                level_nodes[left].val, level_nodes[right].val = level_nodes[right].val, level_nodes[left].val
+                
+                left += 1
+                right -= 1
         
         level += 1
         
     return root
+    
+    
+    
+    # if not root:
+    #     return []
+    
+    # queue = deque([root])
+    # level = 0
+    
+    # while queue:
+    #     level_size = len(queue)
+    #     current_level_nodes = []
+        
+    #     for _ in range(level_size):
+    #         node = queue.popleft()
+    #         current_level_nodes.append(node)
+            
+    #         if node.left:
+    #             queue.append(node.left)
+    #         if node.right:
+    #             queue.append(node.right)
+                
+    
+    #     if level % 2 == 1:
+    #         values = [node.val for node in current_level_nodes]
+    #         reversed_values = values[::-1]
+            
+    #         # Assign reversed values back to the nodes
+    #         for i, node in enumerate(current_level_nodes):
+    #             node.val = reversed_values[i]
+        
+    #     level += 1
+        
+    # return root
 
 root = TreeNode(1)
 root.left = TreeNode(2)

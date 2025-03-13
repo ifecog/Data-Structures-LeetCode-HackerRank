@@ -17,21 +17,41 @@ def kth_smallest(root, k):
     """
     
     # Initialize an empty stack to store nodes for traversal
-    stack = []
+    # stack = []
     
-    while stack or root:
-        while root:
-            stack.append(root)
-            root = root.left
+    # while stack or root:
+    #     while root:
+    #         stack.append(root)
+    #         root = root.left
         
-        root = stack.pop()
+    #     root = stack.pop()
+    #     k -= 1
+    #     if k == 0:
+    #         return root.val
+        
+    #     root = root.right
+    
+    # return stack
+    
+    trav = []
+    
+    def in_order(node):
+        if not node:
+            return
+        
+        in_order(node.left)
+        trav.append(node.val)
+        in_order(node.right)
+    
+    in_order(root)
+    
+    for i in range(len(trav) - 1, -1, -1):
         k -= 1
         if k == 0:
-            return root.val
-        
-        root = root.right
+            return trav[i - 1]
     
-    return stack
+    return []
+    
     
 # Example usage:
 # Construct a binary search tree: [3,1,4,null,2]

@@ -11,14 +11,17 @@ def find_three_numbers(nums, target):
     n = len(nums)
     
     for i in range(n - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        
         left, right = i, n - 1
         
         while left < right:
             current_sum = nums[i] + nums[left] + nums[right]
             
             if current_sum == target:
-                return True
-                # return ((nums[left], nums[i], nums[right]))
+                # return True
+                return [nums[left], nums[i], nums[right]]
             
             else:
                 if current_sum < target:

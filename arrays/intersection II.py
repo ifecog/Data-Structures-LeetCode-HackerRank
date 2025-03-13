@@ -11,6 +11,6 @@ def intersect(nums1, nums2):
     return intersection
 
 # Example usage:
-nums1 = [4, 9, 5, 9]
-nums2 = [9, 4, 9, 8, 4]
+nums1 = [1, 2, 2, 1]
+nums2 = [2, 2]
 print(intersect(nums1, nums2))
