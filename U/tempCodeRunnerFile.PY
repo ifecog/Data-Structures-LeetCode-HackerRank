@@ -1,3 +1,4 @@
 # Example usage
-query = [[2,1],[3,1],[4,3],[5,1],[4,1]]
-print(count_consecutive_pairs(query))
+board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]
+words = ["oath","pea","eat","rain"]
+print(find_words(board, words))

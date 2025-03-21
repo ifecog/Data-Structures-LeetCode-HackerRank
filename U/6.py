@@ -15,7 +15,7 @@ class HitCounter:
     def hit(self, timestamp):
         """Record a hit at a given timestamp."""
         self.queue.append(timestamp)
-        print(self.queue)
+        # print(self.queue)
         
         
     def getHits(self, timestamp):

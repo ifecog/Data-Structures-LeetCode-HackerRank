@@ -1,0 +1,136 @@
+from datetime import datetime
+from enum import Enum
+
+
+# 1. Define Enums
+class SpotType(Enum):
+    COMPACT = 1
+    LARGE = 2
+    HANDICAPPED = 3
+    MOTORSCCLE = 4
+    
+    
+class VehicleType(Enum):
+    MOTORCYCLE = 1
+    CAR = 2
+    TRUCK = 3
+    
+    
+class GateType(Enum):
+    ENTRY = 1
+    EXIT = 2
+    
+    
+# 2. Core funtionalities and code skeleton
+
+# Vehicle Class
+class Vehicle:
+    def __init__(self, license_plate, vehicle_type: VehicleType):
+        self.license_plate = license_plate
+        self.vehicle_type = VehicleType
+        
+        
+class ParkingSpot:
+    def __init__(self, spot_id, spot_type: SpotType):
+        self.spot_id = spot_id
+        self.spot_type = spot_type
+        self.is_available = True
+        self.vehicle = None
+        
+        
+    def assign_vehicle(self, vehicle: Vehicle):
+        if self.is_available:
+            self.vehicle = vehicle
+            self.is_available = False
+            return True
+        
+        return False
+    
+    
+    def remove_vehicle(self):
+        self.vehicle = None
+        self.is_available = True
+        
+        
+class Ticket:
+    def __init__(self, vehicle: Vehicle, spot: ParkingSpot):
+        self.ticket_id = f"T-{int(datetime.now().timestamp())}"
+        self.vehicle = vehicle
+        self.spot = spot
+        self.issued_at = datetime.now()
+        
+        
+class ParkingFeeCalculator:
+    @staticmethod
+    def calculate_fee(ticket: Ticket):
+        time_parked = (datetime.now() - ticket.issued_at).seconds / 3600
+        return max(5, round(time_parked * 10, 2))
+
+         
+class ParkingFloor:
+    def __init__(self, level):
+        self.level = level
+        self.spots = {}
+        
+        
+    def add_spot(self, spot_id, spot_type: SpotType):
+        self.spots[spot_id] = ParkingSpot(spot_id, spot_type)
+        
+    
+    def get_available_spot(self, vehicle_type: VehicleType):
+        for spot in self.spots.values():
+            if spot.is_available:
+                return spot
+        return None
+        
+
+class ParkingLot:
+    def __init__(self, name):
+        self.name = name
+        self.floors = {}
+        
+        
+    def add_floor(self, level):
+        self.floors[level] = ParkingFloor(level)  
+        
+
+    def park_vehicle(self, vehicle: Vehicle):
+        for floor in self.floors.values():
+            spot = floor.get_available_spot(vehicle.vehicle_type)
+            if spot:
+                spot.assign_vehicle(vehicle)
+                return Ticket(vehicle, spot)
+            
+        return None
+    
+    
+    def unpark_vehicle(self, ticket: Ticket):
+        ticket.spot.remove_vehicle()
+        return ParkingFeeCalculator.calculate_fee(ticket)
+    
+class ParkingGate:
+    def __init__(self, gate_id, gate_type: GateType):
+        self.gate_id = gate_id
+        self.gate_type = gate_type
+
+    def process_entry(self, vehicle: Vehicle, parking_lot: ParkingLot):
+        return parking_lot.park_vehicle(vehicle)
+
+    def process_exit(self, ticket: Ticket, parking_lot: ParkingLot):
+        return parking_lot.unpark_vehicle(ticket)
+    
+    
+# Example Usage
+if __name__ == "__main__":
+    lot = ParkingLot("Uber Parking Lot")
+    lot.add_floor(1)
+    lot.floors[1].add_spot("A1", SpotType.COMPACT)
+
+    car = Vehicle("ABC-123", VehicleType.CAR)
+    gate = ParkingGate(1, GateType.ENTRY)
+
+    ticket = gate.process_entry(car, lot)
+    print(f"Ticket issued for {car.license_plate}: {ticket.ticket_id}")
+
+    fee = gate.process_exit(ticket, lot)
+    print(f"Parking fee: ${fee}")
