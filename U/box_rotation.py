@@ -27,7 +27,7 @@ def rotateTheBox(boxGrid):
         for c in range(n):
             rotated[c][m - 1 - r] = boxGrid[r][c]
             
-    print(rotated)
+    # print(rotated)
             
     # Apply gravity (Make stones fall)
     for col in range(m):

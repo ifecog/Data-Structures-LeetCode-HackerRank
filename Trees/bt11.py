@@ -112,8 +112,6 @@ root.left.right = TreeNode(5)
 root.right.left = TreeNode(6)
 root.right.right = TreeNode(7)
 
-# Reverse node values at odd levels
 reverse_odd_levels(root)
 
-# Print the modified tree
 print_tree(root)

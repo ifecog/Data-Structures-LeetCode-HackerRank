@@ -27,9 +27,9 @@ def binary_tree_paths(root):
         # Append the curret node's value to the path
         path.append(str(node.val))
         
-        if not node.left and not node.right:
-            
+        if not node.left and not node.right:            
             result.append('->'.join(path))
+            
         else:
             if node.left:
                 dfs(node.left, path)

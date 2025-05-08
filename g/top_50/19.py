@@ -23,31 +23,20 @@
 
 
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-        
-def preorder(root):
-    result = []
-    def do(node):
-        if not node:
-            return
-        result.append(node.val)
-        do(node.left)
-        do(node.right)
-        
-    do(root)
+def max_sum(arr):
+    n = len(arr)
     
-    return result
-
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(4)
-root.left.left = TreeNode(5)
-root.left.right = TreeNode(3)
-root.right.left = TreeNode(6)
-root.right.right = TreeNode(7)
-
-print(preorder(root))
+    s0, total_sum = 0, 0
+    
+    for i in range(n):
+        s0 += i * arr[i]
+        total_sum += arr[i]
+        
+    max_sum_val = s0
+    
+    current_sum = s0
+    for i in range(1, n):
+        current_sum = current_sum + total_sum - (n * arr[n - 1])
+        max_sum_val = max(max_sum_val, current_sum)
+    
+    return max_sum_val

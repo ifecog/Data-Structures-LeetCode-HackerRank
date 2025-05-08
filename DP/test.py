@@ -1,18 +1,19 @@
-def max_profit(prices):
-    if not prices:
+def max_profit(prices, k):
+    if not prices or k == 0:
         return 0
     
-    buy1, sell1 = float('-inf'), 0
-    buy2, sell2 = float('-inf'), 0
+    n = len(prices)
     
-    for price in prices:
-        buy1 = max(buy1, -price)
-        sell1 = max(sell1, buy1 + price)
-        buy2 = max(buy2, sell1 - price)
-        sell2 = max(sell2, buy2 + price)
+    if k >= (n // 2):
+        return sum(max(prices[i + 1] - prices[i], 0) for i in range(n - 1))
+    
+    dp = [[0] * n for _ in range(k + 1)]
+    
+    for i in range(1, k + 1):
+        max_diff = -prices[0]
         
-    return sell2
-
-# Example usage
-prices = [3,3,5,0,0,3,1,4]
-print(max_profit(prices))
+        for j in range(1, n):
+            dp[i][j] = max(dp[i][j - 1], prices[j] + max_diff)
+            max_diff = max(max_diff, dp[i - 1][j] - prices[j])
+            
+    return dp[k][n - 1]

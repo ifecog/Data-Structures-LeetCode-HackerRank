@@ -25,3 +25,5 @@ def group_anagrams(strs):
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 result = group_anagrams(strs)
 print(result)
+
+# Time complexity: O(n * klogk), Space complexity: O(n)

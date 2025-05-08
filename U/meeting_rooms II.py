@@ -19,12 +19,14 @@ def minMeetingRooms(intervals):
     while start < len(intervals):
         if start_times[start] < end_times[end]:
             rooms += 1
-            max_rooms = max(max_rooms, rooms)
             start += 1
             
         else:
             rooms -= 1
             end += 1
+            
+        max_rooms = max(max_rooms, rooms)
+
             
     return max_rooms
 

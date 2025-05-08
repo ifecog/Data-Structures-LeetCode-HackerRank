@@ -38,3 +38,8 @@ def alienOrder(words):
                 queue.append(neighbor)
                 
     return ''.join(order) if len(order) == len(in_degree)  else ''
+
+
+# Example usage 
+words = ["wrt", "wrf", "er", "ett", "rftt"]
+print(alienOrder(words))    

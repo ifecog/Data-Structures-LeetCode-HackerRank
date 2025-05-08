@@ -17,6 +17,8 @@ def taskSchedulerII(tasks, space):
     Returns:
         int: Minimum number of days needed to complete all tasks.
     """
+    
+    # Use an hash map (dictionary) to store the last day each task was completed 
     last_done = {}
     day = 0
     

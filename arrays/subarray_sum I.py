@@ -9,6 +9,8 @@ def subarray_sum(nums, k):
 
     # Initiate a dict (prefix_sums) to store the count of prefix sums
     # Initiate prefix_sums as {0: 1}. This is to handle cases where the sum of a subarray from the beginning equals to k
+    # Key: prefix sum up to a ertain point
+    # Value: how many times that prefix sum has occured
     prefix_sums = {0: 1}
     current_sum, count = 0, 0
     
@@ -26,6 +28,7 @@ def subarray_sum(nums, k):
             prefix_sums[current_sum] += 1
         else:
             prefix_sums[current_sum] = 1
+            
     
     return count
 

@@ -8,9 +8,32 @@ If the current building's height is greater than or equal to the next building's
 If the current building's height is less than the next building's height, you can either use one ladder or (h[i+1] - h[i]) bricks.
 Return the furthest building index (0-indexed) you can reach if you use the given ladders and bricks optimally."""
 
+import heapq
 
-
-
+# 2. Furthest Building
+def furthestBuilding(heights, bricks, ladders):
+    n = len(heights)
+    
+    height_difference = []
+    
+    for i in range(n - 1):
+        diff = heights[i + 1] - heights[i]
+        
+        if diff > 0:
+            heapq.heappush(height_difference, diff)
+            
+        if len(height_difference) > ladders:
+            bricks -= heapq.heappop(height_difference)
+            
+        if bricks < 0:
+            return i
+        
+    return n - 1
+    
+heights = [4,2,7,6,9,14,12]
+bricks = 5
+ladders = 1
+print(furthestBuilding(heights, bricks, ladders))
 
 
 

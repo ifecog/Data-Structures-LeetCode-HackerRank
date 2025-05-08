@@ -29,7 +29,7 @@ class Solution:
         return left
     
     
-    # Example usage:
+# Example usage:
 w = [1, 3]
 solution = Solution(w)
 

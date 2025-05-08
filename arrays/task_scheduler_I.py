@@ -21,6 +21,6 @@ def leastInterval(tasks, n):
     
     
 # Example usage:
-tasks = ["A", "A", "A", "B", "B", "B"]
+tasks = ["A", "A", "A", "B", "A", "B", "B", "B"]
 n = 2
 print("Minimum CPU intervals:", leastInterval(tasks, n))

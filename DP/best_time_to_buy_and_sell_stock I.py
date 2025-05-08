@@ -8,14 +8,14 @@ def maximum_profit(prices):
         int: the maximum profit that can be realized.
     """
     
-    n = len(prices)
-    if n == 0:
+    if not prices:
         return 0
+    
+    n = len(prices)
     
     min_price = prices[0]
     max_profit = 0
     
-    # iterate through the array and update the min_proce and max_profit
     for i in range(1, n):
         min_price = min(min_price, prices[i])
         max_profit = max(max_profit, prices[i] - min_price)
@@ -23,7 +23,7 @@ def maximum_profit(prices):
     return max_profit
 
 
-# example test
+# Example usage
 prices_of_wears = [3, 1, 6, 4, 9, 7]
 result = maximum_profit(prices_of_wears)
 print('Maximum Profit:', result) 

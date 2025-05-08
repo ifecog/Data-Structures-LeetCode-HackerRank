@@ -9,7 +9,7 @@ def maxPoints(points):
         
     # Fill the DP table from row 1 to m-1
     for r in range(1, m):
-        # Compute prefix maximumx
+        # Compute prefix maximum
         prefix_max = [0] * n
         prefix_max[0] = dp[r - 1][0]
         for c in range(1, n):

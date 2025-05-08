@@ -1,5 +1,6 @@
 def nearestPalindrome(n):
     length = len(n)
+    print(length)
     if n == '1':
         return '0'
     
@@ -27,10 +28,12 @@ def nearestPalindrome(n):
         candidates.add(candidate)
     
     candidates.discard(n)
+    print(candidates)
     return min(candidates, key=lambda x: (abs(int(x) - int(n)), int(x)))
 
+            
 # Example usage:
-n = "10"
+n = "12345"
 output = nearestPalindrome(n)
 print(output)
             

@@ -9,11 +9,14 @@ def num_islands(grid):
     Returns:
         int: The numebr of islands
     """
+    if not grid:
+        return 0
     
+    m, n = len(grid), len(grid[0])
     island_count = 0
     
     def dfs(r, c):
-        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == '0':
+        if r < 0 or c < 0 or r >= m or c >= n or grid[r][c] == '0':
             return
         
         grid[r][c] = '0'

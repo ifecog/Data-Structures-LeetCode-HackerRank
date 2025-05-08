@@ -18,8 +18,10 @@ def leftmost_column_with_one(binaryMatrix):
         Fit the current cell contains '0', move down to the next row (we can't find any 1 to the right)
     
     """
+    if  not binaryMatrix or not binaryMatrix[0]:
+        return -1
     
-    row, col = 0, len(binaryMatrix) - 1
+    row, col = 0, len(binaryMatrix[0]) - 1
     
     leftmost_col = -1
     

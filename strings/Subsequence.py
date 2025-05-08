@@ -29,5 +29,4 @@ def is_subsequence(s, t):
 # Example usage:
 s = "ace"
 t = "abcde"
-print(len(t))
 print(is_subsequence(s, t))

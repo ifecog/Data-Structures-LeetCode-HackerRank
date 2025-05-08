@@ -6,41 +6,34 @@ Input: query=[[2,1],[3,1],[4,3],[5,1],[4,1]]
 Output: [0,1,1,1,3]    
 """
 
-def count_consecutive_pairs(query):
-    max_n = max(x[0] for x in query)
-    line = [0] * (max_n + 1) # Number line initialized to 0
-    same_color_pairs = 0 # Counter for consecutive pairs
+def countConsecutivePairs(query):
+    n = max(x[0] for x in query)
+    colors = [0] * (n + 1)
+    same_color_pairs = 0
     result = []
     
-    for idx, color in query:
-        # Check the left and right neighbors
-        left_same = (idx > 0 and line[idx - 1] == line[idx] and line[idx] != 0)
-        right_same = (idx < max_n and line[idx + 1] == line[idx] and line[idx] != 0)
+    for idx, new_color in query:
+        left_neighbor, right_neighbor = idx - 1, idx + 1
         
-        # Remove previous contributions
-        if left_same:
-            same_color_pairs -= 1
-        if right_same:
-            same_color_pairs -= 1
-            
-        # Update the color
-        line[idx] = color
+        if colors[idx] != 0:
+            if left_neighbor >= 0 and colors[left_neighbor] == colors[idx]:
+                same_color_pairs -= 1
+            if right_neighbor <= n and colors[right_neighbor] == colors[idx]:
+                same_color_pairs -= 1
+                
+        colors[idx] = new_color
         
-        # Update left_same and right_same
-        left_same = (idx > 0 and line[idx - 1] == line[idx])
-        right_same = (idx < max_n and line[idx + 1] == line[idx])
-        
-        # Add current contributions
-        if left_same:
+        if left_neighbor >= 0 and colors[left_neighbor] == colors[idx]:
             same_color_pairs += 1
-        if right_same:
+        if right_neighbor <= n and colors[right_neighbor] == colors[idx]:
             same_color_pairs += 1
-            
-        result.append(same_color_pairs)
+        
+        result.append(same_color_pairs) 
     
     return result
-    
+
+
   
 # Example usage
 query = [[2,1],[3,1],[4,3],[5,1],[4,1]]
-print(count_consecutive_pairs(query))
+print(countConsecutivePairs(query))

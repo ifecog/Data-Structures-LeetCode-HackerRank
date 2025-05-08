@@ -23,18 +23,20 @@ def letter_combinations(digits):
         '9': 'wxyz'
     }
     
-    
-    # Method: Iteration
     queue = deque([''])
     
+    # Iterate through each digit in the input string
     for digit in digits:
+        # Process all existing partial combinations
         for _ in range(len(queue)):
-            combination = queue.popleft()
+            partial_combination = queue.popleft()
             
+            # Appeend each letter correspondidng to the current digit
             for letter in phone_map[digit]:
-                queue.append(combination + letter)
+                queue.append(partial_combination + letter)
                 
-    return list(queue)
+        return list(queue)
+    
     
     # # Method: Recursion
     # result = []

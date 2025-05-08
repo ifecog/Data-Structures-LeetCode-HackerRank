@@ -13,6 +13,13 @@ def find_words(board, words):
         list[str]: a list of words found in the board.
     """
     
+    
+    
+    
+    
+    
+    
+    
     m, n = len(board), len(board[0])
     directions = [
         (0, 1), (0, -1), (1, 0), (-1, 0)

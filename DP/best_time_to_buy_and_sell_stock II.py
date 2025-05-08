@@ -22,7 +22,7 @@ def max_profit(prices):
     
     # return profit
         
-    return sum(max(prices[i + 1] - prices[i], 0) for i in range(n - 1))
+    return sum(max(prices[i] - prices[i - 1], 0) for i in range(1, n))
 
 
 # Example usage

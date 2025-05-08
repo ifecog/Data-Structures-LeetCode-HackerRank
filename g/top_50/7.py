@@ -13,7 +13,7 @@ def maximumDetonation(bombs):
             if i != j:
                 x2, y2, _ = bombs[j]
                 
-                # Check if bomb[j] liies within the radius of bomb[i]
+                # Check if bomb[j] lies within the radius of bomb[i]
                 if ((x2 - x1) ** 2) + ((y2 - y1) ** 2) <= r1 ** 2:
                     adj_list[i].append(j)
                     

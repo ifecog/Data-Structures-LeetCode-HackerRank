@@ -16,16 +16,16 @@ def longest_subarray(nums, limit):
     left = 0
     result = 0
     
-    for right, num in enumerate(nums):
+    for right in range(len(nums)):
         # Maintain the max queue in decreasing order
-        while max_queue and num > max_queue[-1]:
+        while max_queue and nums[right] > max_queue[-1]:
             max_queue.pop()
-        max_queue.append(num)
+        max_queue.append(nums[right])
         
         # Maintain the min queue in increasing order
-        while min_queue and num < min_queue[-1]:
+        while min_queue and nums[right] < min_queue[-1]:
             min_queue.pop()
-        min_queue.append(num)
+        min_queue.append(nums[right])
         
         # If the difference between the max queue and the min queue exceeds the limit, shrink the window
         while max_queue[0] - min_queue[0] > limit:

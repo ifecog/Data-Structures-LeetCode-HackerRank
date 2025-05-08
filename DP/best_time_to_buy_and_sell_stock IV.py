@@ -26,6 +26,7 @@ def max_profit(prices, k):
     
     for i in range(1, k + 1):
         max_diff = -prices[0]
+        
         for j in range(1, n):
             dp[i][j] = max(dp[i][j - 1], prices[j] + max_diff)
             max_diff = max(max_diff, dp[i - 1][j] - prices[j])

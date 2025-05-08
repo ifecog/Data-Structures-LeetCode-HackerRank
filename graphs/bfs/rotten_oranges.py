@@ -2,7 +2,7 @@ from collections import deque
 
 def orangesRotting(grid):
     """
-    You are given an m x n grid where each cell can haave one of three values.
+    You are given an m x n grid where each cell can have one of three values.
     0 -> An empty cell.
     1 -> A fresh orange.
     2 -> A rotten orange.
@@ -12,23 +12,19 @@ def orangesRotting(grid):
     """
     
     m, n = len(grid), len(grid[0])
+    directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]
     fresh_oranges = 0
     
     queue = deque()
-    
-    # Collect all rotten oranges and count fresh onees
     for i in range(m):
         for j in range(n):
             if grid[i][j] == 2:
                 queue.append((i, j, 0))
-            
+                
             elif grid[i][j] == 1:
                 fresh_oranges += 1
                 
-    # BFS
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     minutes_elapsed = 0
-    
     while queue:
         i, j, minutes = queue.popleft()
         minutes_elapsed = max(minutes_elapsed, minutes)
@@ -42,6 +38,7 @@ def orangesRotting(grid):
                 queue.append((ni, nj, minutes + 1))
                 
     return minutes_elapsed if fresh_oranges == 0 else -1
+    
 
 # Example usage
 grid1 = [

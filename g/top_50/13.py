@@ -1,7 +1,7 @@
 def minHeightShelves(books, shelfWidth):
     n = len(books)
     dp = [float('inf')] * (n + 1)
-    dp[0] = 0
+    dp[0] = 0 # placing zero books require zero height
     
     for i in range(1, n + 1):
         width, max_height = 0, 0

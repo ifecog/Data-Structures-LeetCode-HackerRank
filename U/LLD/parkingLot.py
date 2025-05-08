@@ -74,8 +74,10 @@ class ParkingFeeCalculator:
         
         if ticket.vehicle.vehicle_type == VehicleType.TRUCK:
             base_rate *= 1.5
+        if ticket.vehicle.vehicle_type == VehicleType.MOTORCYCLE:
+            base_rate *= 0.75
         
-        return max(5, round(base_rate * time_parked, 2))
+        return max(3.75, round(base_rate * time_parked, 2))
     
 
 class ParkingFloor:

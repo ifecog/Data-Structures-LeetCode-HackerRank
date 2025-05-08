@@ -33,6 +33,7 @@ class Codec:
             
             return [str(node.val)] + preorder(node.left) + preorder(node.right)
         
+        # print(','.join(preorder(root)))
         return ','.join(preorder(root))
     
     
@@ -47,4 +48,14 @@ class Codec:
     
     
     
-    
+# Example Tree
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+
+codec = Codec()
+serialized = codec.serialize(root)
+print("Serialized:", serialized)  # Example: "2,1,3"
+
+deserialized_root = codec.deserialize(serialized)
+print("Deserialized Root Value:", deserialized_root.val)  # Output: 2    

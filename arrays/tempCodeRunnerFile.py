@@ -1,1 +1,2 @@
-min_subarray_length
+
+print(indices_sum(array, target))

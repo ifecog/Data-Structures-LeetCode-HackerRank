@@ -1,0 +1,65 @@
+We are given an m x n matrix points, where points[r][c] represents the points we can gain by selecting the cell at row r and column c. The goal is to maximize the total points by selecting one cell in each row. However, there's a penalty for selecting cells that are far apart in adjacent rows. Specifically:
+
+If we select cell (r, c1) in row r and cell (r + 1, c2) in row r + 1, we lose abs(c1 - c2) points.
+
+Our task is to compute the maximum points we can achieve under these constraints.
+
+Key Observations
+Row-by-Row Selection: We must select exactly one cell in each row.
+
+Penalty for Column Distance: The penalty depends on the absolute difference in column indices between adjacent rows.
+
+Dynamic Programming: This problem can be solved using dynamic programming (DP) because the optimal solution for a row depends on the choices made in the previous row.
+
+Approach
+We will use a dynamic programming approach to solve this problem. Here's the step-by-step plan:
+
+DP State Definition:
+
+Let dp[r][c] represent the maximum points we can achieve up to row r if we select cell (r, c) in row r.
+
+Base Case:
+
+For the first row (r = 0), dp[0][c] = points[0][c] because there are no penalties.
+
+Transition:
+
+For each row r > 0 and each column c, we need to consider all possible columns prev_c in the previous row and compute:
+
+Copy
+dp[r][c] = points[r][c] + max(dp[r-1][prev_c] - abs(c - prev_c))
+This ensures that we account for the penalty when transitioning from (r-1, prev_c) to (r, c).
+
+Final Result:
+
+The answer will be the maximum value in the last row of the dp table, i.e., max(dp[m-1][c] for all c).
+
+Optimization:
+
+To avoid recomputing the maximum for each cell, we can precompute the best possible dp[r-1][prev_c] - abs(c - prev_c) for each column c using prefix and suffix maximums.
+
+def canTransform(self, start: str, result: str) -> bool:
+        # Step 1: Check if the strings contain the same characters ignoring positions
+        if start.replace('X', '') != result.replace('X', ''):
+            return False
+
+        # Step 2: Compare L and R positions
+        j = 0
+        for i, char in enumerate(start):
+            if char == 'X':
+                continue
+            # Move result's pointer to match a non-X character
+            while j < len(result) and result[j] == 'X':
+                j += 1
+
+            if j >= len(result) or char != result[j]:
+                return False
+
+            # Check if L and R are moved validly
+            if char == 'L' and i < j:
+                return False
+            if char == 'R' and i > j:
+                return False
+            j += 1
+
+        return True

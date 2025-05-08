@@ -34,6 +34,8 @@ def trap(height):
     
     return water_trapped
 
+# Time Complexity: O(n), Space Complexity: O(1)
+
 # Example usage
 length = [0,1,0,2,1,0,1,3,2,1,2,1]
 print(trap(length))

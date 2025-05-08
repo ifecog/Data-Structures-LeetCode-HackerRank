@@ -19,7 +19,7 @@ def check_subarray_sum(nums, k):
     """
     
     # Initiate a dict (prefix_mod) to store the remainder of the prefix sums  modulo k and their indices
-    # The key is the raminder and the value is the first index where that remainder was first found
+    # The key is the remainder and the value is the first index where that remainder was first found
     # Initiate prefix mod with {0: -1}. This is to handle cases where the subarray starting from index 0 is a multiple of k
     prefix_mod = {0: -1}
     current_sum = 0

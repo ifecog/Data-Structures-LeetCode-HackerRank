@@ -84,10 +84,10 @@ def orangesRottling(grid):
     return minutes_elapsed if fresh_orranges == 0 else 1
 
 # Example usage
-grid1 = [
-    [2, 1, 1],
-    [1, 1, 0],
-    [0, 1, 1]
-]
+# grid1 = [
+#     [2, 1, 1],
+#     [1, 1, 0],
+#     [0, 1, 1]
+# ]
 
-print(orangesRottling(grid1))
+# print(orangesRottling(grid1))
